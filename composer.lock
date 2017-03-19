@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5510b5b57ab51c5504190d299e090a4d",
+    "content-hash": "87ec0629065e8ab0a2cae078a5a7ac57",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -197,52 +197,6 @@
                 "jquery",
                 "mask",
                 "plugins"
-            ]
-        },
-        {
-            "name": "bower-asset/photoswipe",
-            "version": "v4.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dimsemenov/PhotoSwipe.git",
-                "reference": "41ff96cb8e88ef6f884c388db9f2a6d5e9d3b77a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dimsemenov/PhotoSwipe/zipball/41ff96cb8e88ef6f884c388db9f2a6d5e9d3b77a",
-                "reference": "41ff96cb8e88ef6f884c388db9f2a6d5e9d3b77a",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "dist/photoswipe.js",
-                    "dist/photoswipe.css",
-                    "dist/photoswipe-ui-default.js",
-                    "dist/default-skin/default-skin.css",
-                    "dist/default-skin/default-skin.png",
-                    "dist/default-skin/default-skin.svg",
-                    "dist/default-skin/preloader.gif"
-                ],
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "node_modules",
-                    "bower_components",
-                    "test",
-                    "tests",
-                    "website"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Touch-friendly image gallery for mobile and desktop. Without dependencies.",
-            "keywords": [
-                "gallery",
-                "image",
-                "lightbox",
-                "swipe",
-                "touch"
             ]
         },
         {
