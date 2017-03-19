@@ -412,12 +412,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dench/yii2-language.git",
-                "reference": "7b8759e5759554be67269651c2ee9894f6ce7dee"
+                "reference": "84cf42e6c86b04d6e928bdc96697b0047ce5c145"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dench/yii2-language/zipball/7b8759e5759554be67269651c2ee9894f6ce7dee",
-                "reference": "7b8759e5759554be67269651c2ee9894f6ce7dee",
+                "url": "https://api.github.com/repos/dench/yii2-language/zipball/84cf42e6c86b04d6e928bdc96697b0047ce5c145",
+                "reference": "84cf42e6c86b04d6e928bdc96697b0047ce5c145",
                 "shasum": ""
             },
             "require": {
@@ -446,7 +446,7 @@
                 "language",
                 "yii2"
             ],
-            "time": "2017-03-07 19:20:24"
+            "time": "2017-03-19 20:00:50"
         },
         {
             "name": "ezyang/htmlpurifier",
