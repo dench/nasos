@@ -1,0 +1,141 @@
+<?php
+
+namespace app\models;
+
+use dench\language\behaviors\LanguageBehavior;
+use omgdef\multilingual\MultilingualQuery;
+use Yii;
+use yii\behaviors\SluggableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+
+/**
+ * This is the model class for table "page".
+ *
+ * @property integer $id
+ * @property string $slug
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property integer $enabled
+ *
+ * Language
+ *
+ * @property string $name
+ * @property string $title
+ * @property string $h1
+ * @property string $keywords
+ * @property string $description
+ * @property string $text
+ */
+class Page extends ActiveRecord
+{
+    const DISABLED = 0;
+    const ENABLED = 1;
+
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'page';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            LanguageBehavior::className(),
+            TimestampBehavior::className(),
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'name',
+                'ensureUnique' => true
+            ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['name', 'h1', 'title'], 'required'],
+            [['slug', 'name', 'h1', 'title', 'keywords'], 'string', 'max' => 255],
+            [['description', 'text'], 'string'],
+            [['slug', 'name', 'h1', 'title', 'keywords', 'description', 'text'], 'trim'],
+            [['enabled'], 'boolean'],
+            [['enabled'], 'default', 'value' => self::ENABLED],
+            [['enabled'], 'in', 'range' => [self::ENABLED, self::DISABLED]],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'slug' => Yii::t('app', 'Slug'),
+            'created_at' => Yii::t('app', 'Created'),
+            'updated_at' => Yii::t('app', 'Updated'),
+            'enabled' => Yii::t('app', 'Enabled'),
+            'name' => Yii::t('app', 'Name'),
+            'h1' => Yii::t('app', 'H1'),
+            'title' => Yii::t('app', 'Title'),
+            'keywords' => Yii::t('app', 'Keywords'),
+            'description' => Yii::t('app', 'Description'),
+            'text' => Yii::t('app', 'Text'),
+        ];
+    }
+
+    public static function viewPage($id)
+    {
+        if (is_int($id)) {
+            $page = self::findOne($id);
+        } else {
+            $page = self::findOne(['slug' => $id]);
+        }
+        Yii::$app->view->params['page'] = $page;
+        Yii::$app->view->title = $page->title;
+        if ($page->description) {
+            Yii::$app->view->registerMetaTag([
+                'name' => 'description',
+                'content' => $page->description
+            ]);
+        }
+        if ($page->keywords) {
+            Yii::$app->view->registerMetaTag([
+                'name' => 'keywords',
+                'content' => $page->keywords
+            ]);
+        }
+        return $page;
+    }
+
+    /**
+     * @return MultilingualQuery|\yii\db\ActiveQuery
+     */
+    public static function find()
+    {
+        return new MultilingualQuery(get_called_class());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()) {
+            if ($this->id == 1) {
+                return false;
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+}

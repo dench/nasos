@@ -1,0 +1,38 @@
+div.required label.control-label:after {
+  content: " *";
+  color: red; }
+
+.nav-tabs {
+  margin-bottom: 10px; }
+
+.file-preview {
+  padding: 0;
+  margin: -3px 0 5px 0;
+  border: none; }
+.file-drop-zone {
+  margin: 0; }
+  .file-drop-zone.clickable:hover {
+    border: 1px solid #3c8dbc; }
+.file-preview-frame {
+  float: none;
+  border: none;
+  display: block;
+  height: auto;
+  padding: 0;
+  margin: 3px -12px;
+  box-shadow: 1px 1px 5px 0 #bbb; }
+  .file-preview-frame:not(.file-preview-error):hover {
+    box-shadow: 1px 1px 5px 0 #bbb; }
+  .file-preview-frame img {
+    border-radius: 2px; }
+.file-thumbnail-footer {
+  margin-top: -29px;
+  text-align: right;
+  padding: 3px; }
+.file-initial-thumbs, .file-live-thumbs {
+  margin: 0 -3px; }
+
+.kv-upload-progress {
+  clear: both; }
+
+/*# sourceMappingURL=admin.css.map */

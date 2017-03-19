@@ -1,0 +1,165 @@
+<?php
+
+use app\helpers\ImageHelper;
+use app\models\Currency;
+use app\models\Product;
+use app\models\Unit;
+use app\models\Value;
+use dench\language\models\Language;
+use kartik\file\FileInput;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\ActiveForm;
+use yii\widgets\Pjax;
+
+/* @var $this yii\web\View */
+/* @var $model app\models\Variant */
+/* @var $form yii\widgets\ActiveForm */
+
+if ($model->isNewRecord) {
+    $urlPjax = Url::to([0 => null, 'pjax' => 1]);
+
+$js = <<<JS
+$('#variant-product_id').change(function(){
+    $.pjax.reload({container: "#features-pjax", timeout: 2000, url: '{$urlPjax}&product_id=' + $(this).val() });
+});
+$(document).on('pjax:complete', function() {});
+JS;
+    $this->registerJs($js);
+}
+?>
+
+<div class="variant-form">
+
+    <?php $form = ActiveForm::begin(); ?>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item active"><a href="#tab-main" class="nav-link" data-toggle="tab"><?= Yii::t('app', 'Main') ?></a></li>
+        <li class="nav-item"><a href="#tab-feature" class="tab-feature" class="nav-link" data-toggle="tab"><?= Yii::t('app', 'Features') ?></a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="tab-main">
+            <?= $form->field($model, 'product_id')->dropDownList(Product::getList(true), ['prompt' => '', 'disabled' => !$model->isNewRecord]) ?>
+
+            <?php foreach (Language::suffixList() as $suffix => $name) : ?>
+                <?= $form->field($model, 'name' . $suffix)->textInput(['maxlength' => true]) ?>
+            <?php endforeach; ?>
+
+            <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'price')->textInput() ?>
+
+            <?= $form->field($model, 'price_old')->textInput() ?>
+
+            <?= $form->field($model, 'currency_id')->dropDownList(Currency::getList(true)) ?>
+
+            <?= $form->field($model, 'unit_id')->dropDownList(Unit::getList(true)) ?>
+
+            <?= $form->field($model, 'available')->textInput() ?>
+
+            <?= $form->field($model, 'position')->textInput() ?>
+
+            <?= $form->field($model, 'enabled')->checkbox() ?>
+
+            <?php
+            $fileInputName = 'files';
+            $modelInputName = $model->formName() . '[image_ids][]';
+            $initialPreview = [];
+            $initialPreviewConfig = [];
+            foreach ($images as $image) {
+                $initialPreview[] = '<img src="' . ImageHelper::size($image->id, 'small') . '" alt="" width="100%"><input type="hidden" name="' . $modelInputName . '" value="' . $image->id . '">';
+                $initialPreviewConfig[] = [
+                    'url' => Url::to(['/admin/ajax/file-hide']),
+                    'key' => $image->file_id,
+                ];
+            }
+            echo FileInput::widget([
+                'id' => $fileInputName,
+                'name' => $fileInputName.'[]',
+                'options' => [
+                    'multiple' => true,
+                    'accept' => 'image/jpeg'
+                ],
+                'language' => Yii::$app->language,
+                'pluginOptions' => [
+                    'initialPreview' => $initialPreview,
+                    'initialPreviewConfig' => $initialPreviewConfig,
+                    'fileActionSettings' => [
+                        'showZoom' => false,
+                        'dragClass' => 'btn btn-xs btn-default',
+                    ],
+                    'previewFileType' => 'image',
+                    'uploadUrl' => Url::to(['/admin/ajax/file-upload']),
+                    'uploadExtraData' => [
+                        'name' => $modelInputName,
+                    ],
+                    'uploadAsync' => false,
+                    'showUpload' => false,
+                    'showRemove' => false,
+                    'showBrowse' => true,
+                    'showCaption' => false,
+                    'showClose' => false,
+                    'showPreview ' => false,
+                    'dropZoneEnabled' => false,
+                    'layoutTemplates' => [
+                        'modalMain' => '',
+                        'modal' => '',
+                        'footer' => '<div class="file-thumbnail-footer">{actions}</div>',
+                        'actions' => '{delete}',
+                        'progress' => '',
+                    ],
+                    'previewTemplates' => [
+                        'generic' => '
+<div class="col-sm-4 file-sortable">
+    <div class="file-preview-frame kv-preview-thumb file-drag-handle drag-handle-init" id="{previewId}" data-fileindex="{fileindex}" data-template="{template}">
+    <div class="kv-file-content">
+        {content}
+    </div>
+    {footer}
+    </div>
+    </div>',
+                    'image' => '
+    <div class="col-sm-4">
+    <div class="file-preview-frame kv-preview-thumb" id="{previewId}" data-fileindex="{fileindex}" data-template="{template}">
+    <div class="kv-file-content">
+        <img src="{data}" class="kv-preview-data file-preview-image" title="{caption}" alt="{caption}" width="100%">
+    </div>
+    {footer}
+    </div>
+</div>',
+                    ],
+                ],
+                'pluginEvents' => [
+                    'filebatchselected' => 'function(event, files) { $("#' . $fileInputName . '").fileinput("upload"); }',
+                ],
+            ]);
+            ?>
+        </div>
+
+        <div class="tab-pane fade" id="tab-feature">
+            <?php Pjax::begin(['id' => 'features-pjax']); ?>
+            <?php
+            if (empty($features)) {
+                echo Html::tag('div', Yii::t('app', 'Choose a product!'), ['class' => 'alert alert-danger']);
+            } else {
+                foreach ($features as $feature) {
+                    echo Html::tag('div',
+                        Html::label($feature->name . ($feature->after ? ', ' . $feature->after : '')) . ' ' .
+                        Html::button('+', ['class' => 'btn btn-default btn-xs']) .
+                        Html::checkboxList('Variant[value_ids][]', $model->value_ids, Value::getList($feature->id))
+                        , ['class' => 'form-group']);
+                }
+            }
+            ?>
+            <?php Pjax::end(); ?>
+        </div>
+
+        <div class="form-group">
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>

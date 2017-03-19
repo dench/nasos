@@ -1,0 +1,383 @@
+html {
+  height: 100%; }
+
+body {
+  height: 100%;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 16px; }
+
+.wrap {
+  min-height: 100%;
+  padding-bottom: 150px; }
+
+a {
+  color: #363948; }
+
+.btn {
+  cursor: pointer;
+  border: 0; }
+  .btn-secondary {
+    background-color: #FFCE00; }
+    .btn-secondary:hover {
+      background-color: #FFCE00; }
+
+.bg-inverse {
+  background-color: #363948 !important; }
+
+.bg-grey {
+  background-color: #F5F5F5 !important; }
+  .bg-grey .card {
+    border: 0; }
+
+.bg-white {
+  background-color: #fff; }
+
+.navbar {
+  margin-bottom: 0;
+  border-bottom: 0; }
+  .navbar-brand {
+    padding: 10px 15px; }
+    .navbar-brand-name {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 20px;
+      vertical-align: middle; }
+    .navbar-brand > img {
+      height: 100%;
+      display: inline-block;
+      margin-right: 12px;
+      vertical-align: middle; }
+  .navbar-nav {
+    margin: 7.5px 0; }
+    .navbar-nav > li {
+      padding: 5px 10px; }
+      .navbar-nav > li > a {
+        padding: 5px 0;
+        border-bottom: 2px solid transparent;
+        line-height: inherit; }
+        .navbar-nav > li > a:hover {
+          background-color: transparent; }
+      .navbar-nav > li.active > a {
+        border-color: #DDDDDD; }
+      @media (min-width: 768px) {
+        .navbar-nav > li.active.pod > a:before {
+          content: '';
+          position: absolute;
+          left: 50%;
+          bottom: -12px;
+          margin-left: -8px;
+          width: 0;
+          height: 0;
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          border-bottom: 8px solid #585A69; } }
+      @media (min-width: 992px) {
+        .navbar-nav > li.active.pod > a:before {
+          bottom: -22px;
+          margin-left: -12px;
+          border-left: 12px solid transparent;
+          border-right: 12px solid transparent;
+          border-bottom: 12px solid #585A69; } }
+  .navbar-collapse {
+    border: 0;
+    background-color: #363948; }
+
+.navbar-inverse {
+  background-color: #363948; }
+  .navbar-inverse .navbar-brand-name {
+    color: #ffffff; }
+  .navbar-inverse .navbar-nav > li > a {
+    color: #9B9CA4; }
+  .navbar-inverse .navbar-nav > li.active > a {
+    background-color: transparent;
+    border-color: #585A69; }
+    .navbar-inverse .navbar-nav > li.active > a:hover {
+      background-color: transparent; }
+  .navbar-inverse .navbar-toggle {
+    border-color: #888; }
+
+.podmenu {
+  background: #585A69;
+  font-size: 15px; }
+  .podmenu .nav {
+    text-align: center; }
+    .podmenu .nav > li {
+      float: none;
+      display: inline-block; }
+      .podmenu .nav > li > a {
+        padding: 5px 6px 6px 6px;
+        color: #A3A4AD; }
+        @media (min-width: 992px) {
+          .podmenu .nav > li > a {
+            padding: 9px 10px 10px 10px; } }
+        .podmenu .nav > li > a:hover {
+          background-color: transparent;
+          color: #ffffff; }
+      .podmenu .nav > li.active > a {
+        background-color: transparent;
+        color: #ffffff;
+        font-weight: bold; }
+
+.navbar-nav.lang-change {
+  margin: 0 15px;
+  float: right; }
+  .navbar-nav.lang-change > li {
+    padding: 8px 0;
+    float: left; }
+    .navbar-nav.lang-change > li > a {
+      border: 2px solid transparent;
+      font-size: 13px;
+      text-transform: uppercase;
+      padding: 6px 5px;
+      border-radius: 4px; }
+
+.header {
+  text-align: center;
+  background-image: url("../img/ukraine.png");
+  background-size: contain;
+  background-repeat: no-repeat; }
+  .header-slogan-big {
+    font-size: 22px;
+    margin: 20px 0; }
+  .header-slogan-small {
+    font-size: 16px;
+    margin: 20px 0; }
+  .header-contact {
+    margin: 20px 0; }
+    .header-contact-phone {
+      font-size: 24px;
+      margin: 10px 0; }
+    .header-contact-time {
+      font-size: 16px;
+      margin: 10px 0; }
+
+.breadcrumb {
+  font-size: 12px; }
+  .breadcrumb > li + li:before {
+    font-family: 'Glyphicons Halflings', sans-serif;
+    content: "\e080";
+    font-size: 9px;
+    padding: 0 7px 0 5px; }
+
+.section-company-title {
+  font-size: 28px;
+  text-align: center;
+  margin: 30px 0 20px 0; }
+.section-company-img {
+  display: none; }
+.section-company-link {
+  text-align: center;
+  margin: 20px 0 30px 0; }
+.section-category {
+  padding-bottom: 20px; }
+.section-news {
+  padding-bottom: 20px; }
+.section-title {
+  font-size: 26px;
+  text-transform: uppercase;
+  margin: 30px 0;
+  text-align: center; }
+
+.card {
+  cursor: pointer;
+  background-color: #ffffff;
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 4px; }
+  .card:hover a {
+    text-decoration: underline; }
+  .card:hover .card-img img {
+    -webkit-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    transform: scale(1.02); }
+  .card-img img {
+    margin: 0 auto;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out; }
+  .card-title {
+    font-size: 16px;
+    font-weight: bold; }
+
+.news-item {
+  margin-bottom: 30px; }
+  .news-item-title {
+    margin-top: 0;
+    font-weight: bold;
+    font-size: 16px; }
+  .news-item-img {
+    padding-right: 0; }
+  .news-item-text {
+    font-size: 14px; }
+  .news-item-btn {
+    margin-top: 20px;
+    display: none; }
+
+.footer {
+  padding: 20px 0;
+  height: 150px;
+  margin-top: -150px; }
+  .footer .copyright {
+    color: #888; }
+    .footer .copyright img {
+      max-height: 60px;
+      display: block;
+      margin: 10px auto; }
+    .footer .copyright a {
+      color: #888; }
+
+.table-default {
+  font-size: 14px; }
+  .table-default > thead th + th {
+    text-align: center; }
+  .table-default > tbody th {
+    font-weight: normal; }
+  .table-default > tbody td {
+    text-align: center; }
+  .table-default th, .table-default td {
+    border: none !important;
+    padding: 5px 20px !important; }
+.table-head-bg > thead {
+  background: #585A69;
+  color: #fff; }
+.table-width-auto {
+  width: auto; }
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f5f5f5; }
+
+.page {
+  padding-bottom: 30px; }
+  .page-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: bold; }
+  .page-text {
+    margin-bottom: 50px; }
+
+.product-section {
+  margin-bottom: 30px; }
+  .product-section-title {
+    font-size: 20px;
+    font-weight: bold; }
+    .product-section-title .line {
+      display: inline-block;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #CCCCCC; }
+
+@media (min-width: 768px) {
+  p {
+    line-height: 1.5; }
+
+  .container {
+    position: relative; }
+
+  .navbar-nav {
+    margin: 0;
+    display: inline-block;
+    float: none; }
+    .navbar-nav > li {
+      padding: 10px 12px; }
+      .navbar-nav > li > a {
+        padding: 3px 0; }
+  .navbar-collapse {
+    position: absolute;
+    right: 120px;
+    left: 130px;
+    text-align: center; }
+    .navbar-collapse.collapse {
+      height: 50px !important; }
+  .navbar-header {
+    float: none;
+    position: absolute;
+    left: 15px;
+    right: 15px; }
+
+  .header {
+    padding: 10px 0; }
+    .header-slogan {
+      text-align: left; }
+      .header-slogan-big {
+        font-size: 25px;
+        margin: 22px 0; }
+      .header-slogan-small {
+        font-size: 18px;
+        margin: 22px 0; }
+
+  .section-company-title {
+    font-size: 32px;
+    text-align: left; }
+  .section-company-link {
+    text-align: left; }
+  .section-title {
+    font-size: 30px; }
+
+  .news-item {
+    background-color: #F5F5F5;
+    margin-left: 0;
+    margin-right: 0; }
+    .news-item-title {
+      margin-top: 15px;
+      font-size: 18px; }
+    .news-item-img {
+      padding-left: 0; }
+    .news-item-text {
+      font-size: 16px; }
+    .news-item-btn {
+      display: block; } }
+@media (min-width: 992px) {
+  .navbar {
+    height: 70px; }
+    .navbar-brand {
+      height: 70px;
+      padding: 15px 15px; }
+    .navbar-nav > li {
+      padding: 20px 12px; }
+    .navbar-collapse {
+      left: 160px; }
+      .navbar-collapse.collapse {
+        height: 70px !important; }
+
+  .header {
+    padding: 15px 0; }
+    .header-slogan {
+      text-align: left; }
+      .header-slogan-big {
+        font-size: 28px; }
+      .header-slogan-small {
+        font-size: 20px; }
+    .header-contact {
+      margin: 30px 0; }
+
+  .section-company-title {
+    font-size: 36px;
+    margin: 30px 0; }
+  .section-company-img {
+    display: block; }
+  .section-title {
+    margin: 40px 0 30px 0; }
+
+  .news-item-btn {
+    display: none; }
+
+  .navbar-nav.lang-change > li {
+    padding: 18px 0; } }
+@media (min-width: 1200px) {
+  .header {
+    padding: 20px 0; }
+    .header-slogan {
+      text-align: left; }
+      .header-slogan-big {
+        font-size: 30px; }
+      .header-slogan-small {
+        font-size: 22px; }
+
+  .news-item-btn {
+    display: block; } }
+
+/*# sourceMappingURL=site.css.map */
