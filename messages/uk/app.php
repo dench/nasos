@@ -8,7 +8,7 @@ return [
     'Contacts' => 'Контакти',
     'Read more' => 'Детальніше',
     'Products from Ukrainian manufacturer' => 'Продукція від українського<br>виробника',
-    'Set the task - we will solve it!' => 'Поставте завдання - ми її вирішимо!',
+    'Set the task - we will solve it!' => 'Поставте завдання - ми його вирішимо!',
     'seven days a week' => 'без вихідних',
     'Callback' => 'Зворотний дзвінок',
     'Our production' => 'Наша продукція',

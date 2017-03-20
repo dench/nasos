@@ -58,29 +58,34 @@ class UploadFiles extends Model
             FileHelper::createDirectory($this->path . '/' .$path);
 
             foreach ($this->files as $key => $file) {
-                $f = new File();
-                $f->hash = md5_file($file->tempName);
-                $f->type = $file->type;
-                $f->size = $file->size;
-                $f->extension = $file->extension;
-                $f->name = $file->name;
+
+                $hash = md5_file($file->tempName);
+                $type = $file->type;
+                $size = $file->size;
+                $extension = $file->extension;
 
                 $dub = File::findOne([
-                    'hash' => $f->hash,
-                    'size' => $f->size,
-                    'type' => $f->type,
-                    'extension' => $f->extension,
+                    'hash' => $hash,
+                    'size' => $size,
+                    'type' => $type,
+                    'extension' => $extension,
                 ]);
 
                 if (empty($dub)) {
+                    $f = new File();
+                    $f->hash = $hash;
+                    $f->type = $type;
+                    $f->size = $size;
+                    $f->extension = $extension;
                     $f->path = $path;
                     if ($f->save()) {
                         $file->saveAs($this->path . '/' .$path . '/' . $f->hash . '.' . $f->extension);
                     }
                 } else {
-                    $f->path = $dub->path;
-                    $f->save();
+                    $f = $dub;
                 }
+
+                $f->name = $file->name;
 
                 $this->upload[$key]['file'] = $f;
 
