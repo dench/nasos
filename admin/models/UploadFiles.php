@@ -9,6 +9,7 @@
 namespace app\admin\models;
 
 use app\models\File;
+use app\models\Image;
 use DateTime;
 use Yii;
 use yii\base\Model;
@@ -90,13 +91,20 @@ class UploadFiles extends Model
                 $this->upload[$key]['file'] = $f;
 
                 if (preg_match('#^image/#', $f->type)) {
-                    $image = new \app\models\Image();
-                    $image->file_id = $f->id;
-                    $image->name = $f->name;
-                    $img = \yii\imagine\Image::getImagine()->open($this->path . '/' .$f->path . '/' . $f->hash . '.' . $f->extension);
-                    $image->width = $img->getSize()->getWidth();
-                    $image->height = $img->getSize()->getHeight();
-                    $image->save();
+
+                    $dub = Image::findOne(['file_id' => $f->id]);
+
+                    if (empty($dub)) {
+                        $image = new Image();
+                        $image->file_id = $f->id;
+                        $image->name = $f->name;
+                        $img = \yii\imagine\Image::getImagine()->open($this->path . '/' .$f->path . '/' . $f->hash . '.' . $f->extension);
+                        $image->width = $img->getSize()->getWidth();
+                        $image->height = $img->getSize()->getHeight();
+                        $image->save();
+                    } else {
+                        $image = $dub;
+                    }
 
                     $this->upload[$key]['image'] = $image;
                 }
