@@ -1,5 +1,7 @@
 <?php
 
+use app\helpers\CategoryHelper;
+use app\widgets\ImageUpload;
 use dench\language\models\Language;
 use dosamigos\ckeditor\CKEditor;
 use yii\helpers\Html;
@@ -8,6 +10,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Page */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $images app\models\Image */
 
 $js = '';
 
@@ -41,6 +44,8 @@ $this->registerJs($js);
         <?php foreach (Language::suffixList() as $suffix => $name) : ?>
             <li class="nav-item<?= empty($suffix) ? ' active': '' ?>"><a href="#lang<?= $suffix ?>" class="nav-link" data-toggle="tab"><?= $name ?></a></li>
         <?php endforeach; ?>
+        <li class="nav-item"><a href="#tab-main" class="nav-link" data-toggle="tab"><?= Yii::t('app', 'Main') ?></a></li>
+        <li class="nav-item"><a href="#tab-images" class="nav-link" data-toggle="tab"><?= Yii::t('app', 'Images') ?></a></li>
     </ul>
 
     <div class="tab-content">
@@ -62,9 +67,19 @@ $this->registerJs($js);
             </div>
         <?php endforeach; ?>
 
-        <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
+        <div class="tab-pane fade" id="tab-main">
+            <?= $form->field($model, 'parent_ids')->dropDownList(CategoryHelper::getTree(true), ['multiple' => true, 'options' => [$model->id => ['disabled' => true]]]) ?>
+            <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'position')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'enabled')->checkbox() ?>
+        </div>
 
-        <?= $form->field($model, 'enabled')->checkbox() ?>
+        <div class="tab-pane fade" id="tab-images">
+            <?= ImageUpload::widget([
+                'images' => $images,
+                'modelInputName' => $model->formName() . '[image_ids]',
+            ]) ?>
+        </div>
 
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

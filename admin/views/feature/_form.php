@@ -32,6 +32,8 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'position')->textInput() ?>
 
+        <?= $form->field($model, 'filter')->checkbox() ?>
+
         <?= $form->field($model, 'enabled')->checkbox() ?>
 
         <div class="form-group">

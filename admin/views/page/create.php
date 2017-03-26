@@ -2,9 +2,9 @@
 
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
 /* @var $model app\models\Page */
+/* @var $images app\models\Image */
 
 $this->title = Yii::t('app', 'Create Page');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Pages'), 'url' => ['index']];
@@ -15,7 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model' => $model
+        'model' => $model,
+        'images' => $images,
     ]) ?>
 
 </div>

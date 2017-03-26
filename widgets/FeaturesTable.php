@@ -25,6 +25,7 @@ class FeaturesTable extends Widget
 
         $values = [];
         $labels = [];
+        $after = [];
 
         $sortable = [];
 
@@ -36,6 +37,7 @@ class FeaturesTable extends Widget
             foreach ($variant->values as $value) {
                 if (!isset($rows2[$value->feature_id])) {
                     $labels[$value->feature_id] = $value->feature->name;
+                    $after[$value->feature_id] = $value->feature->after;
                     $sortable[$value->feature_id] = $value->feature->position;
                 }
                 $values[$value->feature_id][$variant->id][] = $value->name;
@@ -45,10 +47,13 @@ class FeaturesTable extends Widget
         $feature = [];
 
         foreach ($values as $key => $variant) {
-            $old_var = 0;
+            //$old_var = 0;
             $old_value = 0;
             $marge = 1;
             $feature[$key]['label'] = $labels[$key];
+            if (!empty($after[$key])) {
+                $feature[$key]['label'] .= ', ' . $after[$key];
+            }
             foreach ($variant as $var => $val) {
                 $value = implode(', ', $val);
                 if ($old_value === $value) {
@@ -63,7 +68,7 @@ class FeaturesTable extends Widget
                     'colspan' => $colspan,
                     'value' =>  $value,
                 ];
-                $old_var = $var;
+                //$old_var = $var;
                 $old_value = $value;
             }
         }

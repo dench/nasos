@@ -16,6 +16,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $feature_id
  *
  * @property Feature $feature
+ * @property Variant[] $variants
  */
 class Value extends ActiveRecord
 {
@@ -79,7 +80,15 @@ class Value extends ActiveRecord
     }
 
     /**
-     * @param boolean|null $enabled
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVariants()
+    {
+        return $this->hasMany(Variant::className(), ['id' => 'variant_id'])->viaTable('variant_value', ['value_id' => 'id']);
+    }
+
+    /**
+     * @param integer|null $feature_id
      * @return array
      */
     public static function getList($feature_id)

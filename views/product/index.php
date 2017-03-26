@@ -2,8 +2,9 @@
 use app\helpers\ImageHelper;
 use yii\helpers\Url;
 
-/** @var $this yii\web\View */
-/** @var $model app\models\Product */
+/* @var $this yii\web\View */
+/* @var $model app\models\Product */
+/* @var $viewed \app\models\Product[] */
 
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Products'),
@@ -20,13 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1 class="page-title"><?= $model->h1 ?></h1>
     <div class="row">
         <div class="col-md-5">
-            <?php
-            $image = @$model->variants[0]->images[0];
-            ?>
             <div class="product-photo">
-                <?php if ($image) { ?>
-                <a href="<?= ImageHelper::big($image->id) ?>" class="thumbnail">
-                    <img src="<?= ImageHelper::cover($image->id) ?>" alt="<?= $model->name ?>">
+                <?php if ($model->image) { ?>
+                <a href="<?= ImageHelper::thumb($model->image->id, 'big') ?>" class="thumbnail">
+                    <img src="<?= ImageHelper::thumb($model->image->id, 'cover') ?>" alt="<?= $model->name ?>">
                 </a>
                 <?php } else { ?>
                     <div class="thumbnail">
@@ -46,8 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
 $('.product-photos a').click(function(e){
     $('.product-photos a').removeClass('active');
     var photo = $('.product-photo');
-    var small = $(this).find('img').attr('src');
-    photo.find('img').attr('src', small.replace('small','cover'));
+    var thumb = $(this);
+    photo.find('a').attr('href', thumb.find('a').attr('href')).find('img').attr('src', thumb.find('img').attr('src'));
     $(this).addClass('active');
     e.preventDefault();
 });
@@ -59,8 +57,8 @@ JS;
             <div class="row product-photos">
                 <?php foreach ($images as $image) : ?>
                     <div class="col-xs-4 col-sm-3 col-md-4">
-                        <a href="<?= ImageHelper::big($image->id) ?>" class="thumbnail<?php if ($model->variants[0]->images[0]->id == $image->id) echo " active"; ?>">
-                            <img src="<?= ImageHelper::small($image->id) ?>" alt="<?= $model->name ?>">
+                        <a href="<?= ImageHelper::thumb($image->id, 'big') ?>" class="thumbnail<?php if ($model->image->id == $image->id) echo " active"; ?>">
+                            <img src="<?= ImageHelper::thumb($image->id, 'cover') ?>" alt="<?= $model->name ?>">
                         </a>
                     </div>
                 <?php endforeach; ?>
@@ -142,58 +140,30 @@ JS;
     <?php endif; ?>
 </div>
 
+<?php if ($viewed) : ?>
 <section class="section section-category bg-grey">
     <div class="container">
         <h3><?= Yii::t('app', 'You looked through') ?></h3>
         <div class="row">
-            <div class="col-xs-6 col-sm-4 col-md-3">
-                <div class="card">
+            <?php foreach ($viewed as $product) : ?>
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                <div class="card block-link">
                     <div class="card-img">
-                        <img src="/img/category.jpg" class="img-responsive" alt="">
+                        <?php if ($model->image) { ?>
+                            <img src="<?= ImageHelper::thumb($product->image->id, 'cover') ?>" class="img-responsive" alt="<?= $product->name ?>">
+                        <?php } else { ?>
+                            <img src="<?= Yii::$app->params['image']['none'] ?>" class="img-responsive" alt="">
+                        <?php } ?>
                     </div>
                     <div class="card-block">
                         <h5 class="card-title">
-                            <a href="#" class="text-nowrap">Насосы</a>
+                            <a href="<?= Url::to(['product/index', 'slug' => $product->slug]) ?>"><?= $product->name ?></a>
                         </h5>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-4 col-md-3">
-                <div class="card">
-                    <div class="card-img">
-                        <img src="/img/category.jpg" class="img-responsive" alt="">
-                    </div>
-                    <div class="card-block">
-                        <h5 class="card-title">
-                            <a href="#" class="text-nowrap">Насосы</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3">
-                <div class="card">
-                    <div class="card-img">
-                        <img src="/img/category.jpg" class="img-responsive" alt="">
-                    </div>
-                    <div class="card-block">
-                        <h5 class="card-title">
-                            <a href="#" class="text-nowrap">Насосы</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3">
-                <div class="card">
-                    <div class="card-img">
-                        <img src="/img/category.jpg" class="img-responsive" alt="">
-                    </div>
-                    <div class="card-block">
-                        <h5 class="card-title">
-                            <a href="#" class="text-nowrap">Насосы</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
+<?php endif; ?>

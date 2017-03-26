@@ -11,6 +11,7 @@ use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
+use yii\web\NotFoundHttpException;
 
 /**
  * This is the model class for table "product".
@@ -37,6 +38,7 @@ use yii\helpers\ArrayHelper;
  * @property Product[] $options
  * @property ProductStatus $status
  * @property Complect[] $complects
+ * @property Image $image
  */
 class Product extends ActiveRecord
 {
@@ -121,6 +123,9 @@ class Product extends ActiveRecord
         } else {
             $page = self::findOne(['slug' => $id]);
         }
+        if ($page === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
         Yii::$app->view->params['page'] = $page;
         Yii::$app->view->title = $page->title;
         if ($page->description) {
@@ -192,6 +197,20 @@ class Product extends ActiveRecord
     public function getStatus()
     {
         return $this->hasOne(ProductStatus::className(), ['id' => 'status_id']);
+    }
+
+    /**
+     * @return Image
+     */
+    public function getImage()
+    {
+        if ($variant = current($this->variants)) {
+            if ($image_id = current($variant->image_ids)) {
+                return Image::findOne($image_id);
+            }
+        }
+
+        return null;
     }
 
     /**

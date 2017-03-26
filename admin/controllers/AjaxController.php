@@ -6,6 +6,7 @@ use app\helpers\ImageHelper;
 use app\models\File;
 use app\admin\models\UploadFiles;
 use Yii;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
@@ -20,6 +21,7 @@ class AjaxController extends Controller
         if (Yii::$app->request->isAjax) {
 
             $name = Yii::$app->request->post('name');
+            $size = Yii::$app->request->post('size') ? Yii::$app->request->post('size') : 'small';
 
             $model = new UploadFiles();
             $model->files = UploadedFile::getInstancesByName('files');
@@ -27,10 +29,16 @@ class AjaxController extends Controller
             if ($model->upload()) {
                 $initialPreview = [];
                 $initialPreviewConfig = [];
-                foreach ($model->upload as $upload) {
-                    $initialPreview[] = '<img src="' . ImageHelper::size($upload['image']->id, 'small') . '" alt="" width="100%"><input type="hidden" name="' . $name . '" value="' . $upload['image']->id . '">';
+                foreach ($model->upload as $key => $upload) {
+                    $html = '<img src="' . ImageHelper::thumb($upload['image']->id, $size) . '" alt="" width="100%"><input type="hidden" name="' . $name . '[' . $upload['image']->id . ']" value="' . $upload['image']->id . '">';
+                    $html .= Html::activeTextInput($upload['image'], '[' . $upload['image']->id . ']alt', ['class' => 'form-control input-sm', 'placeholder' => 'Alt']);
+                    $html .= '<div class="input-group">';
+                    $html .= Html::activeTextInput($upload['image'], '[' . $upload['image']->id . ']name', ['class' => 'form-control input-sm']);
+                    $html .= '<span class="input-group-addon">.' . $upload['file']->extension . '</span>';
+                    $html .= '</div>';
+                    $initialPreview[] = $html;
                     $initialPreviewConfig[] = [
-                        'url' => Url::to(['/ajax/file-delete']),
+                        'url' => Url::to(['/admin/ajax/file-hide']),
                         'key' => $upload['file']->id,
                     ];
                 }
@@ -43,23 +51,6 @@ class AjaxController extends Controller
             return [
                 'error' => $model->errors['files'],
             ];
-        }
-        return [
-            'error' => 'Error!',
-        ];
-    }
-
-    public function actionFileDelete()
-    {
-        Yii::$app->response->format = Response::FORMAT_JSON;
-
-        if (Yii::$app->request->isAjax) {
-            if ($id = Yii::$app->request->post('key')) {
-                $model = File::findOne($id);
-                if ($model->delete()) {
-                    return [];
-                }
-            }
         }
         return [
             'error' => 'Error!',

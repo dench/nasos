@@ -14,15 +14,38 @@ use yii\web\NotFoundHttpException;
 
 class ImageController extends Controller
 {
-    public function actionPhoto($id, $size)
+    /**
+     * @param $name
+     * @param $size = big|small|cover|...
+     * @throws NotFoundHttpException
+     */
+    public function actionIndex($name, $size)
     {
-        if ($file = Image::resize($id, $size)) {
-            header('Content-Type: image/jpeg');
+        $model = $this->findModel($name);
+
+        if ($file = Image::resize($model, $size)) {
+            header('Content-Type: ' . $model->file->type);
             print file_get_contents($file);
         } else {
-            throw new NotFoundHttpException('Photo not found!');
+            throw new NotFoundHttpException('Image not found!');
         }
         die();
+    }
+
+    /**
+     * Finds the Page model based on its name value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param string $name
+     * @return Image the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($name)
+    {
+        if (($model = Image::findOne(['name' => $name])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested image does not exist.');
+        }
     }
 
 }

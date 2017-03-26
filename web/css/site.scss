@@ -155,9 +155,10 @@ a {
         }
         &.active {
           > a {
-            background-color: transparent;
             border-color: $bg-inverse-light;
-            &:hover {
+            &,
+            &:hover,
+            &:focus {
               background-color: transparent;
             }
           }
@@ -168,6 +169,11 @@ a {
       border-color: #888;
     }
   }
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  background-color: transparent;
 }
 
 .podmenu {
@@ -287,7 +293,7 @@ a {
   cursor: pointer;
   background-color: #ffffff;
   text-align: center;
-  margin-bottom: 30px;
+  margin: 15px 0;
   padding: 15px;
   border: 1px solid #eee;
   border-radius: 4px;

@@ -11,6 +11,7 @@ use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
+use yii\web\NotFoundHttpException;
 
 /**
  * This is the model class for table "category".
@@ -37,6 +38,7 @@ use yii\helpers\ArrayHelper;
  * @property Category[] $categories
  * @property Feature[] $features
  * @property Product[] $products
+ * @property Image[] $images
  */
 class Category extends ActiveRecord
 {
@@ -67,6 +69,18 @@ class Category extends ActiveRecord
                 'relations' => [
                     'feature_ids' => ['features'],
                     'product_ids' => ['products'],
+                    'image_ids' => [
+                        'images',
+                        'updater' => [
+                            'viaTableAttributesValue' => [
+                                'position' => function($updater, $relatedPk, $rowCondition) {
+                                    $primaryModel = $updater->getBehavior()->owner;
+                                    $image_ids = array_values($primaryModel->image_ids);
+                                    return array_search($relatedPk, $image_ids);
+                                },
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ];
@@ -85,7 +99,7 @@ class Category extends ActiveRecord
             [['slug', 'name', 'h1', 'title', 'keywords', 'description', 'text'], 'trim'],
             [['enabled', 'main'], 'boolean'],
             [['enabled'], 'default', 'value' => true],
-            [['feature_ids', 'product_ids'], 'each', 'rule' => ['integer']],
+            [['feature_ids', 'product_ids', 'image_ids'], 'each', 'rule' => ['integer']],
             [['image_id'], 'exist', 'skipOnError' => true, 'targetClass' => Image::className(), 'targetAttribute' => ['image_id' => 'id']],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parent_id' => 'id']],
         ];
@@ -122,6 +136,9 @@ class Category extends ActiveRecord
         } else {
             $page = self::findOne(['slug' => $id]);
         }
+        if ($page === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
         Yii::$app->view->params['page'] = $page;
         Yii::$app->view->title = $page->title;
         if ($page->description) {
@@ -145,14 +162,6 @@ class Category extends ActiveRecord
     public static function find()
     {
         return new MultilingualQuery(get_called_class());
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getImage()
-    {
-        return $this->hasOne(Image::className(), ['id' => 'image_id']);
     }
 
     /**
@@ -188,6 +197,33 @@ class Category extends ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImages()
+    {
+        $name = $this->tableName();
+
+        return $this->hasMany(Image::className(), ['id' => 'image_id'])
+            ->viaTable($name . '_image', [$name . '_id' => 'id'])
+            ->leftJoin($name . '_image', 'id=image_id')
+            ->where([$name . '_image.' . $name . '_id' => $this->id])
+            ->orderBy([$name . '_image.position' => SORT_ASC])
+            ->indexBy('id');
+    }
+
+    /**
+     * @return Image
+     */
+    public function getImage()
+    {
+        if ($image_id = current($this->image_ids)) {
+            return Image::findOne($image_id);
+        }
+
+        return null;
+    }
+
+    /**
      * @param boolean|null $enabled
      * @return array
      */
@@ -196,6 +232,9 @@ class Category extends ActiveRecord
         return ArrayHelper::map(self::find()->andFilterWhere(['enabled' => $enabled])->all(), 'id', 'name');
     }
 
+    /**
+     * @return \yii\db\ActiveQuery[]
+     */
     public static function getMain()
     {
         return Category::find()->where(['enabled' => true, 'main' => true])->all();

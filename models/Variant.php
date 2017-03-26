@@ -57,7 +57,18 @@ class Variant extends ActiveRecord
                 'class' => LinkerBehavior::className(),
                 'relations' => [
                     'value_ids' => ['values'],
-                    'image_ids' => ['images'],
+                    'image_ids' => [
+                        'images',
+                        'updater' => [
+                            'viaTableAttributesValue' => [
+                                'position' => function($updater, $relatedPk, $rowCondition) {
+                                    $primaryModel = $updater->getBehavior()->owner;
+                                    $image_ids = array_values($primaryModel->image_ids);
+                                    return array_search($relatedPk, $image_ids);
+                                },
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ];
@@ -148,6 +159,13 @@ class Variant extends ActiveRecord
      */
     public function getImages()
     {
-        return $this->hasMany(Image::className(), ['id' => 'image_id'])->viaTable('variant_image', ['variant_id' => 'id']);
+        $name = $this->tableName();
+
+        return $this->hasMany(Image::className(), ['id' => 'image_id'])
+            ->viaTable($name . '_image', [$name . '_id' => 'id'])
+            ->leftJoin($name . '_image', 'id=image_id')
+            ->where([$name . '_image.' . $name . '_id' => $this->id])
+            ->orderBy([$name . '_image.position' => SORT_ASC])
+            ->indexBy('id');
     }
 }

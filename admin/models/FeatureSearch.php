@@ -18,7 +18,8 @@ class FeatureSearch extends Feature
     public function rules()
     {
         return [
-            [['id', 'position', 'enabled'], 'integer'],
+            [['id', 'position'], 'integer'],
+            [['filter', 'enabled'], 'boolean'],
             [['name', 'after'], 'safe'],
         ];
     }
@@ -61,6 +62,7 @@ class FeatureSearch extends Feature
         $query->andFilterWhere([
             'id' => $this->id,
             'position' => $this->position,
+            'filter' => $this->filter,
             'enabled' => $this->enabled,
         ]);
 

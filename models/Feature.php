@@ -17,6 +17,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $name
  * @property integer $after
  * @property integer $position
+ * @property boolean $filter
  * @property boolean $enabled
  *
  * @property Category[] $categories
@@ -46,6 +47,7 @@ class Feature extends ActiveRecord
                 'relations' => [
                     'variant_ids' => ['variants'],
                     'category_ids' => ['categories'],
+                    'value_ids' => ['values'],
                 ],
             ],
         ];
@@ -60,8 +62,9 @@ class Feature extends ActiveRecord
             [['name'], 'string', 'max' => 255],
             [['after'], 'string', 'max' => 32],
             [['position'], 'integer'],
-            [['enabled'], 'boolean'],
+            [['enabled', 'filter'], 'boolean'],
             [['enabled'], 'default', 'value' => true],
+            [['filter'], 'default', 'value' => false],
             [['variant_ids', 'category_ids'], 'each', 'rule' => ['integer']],
         ];
     }
@@ -76,6 +79,7 @@ class Feature extends ActiveRecord
             'name' => Yii::t('app', 'Name'),
             'after' => Yii::t('app', 'After'),
             'position' => Yii::t('app', 'Position'),
+            'filter' => Yii::t('app', 'Filter'),
             'enabled' => Yii::t('app', 'Enabled'),
         ];
     }
@@ -130,5 +134,15 @@ class Feature extends ActiveRecord
     public static function getObjectList($enabled, array $category_ids)
     {
         return self::find()->joinWith(['categories'])->andFilterWhere(['feature.enabled' => $enabled])->andFilterWhere(['category_id' => $category_ids])->all();
+    }
+
+    /**
+     * @param boolean|null $enabled
+     * @param array $category_ids
+     * @return @return MultilingualQuery|\yii\db\ActiveQuery
+     */
+    public static function getFilterList($enabled, array $category_ids)
+    {
+        return self::find()->where(['filter' => true])->joinWith(['categories'])->andFilterWhere(['feature.enabled' => $enabled])->andFilterWhere(['category_id' => $category_ids])->all();
     }
 }

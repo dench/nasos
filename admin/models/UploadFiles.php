@@ -34,10 +34,12 @@ class UploadFiles extends Model
     {
         parent::init();
 
-        $this->extensions = Yii::$app->params['fileExtensions'];
-        $this->maxSize = Yii::$app->params['fileMaxSize'];
-        $this->maxFiles = Yii::$app->params['fileMaxFiles'];
-        $this->path = Yii::$app->params['filePath'];
+        $param = Yii::$app->params['file'];
+
+        $this->extensions = $param['extensions'];
+        $this->maxSize = $param['maxSize'];
+        $this->maxFiles = $param['maxFiles'];
+        $this->path = $param['path'];
     }
 
     public function rules()
@@ -60,10 +62,10 @@ class UploadFiles extends Model
 
             foreach ($this->files as $key => $file) {
 
-                $hash = md5_file($file->tempName);
                 $type = $file->type;
                 $size = $file->size;
                 $extension = $file->extension;
+                $hash = md5_file($file->tempName);
 
                 $dub = File::findOne([
                     'hash' => $hash,
@@ -86,8 +88,6 @@ class UploadFiles extends Model
                     $f = $dub;
                 }
 
-                $f->name = $file->name;
-
                 $this->upload[$key]['file'] = $f;
 
                 if (preg_match('#^image/#', $f->type)) {
@@ -97,7 +97,7 @@ class UploadFiles extends Model
                     if (empty($dub)) {
                         $image = new Image();
                         $image->file_id = $f->id;
-                        $image->name = $f->name;
+                        $image->name = \yii\helpers\StringHelper::basename($file->baseName, '.' . $f->extension);
                         $img = \yii\imagine\Image::getImagine()->open($this->path . '/' .$f->path . '/' . $f->hash . '.' . $f->extension);
                         $image->width = $img->getSize()->getWidth();
                         $image->height = $img->getSize()->getHeight();

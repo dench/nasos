@@ -14,21 +14,19 @@ div.required label.control-label:after {
   .file-drop-zone.clickable:hover {
     border: 1px solid #3c8dbc; }
 .file-preview-frame {
-  float: none;
   border: none;
   display: block;
   height: auto;
-  padding: 0;
-  margin: 3px -12px;
-  box-shadow: 1px 1px 5px 0 #bbb; }
-  .file-preview-frame:not(.file-preview-error):hover {
+  padding-bottom: 15px;
+  padding-top: 15px; }
+  .file-preview-frame .kv-file-content {
     box-shadow: 1px 1px 5px 0 #bbb; }
   .file-preview-frame img {
     border-radius: 2px; }
 .file-thumbnail-footer {
-  margin-top: -29px;
-  text-align: right;
-  padding: 3px; }
+  position: absolute;
+  top: 20px;
+  right: 20px; }
 .file-initial-thumbs, .file-live-thumbs {
   margin: 0 -3px; }
 

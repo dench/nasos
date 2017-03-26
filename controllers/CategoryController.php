@@ -3,7 +3,10 @@
 namespace app\controllers;
 
 use app\models\Category;
+use app\models\Feature;
 use app\models\Page;
+use app\models\ProductSearch;
+use Yii;
 use yii\web\Controller;
 
 class CategoryController extends Controller
@@ -26,10 +29,14 @@ class CategoryController extends Controller
 
         $this->view->params['category_ids'] = [$page->id];
 
+        $searchModel = new ProductSearch(['category_id' => $page->id]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         return $this->render('view', [
             'page' => $page,
             'categories' => $page->categories,
-            'products' => $page->products,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

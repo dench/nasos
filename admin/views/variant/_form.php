@@ -5,6 +5,7 @@ use app\models\Currency;
 use app\models\Product;
 use app\models\Unit;
 use app\models\Value;
+use app\widgets\ImageUpload;
 use dench\language\models\Language;
 use kartik\file\FileInput;
 use yii\helpers\Html;
@@ -35,6 +36,7 @@ JS;
 
     <ul class="nav nav-tabs">
         <li class="nav-item active"><a href="#tab-main" class="nav-link" data-toggle="tab"><?= Yii::t('app', 'Main') ?></a></li>
+        <li class="nav-item"><a href="#tab-images" class="nav-link" data-toggle="tab"><?= Yii::t('app', 'Images') ?></a></li>
         <li class="nav-item"><a href="#tab-feature" class="tab-feature" class="nav-link" data-toggle="tab"><?= Yii::t('app', 'Features') ?></a></li>
     </ul>
 
@@ -61,80 +63,13 @@ JS;
             <?= $form->field($model, 'position')->textInput() ?>
 
             <?= $form->field($model, 'enabled')->checkbox() ?>
+        </div>
 
-            <?php
-            $fileInputName = 'files';
-            $modelInputName = $model->formName() . '[image_ids][]';
-            $initialPreview = [];
-            $initialPreviewConfig = [];
-            foreach ($images as $image) {
-                $initialPreview[] = '<img src="' . ImageHelper::size($image->id, 'small') . '" alt="" width="100%"><input type="hidden" name="' . $modelInputName . '" value="' . $image->id . '">';
-                $initialPreviewConfig[] = [
-                    'url' => Url::to(['/admin/ajax/file-hide']),
-                    'key' => $image->file_id,
-                ];
-            }
-            echo FileInput::widget([
-                'id' => $fileInputName,
-                'name' => $fileInputName.'[]',
-                'options' => [
-                    'multiple' => true,
-                    'accept' => 'image/jpeg'
-                ],
-                'language' => Yii::$app->language,
-                'pluginOptions' => [
-                    'initialPreview' => $initialPreview,
-                    'initialPreviewConfig' => $initialPreviewConfig,
-                    'fileActionSettings' => [
-                        'showZoom' => false,
-                        'dragClass' => 'btn btn-xs btn-default',
-                    ],
-                    'previewFileType' => 'image',
-                    'uploadUrl' => Url::to(['/admin/ajax/file-upload']),
-                    'uploadExtraData' => [
-                        'name' => $modelInputName,
-                    ],
-                    'uploadAsync' => false,
-                    'showUpload' => false,
-                    'showRemove' => false,
-                    'showBrowse' => true,
-                    'showCaption' => false,
-                    'showClose' => false,
-                    'showPreview ' => false,
-                    'dropZoneEnabled' => false,
-                    'layoutTemplates' => [
-                        'modalMain' => '',
-                        'modal' => '',
-                        'footer' => '<div class="file-thumbnail-footer">{actions}</div>',
-                        'actions' => '{delete}',
-                        'progress' => '',
-                    ],
-                    'previewTemplates' => [
-                        'generic' => '
-<div class="col-sm-4 file-sortable">
-    <div class="file-preview-frame kv-preview-thumb file-drag-handle drag-handle-init" id="{previewId}" data-fileindex="{fileindex}" data-template="{template}">
-    <div class="kv-file-content">
-        {content}
-    </div>
-    {footer}
-    </div>
-    </div>',
-                    'image' => '
-    <div class="col-sm-4">
-    <div class="file-preview-frame kv-preview-thumb" id="{previewId}" data-fileindex="{fileindex}" data-template="{template}">
-    <div class="kv-file-content">
-        <img src="{data}" class="kv-preview-data file-preview-image" title="{caption}" alt="{caption}" width="100%">
-    </div>
-    {footer}
-    </div>
-</div>',
-                    ],
-                ],
-                'pluginEvents' => [
-                    'filebatchselected' => 'function(event, files) { $("#' . $fileInputName . '").fileinput("upload"); }',
-                ],
-            ]);
-            ?>
+        <div class="tab-pane fade" id="tab-images">
+            <?= ImageUpload::widget([
+                'images' => $images,
+                'modelInputName' => $model->formName() . '[image_ids]',
+            ]) ?>
         </div>
 
         <div class="tab-pane fade" id="tab-feature">

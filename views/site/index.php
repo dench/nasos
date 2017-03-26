@@ -4,7 +4,8 @@ use app\helpers\ImageHelper;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/** @var $page \app\models\Page */
+/* @var $page \app\models\Page */
+/* @var $categories \app\models\Category[] */
 ?>
 <section class="section bg-grey">
     <div class="container">
@@ -59,7 +60,11 @@ use yii\helpers\Url;
                 <div class="col-sm-6 col-md-4">
                     <div class="card block-link">
                         <div class="card-img">
-                            <img src="<?= ImageHelper::normal($category->image->id) ?>" class="img-responsive" alt="<?= $category->name ?>">
+                            <?php if ($category->image) { ?>
+                                <img src="<?= ImageHelper::thumb($category->image->id, 'cover') ?>" class="img-responsive" alt="<?= $category->name ?>">
+                            <?php } else { ?>
+                                <img src="<?= Yii::$app->params['image']['none'] ?>" class="img-responsive" alt="">
+                            <?php } ?>
                         </div>
                         <div class="card-block">
                             <h5 class="card-title">

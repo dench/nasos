@@ -10,45 +10,71 @@ namespace app\helpers;
 
 use app\models\Image;
 use Yii;
+use yii\web\NotFoundHttpException;
 
 class ImageHelper
 {
-    public static function big($image_id)
+    /**
+     * @param integer $id
+     * @param string $size = big|small|cover|...
+     * @return string
+     */
+    public static function thumb($id, $size)
     {
-        return self::size($image_id, 'big');
+        return static::generateUrl($id, $size);
     }
 
-    public static function normal($image_id)
+    /**
+     * @param string $size = big|small|cover|...
+     * @return string
+     */
+    public static function generatePath($size)
     {
-        return self::size($image_id, 'normal');
+        $param = Yii::$app->params['image'];
+
+        $thumb = $param['size'][$size];
+
+        $dir = isset($thumb['dir']) ? $thumb['dir'] : $size;
+
+        return $param['path'] . '/' . $dir;
     }
 
-    public static function small($image_id)
+    /**
+     * @param integer $id
+     * @param string $size = big|small|cover|...
+     * @return string
+     */
+    protected static function generateUrl($id, $size)
     {
-        return self::size($image_id, 'small');
-    }
+        $model = static::findModel($id);
 
-    public static function cover($image_id)
-    {
-        return self::size($image_id, 'cover');
-    }
+        $path = static::generatePath($size);
 
-    public static function size($image_id, $size)
-    {
-        return '/' . Yii::$app->params['imagesDir'] . '/' . Yii::$app->params['imageCache'][$size]['dir'] . '/' . $image_id . '.jpg?i=' . self::hash($image_id);
-    }
-
-    private static function hash($image_id)
-    {
-        $image = Image::findOne($image_id);
-
-        return substr(md5(
-            $image->method .
-            $image->rotate .
-            $image->mirror .
-            $image->x .
-            $image->y .
-            $image->zoom
+        $hash = substr(md5(
+            $model->method .
+            $model->rotate .
+            $model->mirror .
+            $model->x .
+            $model->y .
+            $model->zoom
         ), 0, 6);
+
+        return '/' . $path . '/' . $model->name . '.' . $model->file->extension . '?i=' . $hash;
+    }
+
+    /**
+     * Finds the Page model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Image the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected static function findModel($id)
+    {
+        if (($model = Image::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested image does not exist.');
+        }
     }
 }

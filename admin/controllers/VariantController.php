@@ -3,9 +3,11 @@
 namespace app\admin\controllers;
 
 use app\models\Feature;
+use app\models\Image;
 use Yii;
 use app\models\Variant;
 use app\admin\models\VariantSearch;
+use yii\base\Model;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -70,17 +72,44 @@ class VariantController extends Controller
 
         $model->product_id = Yii::$app->request->get('product_id');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Yii::t('app', 'Information added successfully'));
-            return $this->redirect(['index']);
-        }
-
         $features = !empty($model->product->category_ids) ? Feature::getObjectList(true, $model->product->category_ids) : [];
+
+        $images = [];
+
+        if ($post = Yii::$app->request->post()) {
+            /** @var Image[] $images */
+            $images = [];
+            $image_ids = isset($post['Image']) ? $post['Image'] : [];
+            foreach ($image_ids as $key => $image) {
+                $images[$key] = Image::findOne($key);
+            }
+            if ($images) {
+                Model::loadMultiple($images, $post);
+            } else {
+                $model->image_ids = [];
+            }
+
+            $model->load($post);
+
+            $error = [];
+            if (!$model->validate()) $error['model'] = $model->errors;
+            foreach ($images as $key => $image) {
+                if (!$image->validate()) $error['image'][$key] = $image->errors;
+            }
+            if (empty($error)) {
+                $model->save(false);
+                foreach ($images as $key => $image) {
+                    $image->save(false);
+                }
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Information added successfully'));
+                return $this->redirect(['index']);
+            }
+        }
 
         return $this->render('create', [
             'model' => $model,
             'features' => $features,
-            'images' => $model->images,
+            'images' => $images,
         ]);
     }
 
@@ -94,17 +123,43 @@ class VariantController extends Controller
     {
         $model = $this->findModelMulti($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Yii::t('app', 'Information has been saved successfully'));
-            return $this->redirect(['index']);
-        }
-
         $features = Feature::getObjectList(true, $model->product->category_ids);
+
+        $images = $model->images;
+
+        if ($post = Yii::$app->request->post()) {
+            $model->load($post);
+            /** @var Image[] $images */
+            $images = [];
+            $image_ids = isset($post['Image']) ? $post['Image'] : [];
+            foreach ($image_ids as $key => $image) {
+                $images[$key] = Image::findOne($key);
+            }
+            if ($images) {
+                Model::loadMultiple($images, $post);
+            } else {
+                $model->image_ids = [];
+            }
+
+            $error = [];
+            if (!$model->validate()) $error['model'] = $model->errors;
+            foreach ($images as $key => $image) {
+                if (!$image->validate()) $error['image'][$key] = $image->errors;
+            }
+            if (empty($error)) {
+                $model->save(false);
+                foreach ($images as $key => $image) {
+                    $image->save(false);
+                }
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Information has been saved successfully'));
+                return $this->redirect(['index']);
+            }
+        }
 
         return $this->render('update', [
             'model' => $model,
             'features' => $features,
-            'images' => $model->images,
+            'images' => $images,
         ]);
     }
 
