@@ -149,7 +149,7 @@ JS;
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
                 <div class="card block-link">
                     <div class="card-img">
-                        <?php if ($model->image) { ?>
+                        <?php if ($product->image) { ?>
                             <img src="<?= ImageHelper::thumb($product->image->id, 'cover') ?>" class="img-responsive" alt="<?= $product->name ?>">
                         <?php } else { ?>
                             <img src="<?= Yii::$app->params['image']['none'] ?>" class="img-responsive" alt="">
