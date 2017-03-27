@@ -297,6 +297,9 @@ a {
   padding: 15px;
   border: 1px solid #eee;
   border-radius: 4px;
+  &-block {
+    min-height: 66px;
+  }
   &:hover {
     a {
       text-decoration: underline;

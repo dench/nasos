@@ -189,6 +189,8 @@ a {
   padding: 15px;
   border: 1px solid #eee;
   border-radius: 4px; }
+  .card-block {
+    min-height: 66px; }
   .card:hover a {
     text-decoration: underline; }
   .card:hover .card-img img {
