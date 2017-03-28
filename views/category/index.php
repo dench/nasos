@@ -3,8 +3,8 @@ use app\helpers\ImageHelper;
 use yii\helpers\Url;
 
 /** @var $this yii\web\View */
-/** @var $page \app\models\Page */
-/** @var $categories \app\models\Category[] */
+/** @var $page dench\page\models\Page */
+/** @var $categories app\models\Category[] */
 
 $this->params['breadcrumbs'][] = $this->title;
 ?>

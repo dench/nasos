@@ -20,6 +20,7 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "yiisoft/yii2-imagine": "^2.0",
         "dench/yii2-language": "@dev",
+        "dench/yii2-page": "@dev",
         "2amigos/yii2-ckeditor-widget": "~2.0",
         "voskobovich/yii2-linker-behavior": "^4.0",
         "kartik-v/yii2-widget-fileinput": "@dev",

@@ -29,6 +29,11 @@ return [
                     ],
                 ],
             ],
+            'modules' => [
+                'page' => [
+                    'class' => 'dench\page\Module',
+                ],
+            ],
         ],
     ],
     'components' => [

@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/** @var $page \app\models\Page */
+/* @var $page \dench\page\models\Page */
 
 $this->params['breadcrumbs'][] = $this->title;
 ?>

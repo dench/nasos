@@ -3,9 +3,8 @@
 namespace app\controllers;
 
 use app\models\Category;
-use app\models\Feature;
-use app\models\Page;
 use app\models\ProductSearch;
+use dench\page\models\Page;
 use Yii;
 use yii\web\Controller;
 

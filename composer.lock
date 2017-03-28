@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d0862248a22393f9935cafcf53249d8b",
+    "content-hash": "c1b53929496650b52167ab6c298d0ba8",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -447,6 +447,51 @@
                 "yii2"
             ],
             "time": "2017-03-19 20:00:50"
+        },
+        {
+            "name": "dench/yii2-page",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dench/yii2-page.git",
+                "reference": "5633951feedd6540baa184eaab4cbd70b3ac945a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dench/yii2-page/zipball/5633951feedd6540baa184eaab4cbd70b3ac945a",
+                "reference": "5633951feedd6540baa184eaab4cbd70b3ac945a",
+                "shasum": ""
+            },
+            "require": {
+                "2amigos/yii2-ckeditor-widget": "~2.0",
+                "dench/yii2-language": "@dev",
+                "kartik-v/yii2-widget-fileinput": "@dev",
+                "voskobovich/yii2-linker-behavior": "^4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "dench\\page\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Dench",
+                    "email": "dench@i.ua"
+                }
+            ],
+            "description": "Page",
+            "keywords": [
+                "extension",
+                "page",
+                "yii2"
+            ],
+            "time": "2017-03-28 18:14:13"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -1497,6 +1542,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "dench/yii2-language": 20,
+        "dench/yii2-page": 20,
         "kartik-v/yii2-widget-fileinput": 20
     },
     "prefer-stable": false,
