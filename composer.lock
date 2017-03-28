@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1b53929496650b52167ab6c298d0ba8",
+    "content-hash": "23c2abf9f9428556b4deea6adb65e78a",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -451,16 +451,11 @@
         {
             "name": "dench/yii2-page",
             "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dench/yii2-page.git",
-                "reference": "5633951feedd6540baa184eaab4cbd70b3ac945a"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dench/yii2-page/zipball/5633951feedd6540baa184eaab4cbd70b3ac945a",
-                "reference": "5633951feedd6540baa184eaab4cbd70b3ac945a",
-                "shasum": ""
+                "type": "path",
+                "url": "/var/www/nasos/runtime/tmp-extensions/yii2-page",
+                "reference": "198f0b264bd31395fbb23fa302b571fdd0d8dd4f",
+                "shasum": null
             },
             "require": {
                 "2amigos/yii2-ckeditor-widget": "~2.0",
@@ -475,7 +470,6 @@
                     "dench\\page\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -490,8 +484,7 @@
                 "extension",
                 "page",
                 "yii2"
-            ],
-            "time": "2017-03-28 18:14:13"
+            ]
         },
         {
             "name": "ezyang/htmlpurifier",

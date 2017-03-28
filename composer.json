@@ -31,6 +31,12 @@
         "yiisoft/yii2-gii": "~2.0.0",
         "yiisoft/yii2-faker": "~2.0.0"
     },
+    "repositories": [
+      {
+        "type": "path",
+        "url": "/var/www/nasos/runtime/tmp-extensions/yii2-page"
+      }
+    ],
     "config": {
         "process-timeout": 1800,
         "fxp-asset": {
