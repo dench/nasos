@@ -1,5 +1,5 @@
 <?php
-use app\helpers\ImageHelper;
+use dench\image\helpers\ImageHelper;
 use yii\helpers\Url;
 
 /** @var $this yii\web\View */

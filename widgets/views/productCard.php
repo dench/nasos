@@ -8,7 +8,7 @@
  * @var $model \app\models\Product
  * @var $link string
  */
-use app\helpers\ImageHelper;
+use dench\image\helpers\ImageHelper;
 
 ?>
 

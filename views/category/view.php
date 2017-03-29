@@ -6,7 +6,7 @@
 /* @var $searchModel app\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-use app\helpers\ImageHelper;
+use dench\image\helpers\ImageHelper;
 use yii\helpers\Url;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
