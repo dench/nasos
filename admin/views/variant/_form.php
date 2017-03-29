@@ -1,13 +1,11 @@
 <?php
 
-use app\helpers\ImageHelper;
 use app\models\Currency;
 use app\models\Product;
 use app\models\Unit;
 use app\models\Value;
-use app\widgets\ImageUpload;
+use dench\image\widgets\ImageUpload;
 use dench\language\models\Language;
-use kartik\file\FileInput;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;

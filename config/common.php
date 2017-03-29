@@ -35,6 +35,9 @@ return [
                 ],
             ],
         ],
+        'image' => [
+            'class' => 'dench\image\Module',
+        ],
     ],
     'components' => [
         'db' => [

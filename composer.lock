@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1b53929496650b52167ab6c298d0ba8",
+    "content-hash": "89c4ecd3ca0618407b1daf82204fdd56",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -407,8 +407,51 @@
             "time": "2017-01-12T17:36:48+00:00"
         },
         {
-            "name": "dench/yii2-language",
+            "name": "dench/yii2-image",
             "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dench/yii2-image.git",
+                "reference": "5e07b6f22d23b2218e006d60276b0f66263c141d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dench/yii2-image/zipball/5e07b6f22d23b2218e006d60276b0f66263c141d",
+                "reference": "5e07b6f22d23b2218e006d60276b0f66263c141d",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-widget-fileinput": "@dev",
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-imagine": "^2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "dench\\image\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Dench",
+                    "email": "dench@i.ua"
+                }
+            ],
+            "description": "Image",
+            "keywords": [
+                "extension",
+                "image",
+                "yii2"
+            ],
+            "time": "2017-03-29T18:21:31+00:00"
+        },
+        {
+            "name": "dench/yii2-language",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dench/yii2-language.git",
@@ -446,7 +489,7 @@
                 "language",
                 "yii2"
             ],
-            "time": "2017-03-19 20:00:50"
+            "time": "2017-03-19T20:00:50+00:00"
         },
         {
             "name": "dench/yii2-page",
@@ -454,18 +497,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dench/yii2-page.git",
-                "reference": "198f0b264bd31395fbb23fa302b571fdd0d8dd4f"
+                "reference": "e97fada8a8826e72f73500cb55084cc5b9d64848"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dench/yii2-page/zipball/198f0b264bd31395fbb23fa302b571fdd0d8dd4f",
-                "reference": "198f0b264bd31395fbb23fa302b571fdd0d8dd4f",
+                "url": "https://api.github.com/repos/dench/yii2-page/zipball/e97fada8a8826e72f73500cb55084cc5b9d64848",
+                "reference": "e97fada8a8826e72f73500cb55084cc5b9d64848",
                 "shasum": ""
             },
             "require": {
                 "2amigos/yii2-ckeditor-widget": "~2.0",
+                "dench/yii2-image": "@dev",
                 "dench/yii2-language": "@dev",
-                "kartik-v/yii2-widget-fileinput": "@dev",
                 "voskobovich/yii2-linker-behavior": "^4.0",
                 "yiisoft/yii2": "*"
             },
@@ -491,7 +534,7 @@
                 "page",
                 "yii2"
             ],
-            "time": "2017-03-28 21:12:26"
+            "time": "2017-03-29 18:35:25"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -762,16 +805,16 @@
         },
         {
             "name": "kartik-v/yii2-widget-fileinput",
-            "version": "dev-master",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-fileinput.git",
-                "reference": "744e12c1f5be45357ec50eea6f678ecc9ba67dc2"
+                "reference": "3b8f6819f2cd01becff5251b8b952ac3e57b903a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-fileinput/zipball/744e12c1f5be45357ec50eea6f678ecc9ba67dc2",
-                "reference": "744e12c1f5be45357ec50eea6f678ecc9ba67dc2",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-fileinput/zipball/3b8f6819f2cd01becff5251b8b952ac3e57b903a",
+                "reference": "3b8f6819f2cd01becff5251b8b952ac3e57b903a",
                 "shasum": ""
             },
             "require": {
@@ -813,7 +856,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-10-18 06:35:15"
+            "time": "2016-06-16T06:53:01+00:00"
         },
         {
             "name": "omgdef/yii2-multilingual-behavior",
@@ -1541,9 +1584,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "dench/yii2-language": 20,
         "dench/yii2-page": 20,
-        "kartik-v/yii2-widget-fileinput": 20
+        "dench/yii2-image": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

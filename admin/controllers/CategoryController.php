@@ -2,7 +2,7 @@
 
 namespace app\admin\controllers;
 
-use app\models\Image;
+use dench\image\models\Image;
 use Yii;
 use app\models\Category;
 use app\admin\models\CategorySearch;

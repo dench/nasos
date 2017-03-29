@@ -3,7 +3,7 @@
 namespace app\admin\controllers;
 
 use app\models\Feature;
-use app\models\Image;
+use dench\image\models\Image;
 use Yii;
 use app\models\Variant;
 use app\admin\models\VariantSearch;

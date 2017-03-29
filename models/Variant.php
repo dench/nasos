@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\behaviors\PositionBehavior;
+use dench\image\models\Image;
 use dench\language\behaviors\LanguageBehavior;
 use omgdef\multilingual\MultilingualQuery;
 use voskobovich\linker\LinkerBehavior;
