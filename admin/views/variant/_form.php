@@ -14,6 +14,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $model app\models\Variant */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $images \dench\image\models\Image[] */
 
 if ($model->isNewRecord) {
     $urlPjax = Url::to([0 => null, 'pjax' => 1]);
@@ -57,8 +58,6 @@ JS;
             <?= $form->field($model, 'unit_id')->dropDownList(Unit::getList(true)) ?>
 
             <?= $form->field($model, 'available')->textInput() ?>
-
-            <?= $form->field($model, 'position')->textInput() ?>
 
             <?= $form->field($model, 'enabled')->checkbox() ?>
         </div>

@@ -2,8 +2,8 @@
 
 namespace app\models;
 
-use app\behaviors\PositionBehavior;
 use dench\language\behaviors\LanguageBehavior;
+use dench\sortable\behaviors\SortableBehavior;
 use omgdef\multilingual\MultilingualQuery;
 use Yii;
 use yii\db\ActiveRecord;
@@ -34,7 +34,7 @@ class ProductStatus extends ActiveRecord
     {
         return [
             LanguageBehavior::className(),
-            PositionBehavior::className(),
+            SortableBehavior::className(),
         ];
     }
 
@@ -77,6 +77,6 @@ class ProductStatus extends ActiveRecord
      */
     public static function getList()
     {
-        return ArrayHelper::map(self::find()->all(), 'id', 'name');
+        return ArrayHelper::map(self::find()->orderBy('position')->all(), 'id', 'name');
     }
 }

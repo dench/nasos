@@ -95,12 +95,12 @@ class FeaturesTable extends Widget
             $rows_sortable[$key] = $rows[$key];
         }
 
-        $tbody = Html::tag('tr', implode("\n", $rows_sortable));
+        $tbody = implode("\n", $rows_sortable);
 
         $table = strtr('<thead>{thead}</thead><tbody>{tbody}</tbody>', [
             '{thead}' => $thead,
             '{tbody}' => $tbody,
         ]);
-        echo Html::tag('table', $table, $this->options);
+        return Html::tag('table', $table, $this->options);
     }
 }

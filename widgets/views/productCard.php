@@ -25,10 +25,16 @@ use dench\image\helpers\ImageHelper;
             <h5 class="card-title">
                 <a href="<?= $link ?>"><?= $model->name ?></a>
             </h5>
+            <?php if ($model->variants[0]->price) : ?>
             <div class="card-price">
+                <?php if ($model->price_from) : ?>
+                    <?= Yii::t('app', 'from') ?>
+                <?php endif; ?>
+                <?= $model->variants[0]->currency->before ?>
                 <?= $model->variants[0]->price ?>
-                <?= Yii::t('app', 'UAH') ?>
+                <?= $model->variants[0]->currency->after ?>
             </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

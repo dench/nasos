@@ -2,6 +2,7 @@
 
 namespace app\admin\controllers;
 
+use dench\sortable\actions\SortingAction;
 use Yii;
 use app\models\Unit;
 use yii\data\ActiveDataProvider;
@@ -25,6 +26,16 @@ class UnitController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'sorting' => [
+                'class' => SortingAction::className(),
+                'query' => Unit::find(),
             ],
         ];
     }

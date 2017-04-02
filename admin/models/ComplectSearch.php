@@ -18,7 +18,7 @@ class ComplectSearch extends Complect
     public function rules()
     {
         return [
-            [['id', 'product_id', 'position'], 'integer'],
+            [['id', 'position'], 'integer'],
             [['name'], 'safe'],
         ];
     }
@@ -47,6 +47,11 @@ class ComplectSearch extends Complect
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> [
+                'defaultOrder' => [
+                    'position' => SORT_ASC,
+                ],
+            ],
         ]);
 
         $this->load($params);
@@ -60,7 +65,6 @@ class ComplectSearch extends Complect
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'product_id' => $this->product_id,
             'position' => $this->position,
         ]);
 

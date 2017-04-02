@@ -16,30 +16,30 @@ echo $this->render('_breadcrumbs', [
             <?= $this->render('_photo', [
                 'model' => $model,
             ]) ?>
-            <?= $this->render('_price', [
-                'model' => $model,
-            ]) ?>
         </div>
         <div class="col-md-7">
             <?= $this->render('_feature', [
                 'model' => $model,
             ]) ?>
+
+            <?= $this->render('_price', [
+                'model' => $model,
+            ]) ?>
+
+            <?= $this->render('_text', [
+                'name' => $model->name,
+                'text' => $model->text,
+            ]) ?>
+
+            <?= $this->render('_complects', [
+                'complects' => $model->complects,
+            ]) ?>
+
+            <?= $this->render('_options', [
+                'options' => $model->options,
+            ]) ?>
         </div>
     </div>
-
-    <?= $this->render('_text', [
-        'name' => $model->name,
-        'text' => $model->text,
-    ]) ?>
-
-    <?= $this->render('_complects', [
-        'complects' => $model->complects,
-    ]) ?>
-
-    <?= $this->render('_options', [
-        'options' => $model->options,
-    ]) ?>
-
 </div>
 
 <?= $this->render('_viewed', [

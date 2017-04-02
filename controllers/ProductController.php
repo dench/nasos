@@ -32,7 +32,13 @@ class ProductController extends Controller
         $viewed = Product::find()->where(['id' => $viewed_ids])->all();
         /* End - Save viewed products */
 
-        return $this->render('index', [
+        $view = 'index';
+
+        if ($model->view) {
+            $view = $model->view;
+        }
+
+        return $this->render($view, [
             'model' => $model,
             'viewed' => $viewed,
         ]);

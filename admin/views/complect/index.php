@@ -1,7 +1,9 @@
 <?php
 
+use dench\sortable\grid\SortableColumn;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\admin\models\ComplectSearch */
@@ -13,7 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="complect-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a(Yii::t('app', 'Create Complect'), ['create'], ['class' => 'btn btn-success']) ?>
@@ -21,14 +22,24 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function ($model, $key, $index, $grid) {
+            return [
+                'data-position' => $model->position,
+            ];
+        },
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'product.name',
+            [
+                'class' => SortableColumn::className(),
+            ],
             'name',
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'options' => [
+            'data' => [
+                'sortable' => 1,
+                'sortable-url' => Url::to(['sorting']),
+            ]
         ],
     ]); ?>
 </div>

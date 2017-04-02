@@ -3,6 +3,7 @@
 namespace app\models;
 
 use dench\language\behaviors\LanguageBehavior;
+use dench\sortable\behaviors\SortableBehavior;
 use omgdef\multilingual\MultilingualQuery;
 use Yii;
 use yii\db\ActiveRecord;
@@ -35,6 +36,7 @@ class Value extends ActiveRecord
     {
         return [
             LanguageBehavior::className(),
+            SortableBehavior::className(),
         ];
     }
 
@@ -46,7 +48,7 @@ class Value extends ActiveRecord
         return [
             [['feature_id', 'name'], 'required'],
             [['name'], 'string', 'max' => 255],
-            [['feature_id'], 'integer'],
+            [['feature_id', 'position'], 'integer'],
             [['feature_id'], 'exist', 'skipOnError' => true, 'targetClass' => Feature::className(), 'targetAttribute' => ['feature_id' => 'id']],
         ];
     }
@@ -60,6 +62,7 @@ class Value extends ActiveRecord
             'id' => 'ID',
             'feature_id' => Yii::t('app', 'Feature'),
             'name' => Yii::t('app', 'Name'),
+            'position' => Yii::t('app', 'Position'),
         ];
     }
 
@@ -93,6 +96,6 @@ class Value extends ActiveRecord
      */
     public static function getList($feature_id)
     {
-        return ArrayHelper::map(self::find()->andFilterWhere(['feature_id' => $feature_id])->all(), 'id', 'name');
+        return ArrayHelper::map(self::find()->andFilterWhere(['feature_id' => $feature_id])->orderBy('position')->all(), 'id', 'name');
     }
 }

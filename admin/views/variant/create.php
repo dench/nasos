@@ -5,6 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Variant */
 /* @var $features app\models\Feature */
+/* @var $images \dench\image\models\Image[] */
 
 $this->title = Yii::t('app', 'Create Variant');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Variants'), 'url' => ['index']];

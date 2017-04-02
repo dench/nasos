@@ -2,6 +2,7 @@
 
 namespace app\admin\controllers;
 
+use dench\sortable\actions\SortingAction;
 use Yii;
 use app\models\Brand;
 use yii\data\ActiveDataProvider;
@@ -25,6 +26,16 @@ class BrandController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'sorting' => [
+                'class' => SortingAction::className(),
+                'query' => Brand::find(),
             ],
         ];
     }

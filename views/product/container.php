@@ -16,12 +16,9 @@ echo $this->render('_breadcrumbs', [
             <?= $this->render('_photo', [
                 'model' => $model,
             ]) ?>
-            <?= $this->render('_price', [
-                'model' => $model,
-            ]) ?>
         </div>
         <div class="col-md-7">
-            <?= $this->render('_feature', [
+            <?= $this->render('_feature_simple', [
                 'model' => $model,
             ]) ?>
         </div>
@@ -39,7 +36,7 @@ echo $this->render('_breadcrumbs', [
     <?= $this->render('_options', [
         'options' => $model->options,
     ]) ?>
-
+    
 </div>
 
 <?= $this->render('_viewed', [

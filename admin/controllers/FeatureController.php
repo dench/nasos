@@ -2,6 +2,7 @@
 
 namespace app\admin\controllers;
 
+use dench\sortable\actions\SortingAction;
 use Yii;
 use app\models\Feature;
 use app\admin\models\FeatureSearch;
@@ -25,6 +26,16 @@ class FeatureController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'sorting' => [
+                'class' => SortingAction::className(),
+                'query' => Feature::find(),
             ],
         ];
     }

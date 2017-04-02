@@ -2,6 +2,7 @@
 
 use app\models\Brand;
 use app\models\Category;
+use app\models\Complect;
 use app\models\Product;
 use app\models\ProductStatus;
 use dench\language\models\Language;
@@ -46,6 +47,7 @@ $this->registerJs($js);
             <li class="nav-item<?= empty($suffix) ? ' active': '' ?>"><a href="#lang<?= $suffix ?>-tab" class="nav-link" data-toggle="tab"><?= $name ?></a></li>
         <?php endforeach; ?>
         <li class="nav-item"><a href="#main-tab" class="nav-link" data-toggle="tab"><?= Yii::t('app', 'Main') ?></a></li>
+        <li class="nav-item"><a href="#complects-tab" class="nav-link" data-toggle="tab"><?= Yii::t('app', 'Complectation') ?></a></li>
         <li class="nav-item"><a href="#options-tab" class="nav-link" data-toggle="tab"><?= Yii::t('app', 'Additional options') ?></a></li>
     </ul>
 
@@ -80,9 +82,18 @@ $this->registerJs($js);
 
             <?= $form->field($model, 'status_id')->dropDownList(ProductStatus::getList(), ['prompt' => '']) ?>
 
-            <?= $form->field($model, 'position')->textInput() ?>
+            <?= $form->field($model, 'view')->dropDownList(['container' => 'container', 'accessory' => 'accessory'], ['prompt' => '']) ?>
+
+            <?= $form->field($model, 'price_from')->checkbox() ?>
 
             <?= $form->field($model, 'enabled')->checkbox() ?>
+        </div>
+
+        <div class="tab-pane fade" id="complects-tab">
+            <?= $form->field($model, 'complect_ids')->dropDownList(Complect::getList(), [
+                'multiple' => true,
+                'size' => 30,
+            ]) ?>
         </div>
 
         <div class="tab-pane fade" id="options-tab">

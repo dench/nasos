@@ -19,8 +19,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'image_id')->textInput() ?>
 
-    <?= $form->field($model, 'position')->textInput() ?>
-
     <?= $form->field($model, 'enabled')->checkbox() ?>
 
     <div class="form-group">

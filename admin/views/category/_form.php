@@ -79,7 +79,6 @@ $this->registerJs($js);
                 ],
             ]) ?>
             <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'position')->textInput() ?>
             <?= $form->field($model, 'enabled')->checkbox() ?>
             <?= $form->field($model, 'main')->checkbox() ?>
         </div>

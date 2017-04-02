@@ -1,7 +1,9 @@
 <?php
 
+use dench\sortable\grid\SortableColumn;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -18,16 +20,26 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'rowOptions' => function ($model, $key, $index, $grid) {
+            return [
+                'data-position' => $model->position,
+            ];
+        },
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            [
+                'class' => SortableColumn::className(),
+            ],
             'name',
             'color',
-            'position',
             'enabled',
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'options' => [
+            'data' => [
+                'sortable' => 1,
+                'sortable-url' => Url::to(['sorting']),
+            ]
         ],
     ]); ?>
 </div>

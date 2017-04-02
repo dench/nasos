@@ -30,8 +30,6 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'category_ids')->checkboxList(Category::getList(true)) ?>
 
-        <?= $form->field($model, 'position')->textInput() ?>
-
         <?= $form->field($model, 'filter')->checkbox() ?>
 
         <?= $form->field($model, 'enabled')->checkbox() ?>

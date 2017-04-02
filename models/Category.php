@@ -2,9 +2,9 @@
 
 namespace app\models;
 
-use app\behaviors\PositionBehavior;
 use dench\image\models\Image;
 use dench\language\behaviors\LanguageBehavior;
+use dench\sortable\behaviors\SortableBehavior;
 use omgdef\multilingual\MultilingualQuery;
 use voskobovich\linker\LinkerBehavior;
 use Yii;
@@ -59,8 +59,8 @@ class Category extends ActiveRecord
         return [
             LanguageBehavior::className(),
             TimestampBehavior::className(),
-            PositionBehavior::className(),
-            [
+            SortableBehavior::className(),
+            'slug' => [
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'name',
                 'ensureUnique' => true
@@ -230,7 +230,7 @@ class Category extends ActiveRecord
      */
     public static function getList($enabled)
     {
-        return ArrayHelper::map(self::find()->andFilterWhere(['enabled' => $enabled])->all(), 'id', 'name');
+        return ArrayHelper::map(self::find()->andFilterWhere(['enabled' => $enabled])->orderBy('position')->all(), 'id', 'name');
     }
 
     /**

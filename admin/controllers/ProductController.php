@@ -2,6 +2,7 @@
 
 namespace app\admin\controllers;
 
+use dench\sortable\actions\SortingAction;
 use Yii;
 use app\models\Product;
 use app\admin\models\ProductSearch;
@@ -25,6 +26,16 @@ class ProductController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'sorting' => [
+                'class' => SortingAction::className(),
+                'query' => Product::find(),
             ],
         ];
     }

@@ -2,22 +2,23 @@
 
 namespace app\models;
 
-use app\behaviors\PositionBehavior;
 use dench\language\behaviors\LanguageBehavior;
+use dench\sortable\behaviors\SortableBehavior;
 use omgdef\multilingual\MultilingualQuery;
+use voskobovich\linker\LinkerBehavior;
 use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "complect".
  *
  * @property integer $id
- * @property integer $product_id
  * @property integer $position
  *
  * @property string $name
  *
- * @property Product $product
+ * @property Product[] $products
  */
 class Complect extends ActiveRecord
 {
@@ -35,7 +36,13 @@ class Complect extends ActiveRecord
     {
         return [
             LanguageBehavior::className(),
-            PositionBehavior::className(),
+            SortableBehavior::className(),
+            [
+                'class' => LinkerBehavior::className(),
+                'relations' => [
+                    'product_ids' => ['products'],
+                ],
+            ],
         ];
     }
 
@@ -47,8 +54,9 @@ class Complect extends ActiveRecord
     {
         return [
             [['name'], 'string', 'max' => 255],
-            [['product_id', 'name'], 'required'],
-            [['product_id', 'position'], 'integer'],
+            [['name'], 'required'],
+            [['position'], 'integer'],
+            [['product_ids'], 'each', 'rule' => ['integer']],
         ];
     }
 
@@ -59,7 +67,6 @@ class Complect extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => Yii::t('app', 'Product'),
             'position' => Yii::t('app', 'Position'),
         ];
     }
@@ -75,8 +82,16 @@ class Complect extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProduct()
+    public function getProducts()
     {
-       return $this->hasOne(Product::className(), ['id' => 'product_id']);
+        return $this->hasMany(Product::className(), ['id' => 'product_id'])->viaTable('product_complect', ['complect_id' => 'id']);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getList()
+    {
+        return ArrayHelper::map(self::find()->orderBy('position')->all(), 'id', 'name');
     }
 }

@@ -2,9 +2,9 @@
 
 namespace app\models;
 
-use app\behaviors\PositionBehavior;
 use dench\image\models\Image;
 use dench\language\behaviors\LanguageBehavior;
+use dench\sortable\behaviors\SortableBehavior;
 use omgdef\multilingual\MultilingualQuery;
 use Yii;
 use yii\db\ActiveRecord;
@@ -40,7 +40,7 @@ class Brand extends ActiveRecord
     {
         return [
             LanguageBehavior::className(),
-            PositionBehavior::className(),
+            SortableBehavior::className(),
         ];
     }
 
@@ -103,6 +103,6 @@ class Brand extends ActiveRecord
      */
     public static function getList($enabled)
     {
-        return ArrayHelper::map(self::find()->andFilterWhere(['enabled' => $enabled])->all(), 'id', 'name');
+        return ArrayHelper::map(self::find()->andFilterWhere(['enabled' => $enabled])->orderBy('position')->all(), 'id', 'name');
     }
 }

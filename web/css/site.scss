@@ -278,6 +278,17 @@ a {
   &-category {
     padding-bottom: 20px;
   }
+  &-viewed {
+    padding-bottom: 20px;
+    .card {
+      &-title {
+        font-size: 14px;
+      }
+      &-block {
+        min-height: inherit;
+      }
+    }
+  }
   &-news {
     padding-bottom: 20px;
   }
@@ -390,8 +401,13 @@ a {
   &-width-auto {
     width: auto;
   }
-  &-striped > tbody > tr:nth-of-type(odd) {
-    background-color: #f5f5f5;
+  &-striped > tbody > tr {
+    &:nth-of-type(odd) {
+      background-color: #f5f5f5;
+    }
+    &:hover {
+      background-color: #eee;
+    }
   }
 }
 
@@ -424,6 +440,39 @@ a {
         padding-bottom: 5px;
         border-bottom: 1px solid #CCCCCC;
       }
+    }
+  }
+  &-code {
+    text-align: center;
+    font-size: 1.7rem;
+    margin-bottom: 10px;
+    div {
+      display: inline-block;
+    }
+    .title {
+      margin-right: 8px;
+    }
+  }
+  &-price {
+    text-align: center;
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+    div {
+      display: inline-block;
+    }
+    .title {
+      margin-right: 8px;
+    }
+  }
+  &-buy {
+    padding: 5px 0;
+    text-align: center;
+    background-color: #f5f5f5;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    .phone {
+      margin: 5px 0 4px 0;
     }
   }
 }
@@ -509,6 +558,14 @@ a {
       &-btn {
         display: block;
       }
+    }
+  }
+  .product {
+    &-code {
+      text-align: left;
+    }
+    &-price {
+      text-align: left;
     }
   }
 }

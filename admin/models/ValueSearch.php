@@ -12,6 +12,8 @@ use app\models\Value;
  */
 class ValueSearch extends Value
 {
+    public $all = false;
+
     /**
      * @inheritdoc
      */
@@ -47,7 +49,16 @@ class ValueSearch extends Value
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> [
+                'defaultOrder' => [
+                    'position' => SORT_ASC,
+                ],
+            ],
         ]);
+
+        if ($this->all) {
+            $dataProvider->pagination = false;
+        }
 
         $this->load($params);
 

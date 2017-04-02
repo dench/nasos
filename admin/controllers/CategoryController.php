@@ -3,6 +3,7 @@
 namespace app\admin\controllers;
 
 use dench\image\models\Image;
+use dench\sortable\actions\SortingAction;
 use Yii;
 use app\models\Category;
 use app\admin\models\CategorySearch;
@@ -27,6 +28,16 @@ class CategoryController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'sorting' => [
+                'class' => SortingAction::className(),
+                'query' => Category::find(),
             ],
         ];
     }

@@ -18,9 +18,10 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'name' . $suffix)->textInput(['maxlength' => true]) ?>
     <?php endforeach; ?>
 
-    <?= $form->field($model, 'product_id')->dropDownList(Product::getList(null)) ?>
-
-    <?= $form->field($model, 'position')->textInput() ?>
+    <?= $form->field($model, 'product_ids')->dropDownList(Product::getList(null), [
+        'multiple' => true,
+        'size' => 20,
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

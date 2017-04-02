@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Image;
+use dench\image\models\Image;
 use yii\db\Migration;
 use yii\helpers\StringHelper;
 

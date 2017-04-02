@@ -23,4 +23,6 @@ return [
     'Price, UAH' => 'Ціна, грн',
     'from' => 'від',
     'UAH' => 'грн',
+    'Vendor code' => 'Артикул',
+    'You can order by phone' => 'Замовити можна по телефону',
 ];

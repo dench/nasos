@@ -4,6 +4,7 @@ namespace app\admin\controllers;
 
 use app\models\Feature;
 use dench\image\models\Image;
+use dench\sortable\actions\SortingAction;
 use Yii;
 use app\models\Variant;
 use app\admin\models\VariantSearch;
@@ -28,6 +29,16 @@ class VariantController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'sorting' => [
+                'class' => SortingAction::className(),
+                'query' => Variant::find(),
             ],
         ];
     }

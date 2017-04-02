@@ -2,6 +2,7 @@
 
 namespace app\admin\controllers;
 
+use dench\sortable\actions\SortingAction;
 use Yii;
 use app\models\Value;
 use app\admin\models\ValueSearch;
@@ -29,13 +30,23 @@ class ValueController extends Controller
         ];
     }
 
+    public function actions()
+    {
+        return [
+            'sorting' => [
+                'class' => SortingAction::className(),
+                'query' => Value::find(),
+            ],
+        ];
+    }
+
     /**
      * Lists all Value models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ValueSearch();
+        $searchModel = new ValueSearch(['all' => Yii::$app->request->get('all')]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

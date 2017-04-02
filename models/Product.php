@@ -2,9 +2,9 @@
 
 namespace app\models;
 
-use app\behaviors\PositionBehavior;
 use dench\image\models\Image;
 use dench\language\behaviors\LanguageBehavior;
+use dench\sortable\behaviors\SortableBehavior;
 use omgdef\multilingual\MultilingualQuery;
 use voskobovich\linker\LinkerBehavior;
 use Yii;
@@ -25,6 +25,8 @@ use yii\web\NotFoundHttpException;
  * @property integer $updated_at
  * @property integer $position
  * @property boolean $enabled
+ * @property boolean $price_from
+ * @property string $view
  *
  * @property string $name
  * @property string $h1
@@ -59,7 +61,7 @@ class Product extends ActiveRecord
         return [
             LanguageBehavior::className(),
             TimestampBehavior::className(),
-            PositionBehavior::className(),
+            SortableBehavior::className(),
             [
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'name',
@@ -70,6 +72,7 @@ class Product extends ActiveRecord
                 'relations' => [
                     'category_ids' => ['categories'],
                     'option_ids' => ['options'],
+                    'complect_ids' => ['complects'],
                 ],
             ],
         ];
@@ -83,12 +86,12 @@ class Product extends ActiveRecord
         return [
             [['name', 'h1', 'title', 'category_ids'], 'required'],
             [['brand_id', 'status_id', 'position'], 'integer'],
-            [['slug', 'name', 'h1', 'title', 'keywords'], 'string', 'max' => 255],
+            [['slug', 'name', 'h1', 'title', 'keywords', 'view'], 'string', 'max' => 255],
             [['description', 'text'], 'string'],
             [['slug', 'name', 'h1', 'title', 'keywords', 'description', 'text'], 'trim'],
-            [['enabled'], 'boolean'],
+            [['enabled', 'price_from'], 'boolean'],
             [['enabled'], 'default', 'value' => true],
-            [['category_ids', 'option_ids'], 'each', 'rule' => ['integer']],
+            [['category_ids', 'option_ids', 'complect_ids'], 'each', 'rule' => ['integer']],
             [['brand_id'], 'exist', 'skipOnError' => true, 'targetClass' => Brand::className(), 'targetAttribute' => ['brand_id' => 'id']],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductStatus::className(), 'targetAttribute' => ['status_id' => 'id']],
         ];
@@ -114,6 +117,8 @@ class Product extends ActiveRecord
             'keywords' => Yii::t('app', 'Keywords'),
             'description' => Yii::t('app', 'Description'),
             'text' => Yii::t('app', 'Text'),
+            'price_from' => Yii::t('app', 'from'),
+            'view' => Yii::t('app', 'View template'),
         ];
     }
 
@@ -189,7 +194,7 @@ class Product extends ActiveRecord
      */
     public function getComplects()
     {
-        return $this->hasMany(Complect::className(), ['product_id' => 'id']);
+        return $this->hasMany(Complect::className(), ['id' => 'complect_id'])->viaTable('product_complect', ['product_id' => 'id']);
     }
 
     /**
@@ -220,6 +225,6 @@ class Product extends ActiveRecord
      */
     public static function getList($enabled)
     {
-        return ArrayHelper::map(self::find()->andFilterWhere(['enabled' => $enabled])->all(), 'id', 'name');
+        return ArrayHelper::map(self::find()->andFilterWhere(['enabled' => $enabled])->orderBy('position')->all(), 'id', 'name');
     }
 }

@@ -173,6 +173,12 @@ a {
   margin: 20px 0 30px 0; }
 .section-category {
   padding-bottom: 20px; }
+.section-viewed {
+  padding-bottom: 20px; }
+  .section-viewed .card-title {
+    font-size: 14px; }
+  .section-viewed .card-block {
+    min-height: inherit; }
 .section-news {
   padding-bottom: 20px; }
 .section-title {
@@ -254,6 +260,8 @@ a {
   width: auto; }
 .table-striped > tbody > tr:nth-of-type(odd) {
   background-color: #f5f5f5; }
+.table-striped > tbody > tr:hover {
+  background-color: #eee; }
 
 .page {
   padding-bottom: 30px; }
@@ -274,6 +282,31 @@ a {
       display: inline-block;
       padding-bottom: 5px;
       border-bottom: 1px solid #CCCCCC; }
+.product-code {
+  text-align: center;
+  font-size: 1.7rem;
+  margin-bottom: 10px; }
+  .product-code div {
+    display: inline-block; }
+  .product-code .title {
+    margin-right: 8px; }
+.product-price {
+  text-align: center;
+  font-size: 1.7rem;
+  margin-bottom: 20px; }
+  .product-price div {
+    display: inline-block; }
+  .product-price .title {
+    margin-right: 8px; }
+.product-buy {
+  padding: 5px 0;
+  text-align: center;
+  background-color: #f5f5f5;
+  margin-bottom: 20px;
+  border: 1px solid #eee;
+  border-radius: 3px; }
+  .product-buy .phone {
+    margin: 5px 0 4px 0; }
 
 @media (min-width: 768px) {
   p {
@@ -334,7 +367,12 @@ a {
     .news-item-text {
       font-size: 16px; }
     .news-item-btn {
-      display: block; } }
+      display: block; }
+
+  .product-code {
+    text-align: left; }
+  .product-price {
+    text-align: left; } }
 @media (min-width: 992px) {
   .navbar {
     height: 70px; }

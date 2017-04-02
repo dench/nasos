@@ -1,7 +1,9 @@
 <?php
 
+use dench\sortable\grid\SortableColumn;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\admin\models\VariantSearch */
@@ -13,7 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="variant-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a(Yii::t('app', 'Create Variant'), ['create'], ['class' => 'btn btn-success']) ?>
@@ -21,22 +22,28 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function ($model, $key, $index, $grid) {
+            return [
+                'data-position' => $model->position,
+            ];
+        },
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            [
+                'class' => SortableColumn::className(),
+            ],
             'product.name',
             'name',
             'code',
             'price',
-            //'price_old',
-            // 'currency_id',
-            // 'unit_id',
-            // 'available',
-            //'position',
             'enabled',
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'options' => [
+            'data' => [
+                'sortable' => 1,
+                'sortable-url' => Url::to(['sorting']),
+            ]
         ],
     ]); ?>
 </div>

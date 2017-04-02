@@ -2,8 +2,8 @@
 
 namespace app\models;
 
-use app\behaviors\PositionBehavior;
 use dench\language\behaviors\LanguageBehavior;
+use dench\sortable\behaviors\SortableBehavior;
 use omgdef\multilingual\MultilingualQuery;
 use voskobovich\linker\LinkerBehavior;
 use Yii;
@@ -41,13 +41,12 @@ class Feature extends ActiveRecord
     {
         return [
             LanguageBehavior::className(),
-            PositionBehavior::className(),
+            SortableBehavior::className(),
             [
                 'class' => LinkerBehavior::className(),
                 'relations' => [
                     'variant_ids' => ['variants'],
                     'category_ids' => ['categories'],
-                    'value_ids' => ['values'],
                 ],
             ],
         ];
@@ -123,7 +122,7 @@ class Feature extends ActiveRecord
      */
     public static function getList($enabled, $category_ids)
     {
-        return ArrayHelper::map(self::find()->joinWith(['categories'])->andFilterWhere(['feature.enabled' => $enabled])->andFilterWhere(['category_id' => $category_ids])->all(), 'id', 'name');
+        return ArrayHelper::map(self::find()->joinWith(['categories'])->andFilterWhere(['feature.enabled' => $enabled])->andFilterWhere(['category_id' => $category_ids])->orderBy('position')->all(), 'id', 'name');
     }
 
     /**
@@ -133,7 +132,7 @@ class Feature extends ActiveRecord
      */
     public static function getObjectList($enabled, array $category_ids)
     {
-        return self::find()->joinWith(['categories'])->andFilterWhere(['feature.enabled' => $enabled])->andFilterWhere(['category_id' => $category_ids])->all();
+        return self::find()->joinWith(['categories'])->andFilterWhere(['feature.enabled' => $enabled])->andFilterWhere(['category_id' => $category_ids])->orderBy('position')->all();
     }
 
     /**
@@ -143,6 +142,6 @@ class Feature extends ActiveRecord
      */
     public static function getFilterList($enabled, array $category_ids)
     {
-        return self::find()->where(['filter' => true])->joinWith(['categories'])->andFilterWhere(['feature.enabled' => $enabled])->andFilterWhere(['category_id' => $category_ids])->all();
+        return self::find()->where(['filter' => true])->joinWith(['categories'])->andFilterWhere(['feature.enabled' => $enabled])->andFilterWhere(['category_id' => $category_ids])->orderBy('position')->all();
     }
 }

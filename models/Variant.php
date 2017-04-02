@@ -2,9 +2,9 @@
 
 namespace app\models;
 
-use app\behaviors\PositionBehavior;
 use dench\image\models\Image;
 use dench\language\behaviors\LanguageBehavior;
+use dench\sortable\behaviors\SortableBehavior;
 use omgdef\multilingual\MultilingualQuery;
 use voskobovich\linker\LinkerBehavior;
 use Yii;
@@ -53,7 +53,7 @@ class Variant extends ActiveRecord
         return [
             LanguageBehavior::className(),
             TimestampBehavior::className(),
-            PositionBehavior::className(),
+            SortableBehavior::className(),
             [
                 'class' => LinkerBehavior::className(),
                 'relations' => [
@@ -101,7 +101,7 @@ class Variant extends ActiveRecord
         return [
             'id' => 'ID',
             'product_id' => Yii::t('app', 'Product'),
-            'code' => Yii::t('app', 'Code'),
+            'code' => Yii::t('app', 'Vendor code'),
             'name' => Yii::t('app', 'Name'),
             'price' => Yii::t('app', 'Price'),
             'price_old' => Yii::t('app', 'Price Old'),
