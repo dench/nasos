@@ -21,7 +21,8 @@
         "dench/yii2-page": "@dev",
         "dench/yii2-image": "@dev",
         "dench/yii2-sortable": "@dev",
-        "bower-asset/twbs/bootstrap-sass": "*"
+        "bower-asset/twbs/bootstrap-sass": "*",
+        "kartik-v/bootstrap-fileinput": "4.3.8"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
