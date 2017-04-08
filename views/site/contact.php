@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $page->text ?>
     </div>
 
-    <div class="page-title"><?= Yii::t('app', 'Feedback') ?></div>
+    <div id="feedback" class="page-title"><?= Yii::t('app', 'Feedback') ?></div>
 
     <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 

@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Category;
 use dench\page\models\Page;
 use Yii;
+use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use app\models\ContactForm;
@@ -57,7 +58,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
 
-            return $this->refresh();
+            return $this->redirect(Url::current(['#' => 'feedback']));
         }
         return $this->render('contact', [
             'page' => $page,
