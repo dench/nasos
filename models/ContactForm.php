@@ -28,7 +28,7 @@ class ContactForm extends Model
             // email has to be a valid email address
             ['email', 'email'],
             // verifyCode needs to be entered correctly
-            [['reCaptcha'], ReCaptchaValidator::className(), 'uncheckedMessage' => 'Please confirm that you are not a bot.']
+            [['reCaptcha'], ReCaptchaValidator::className(), 'uncheckedMessage' => Yii::t('app','Please confirm that you are not a bot.')],
         ];
     }
 
@@ -57,7 +57,7 @@ class ContactForm extends Model
                 ->setTo($email)
                 ->setFrom([$this->email => $this->name])
                 ->setSubject(Yii::t('app', 'Feedback'))
-                ->setTextBody($this->body)
+                ->setTextBody($this->text)
                 ->send();
 
             return true;
