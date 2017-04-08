@@ -36,12 +36,17 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'id',
                 'filter' => Feature::getList(null, null),
-                'value' => 'name',
+                'content' => function($model, $key, $index, $column){
+                    return Html::a($model->name, ['value/index', 'ValueSearch[feature_id]' => $model->id]);
+                },
             ],
             'after',
             'enabled',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+            ],
         ],
         'options' => [
             'data' => [

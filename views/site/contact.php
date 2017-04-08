@@ -5,9 +5,9 @@
 /* @var $model app\models\ContactForm */
 /* @var $page dench\page\models\Page */
 
+use himiklab\yii2\recaptcha\ReCaptcha;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use yii\captcha\Captcha;
 
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,17 +15,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1 class="page-title"><?= $page->h1 ?></h1>
 
+    <div class="page-text">
+        <?= $page->text ?>
+    </div>
+
+    <div class="page-title"><?= Yii::t('app', 'Feedback') ?></div>
+
     <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 
         <div class="alert alert-success">
-            Thank you for contacting us. We will respond to you as soon as possible.
+            <?= Yii::t('app', 'Thank you for contacting us. We will respond to you as soon as possible.') ?>
         </div>
 
     <?php else: ?>
-
-        <div class="page-text">
-            <?= $page->text ?>
-        </div>
 
         <div class="row">
             <div class="col-lg-5">
@@ -36,16 +38,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?= $form->field($model, 'email') ?>
 
-                    <?= $form->field($model, 'subject') ?>
+                    <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
 
-                    <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
-
-                    <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-                    ]) ?>
+                    <?= $form->field($model, 'reCaptcha')->widget(ReCaptcha::className()) ?>
 
                     <div class="form-group">
-                        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                        <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                     </div>
 
                 <?php ActiveForm::end(); ?>

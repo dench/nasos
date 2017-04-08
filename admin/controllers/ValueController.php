@@ -46,12 +46,15 @@ class ValueController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ValueSearch(['all' => Yii::$app->request->get('all')]);
+        $searchModel = new ValueSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $feature_id = Yii::$app->request->get('ValueSearch')['feature_id'];
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'feature_id' => $feature_id,
         ]);
     }
 
@@ -78,12 +81,32 @@ class ValueController extends Controller
 
         $model->loadDefaultValues();
 
+        $model->feature_id = Yii::$app->request->get('feature_id');
+
+        $success = false;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Yii::t('app', 'Information added successfully'));
-            return $this->redirect(['index']);
+            $success = true;
+        }
+
+        if (Yii::$app->request->isAjax) {
+            if ($success) {
+                return 'success';
+            } else {
+                return $this->renderAjax('_form', [
+                    'model' => $model,
+                    'modal' => true,
+                ]);
+            }
+        }
+
+        if ($success) {
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Information has been saved successfully'));
+            return $this->redirect(['index', 'ValueSearch[feature_id]' => $model->feature_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'modal' => false,
             ]);
         }
     }
@@ -98,12 +121,30 @@ class ValueController extends Controller
     {
         $model = $this->findModelMulti($id);
 
+        $success = false;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $success = true;
+        }
+
+        if (Yii::$app->request->isAjax) {
+            if ($success) {
+                return 'success';
+            } else {;
+                return $this->renderAjax('_form', [
+                    'model' => $model,
+                    'modal' => true,
+                ]);
+            }
+        }
+
+        if ($success) {
             Yii::$app->session->setFlash('success', Yii::t('app', 'Information has been saved successfully'));
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'modal' => false,
             ]);
         }
     }
@@ -116,9 +157,11 @@ class ValueController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
 
-        return $this->redirect(['index']);
+        $model->delete();
+
+        return $this->redirect(['index', 'ValueSearch[feature_id]' => $model->feature_id]);
     }
 
     /**

@@ -1,6 +1,5 @@
 <?php
 
-use dench\image\helpers\ImageHelper;
 use app\models\Category;
 use dench\image\widgets\ImageUpload;
 use dench\language\models\Language;

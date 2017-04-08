@@ -28,7 +28,7 @@ class CategoryController extends Controller
 
         $this->view->params['category_ids'] = [$page->id];
 
-        $searchModel = new ProductSearch(['category_id' => $page->id]);
+        $searchModel = new ProductSearch(['category_id' => $page->id, 'enabled' => true]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('view', [

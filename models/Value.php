@@ -98,4 +98,18 @@ class Value extends ActiveRecord
     {
         return ArrayHelper::map(self::find()->andFilterWhere(['feature_id' => $feature_id])->orderBy('position')->all(), 'id', 'name');
     }
+
+    public static function getListEx($feature_id, $category_id)
+    {
+        $query = self::find();
+        $query->joinWith(['feature']);
+        $query->joinWith(['variants.product.categories']);
+        $query->andWhere(['feature_id' => $feature_id]);
+        $query->andWhere(['category_id' => $category_id]);
+        $query->andWhere(['variant.enabled' => true]);
+        $query->andWhere(['product.enabled' => true]);
+        $ids = $query->select('value.id')->groupBy(['value.id'])->column();
+
+        return ArrayHelper::map(self::find()->andFilterWhere(['feature_id' => $feature_id])->where(['id' => $ids])->orderBy('position')->all(), 'id', 'name');
+    }
 }

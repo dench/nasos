@@ -13,6 +13,10 @@ class ProductController extends Controller
     {
         $model = Product::viewPage($slug);
 
+        if (!$model->enabled) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
         $this->view->params['category_ids'] = $model->category_ids;
 
         /**

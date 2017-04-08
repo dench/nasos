@@ -25,7 +25,11 @@ use yii\helpers\Url;
                 <tbody>
                 <?php foreach ($options as $option) : ?>
                     <tr>
-                        <th><a href="<?= Url::to(['product/index', 'slug' => $option->slug]) ?>" target="_blank"><?= $option->name ?></a></th>
+                        <?php if ($option->enabled) { ?>
+                            <th><a href="<?= Url::to(['product/index', 'slug' => $option->slug]) ?>" target="_blank"><?= $option->name ?></a></th>
+                        <?php } else { ?>
+                            <th><?= $option->name ?></th>
+                        <?php } ?>
                         <td><?= $option->variants[0]->price ?></td>
                     </tr>
                 <?php endforeach; ?>

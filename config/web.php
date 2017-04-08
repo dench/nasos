@@ -1,5 +1,7 @@
 <?php
 
+/** @var array $params */
+
 $config = [
     'id' => 'app',
     'defaultRoute' => 'site/index',
@@ -31,6 +33,12 @@ $config = [
                 'products/<slug:[0-9a-z\-]+>' => 'category/view',
                 'product/<slug:[0-9a-z\-]+>' => 'product/index',
             ],
+        ],
+        'reCaptcha' => [
+            'name' => 'reCaptcha',
+            'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
+            'siteKey' => $params['recaptchaSiteKey'],
+            'secret' => $params['recaptchaSecretKey'],
         ],
     ],
 ];

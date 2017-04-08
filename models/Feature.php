@@ -58,6 +58,7 @@ class Feature extends ActiveRecord
     public function rules()
     {
         return [
+            [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
             [['after'], 'string', 'max' => 32],
             [['position'], 'integer'],
@@ -112,6 +113,7 @@ class Feature extends ActiveRecord
      */
     public function getVariants()
     {
+        // TODO: value_id != feature_id
         return $this->hasMany(Variant::className(), ['id' => 'variant_id'])->viaTable('variant_value', ['value_id' => 'id']);
     }
 

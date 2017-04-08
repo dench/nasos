@@ -37,7 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
             'enabled',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+            ],
         ],
         'options' => [
             'data' => [

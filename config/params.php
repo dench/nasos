@@ -3,6 +3,10 @@
 return [
     'adminEmail' => '',
     'supportEmail' => '',
+    'phone' => '',
+    'googleMapsApiKey' => '',
+    'recaptchaSiteKey' => '',
+    'recaptchaSecretKey' => '',
 
     'file' => [
         'extensions' => 'png, jpg',

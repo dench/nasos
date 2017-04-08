@@ -2,10 +2,12 @@
 
 namespace app\admin\controllers;
 
+use app\models\Value;
 use dench\sortable\actions\SortingAction;
 use Yii;
 use app\models\Feature;
 use app\admin\models\FeatureSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -98,12 +100,23 @@ class FeatureController extends Controller
     {
         $model = $this->findModelMulti($id);
 
+        $values = new ActiveDataProvider([
+            'query' => Value::find()->where(['feature_id' => $id]),
+            'sort'=> [
+                'defaultOrder' => [
+                    'position' => SORT_ASC,
+                ],
+            ],
+            'pagination' => false,
+        ]);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Yii::t('app', 'Information has been saved successfully'));
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'values' => $values,
             ]);
         }
     }

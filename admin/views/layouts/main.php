@@ -47,15 +47,14 @@ AdminAsset::register($this);
             ['label' => Yii::t('app', 'Products'), 'url' => ['/admin/product/index']],
             ['label' => Yii::t('app', 'Variants'), 'url' => ['/admin/variant/index']],
             ['label' => Yii::t('app', 'Features'), 'url' => ['/admin/feature/index']],
-            ['label' => Yii::t('app', 'Values'), 'url' => ['/admin/value/index']],
             ['label' => Yii::t('app', 'Complectation'), 'url' => ['/admin/complect/index']],
             ['label' => Yii::t('app', 'Categories'), 'url' => ['/admin/category/index']],
             ['label' => Yii::t('app', 'Pages'), 'url' => ['/admin/page/default/index']],
-            ['label' => Yii::t('app', 'Setting'), 'url' => '#', 'items' => [
+            ['label' => Yii::t('app', 'Other'), 'url' => '#', 'items' => [
                 ['label' => Yii::t('app', 'Brands'), 'url' => ['/admin/brand/index']],
                 ['label' => Yii::t('app', 'Currencies'), 'url' => ['/admin/currency/index']],
                 ['label' => Yii::t('app', 'Units'), 'url' => ['/admin/unit/index']],
-                ['label' => Yii::t('app', 'Status'), 'url' => ['/admin/product-status/index']],
+                ['label' => Yii::t('app', 'Statuses'), 'url' => ['/admin/product-status/index']],
             ]],
             ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
             /*'<li>'

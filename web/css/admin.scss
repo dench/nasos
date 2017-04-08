@@ -1,8 +1,9 @@
-div.required label.control-label:after {
-  content: " *";
-  color: red;
-}
-
 .nav-tabs {
   margin-bottom: 10px;
+}
+
+footer {
+  border-top: 2px solid #eee;
+  padding: 30px 0;
+  margin-top: 30px;
 }

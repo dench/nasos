@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\ProductSearch */
 /* @var $form yii\widgets\ActiveForm */
-/* @var $page \app\models\Category */
+/* @var $page app\models\Category */
 
 $features = Feature::getFilterList(true, [$model->category_id]);
 ?>
@@ -35,7 +35,7 @@ JS;
 
         <?php foreach ($features as $key => $feature) : ?>
             <div class="col-sm-4 col-md-3">
-                <?= $form->field($model, 'feature_ids[' . $feature->id . ']')->checkboxList(Value::getList($feature->id))->label($feature->name . ($feature->after ? ', ' . $feature->after : '')) ?>
+                <?= $form->field($model, 'feature_ids[' . $feature->id . ']')->checkboxList(Value::getListEx($feature->id, $model->category_id), ['class' => 'filter-values'])->label($feature->name . ($feature->after ? ', ' . $feature->after : '')) ?>
             </div>
         <?php endforeach; ?>
 

@@ -21,6 +21,18 @@ class FeaturesTable extends Widget
 
     function run()
     {
+        $variants = [];
+
+        foreach ($this->variants as $variant) {
+            if ($variant->enabled) {
+                $variants[] = $variant;
+            }
+        }
+
+        if (empty($this->variants)) {
+            return '';
+        }
+
         $cols[] = Html::tag('th', $this->theadText);
 
         $values = [];
@@ -29,9 +41,9 @@ class FeaturesTable extends Widget
 
         $sortable = [];
 
-        $count = count($this->variants);
+        $count = count($variants);
 
-        foreach ($this->variants as $variant) {
+        foreach ($variants as $variant) {
             $cols[] = Html::tag('th', $variant->name);
 
             foreach ($variant->values as $value) {

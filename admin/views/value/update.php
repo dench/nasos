@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Value */
+/* @var $modal boolean */
 
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
     'modelClass' => 'Value',
@@ -18,6 +19,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
     <?= $this->render('_form', [
         'model' => $model,
+        'modal' => $modal,
     ]) ?>
 
 </div>

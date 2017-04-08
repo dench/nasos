@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use himiklab\yii2\recaptcha\ReCaptchaValidator;
 use Yii;
 use yii\base\Model;
 
@@ -12,9 +13,8 @@ class ContactForm extends Model
 {
     public $name;
     public $email;
-    public $subject;
-    public $body;
-    public $verifyCode;
+    public $text;
+    public $reCaptcha;
 
 
     /**
@@ -23,12 +23,12 @@ class ContactForm extends Model
     public function rules()
     {
         return [
-            // name, email, subject and body are required
-            [['name', 'email', 'subject', 'body'], 'required'],
+            // name, email and body are required
+            [['name', 'email', 'text'], 'required'],
             // email has to be a valid email address
             ['email', 'email'],
             // verifyCode needs to be entered correctly
-            ['verifyCode', 'captcha'],
+            [['reCaptcha'], ReCaptchaValidator::className(), 'uncheckedMessage' => 'Please confirm that you are not a bot.']
         ];
     }
 
@@ -38,7 +38,10 @@ class ContactForm extends Model
     public function attributeLabels()
     {
         return [
-            'verifyCode' => 'Verification Code',
+            'name' => Yii::t('app', 'Your name'),
+            'email' => Yii::t('app', 'Your E-mail'),
+            'text' => Yii::t('app', 'Text'),
+            'reCaptcha' => Yii::t('app', 'Verification'),
         ];
     }
 
@@ -53,7 +56,7 @@ class ContactForm extends Model
             Yii::$app->mailer->compose()
                 ->setTo($email)
                 ->setFrom([$this->email => $this->name])
-                ->setSubject($this->subject)
+                ->setSubject(Yii::t('app', 'Feedback'))
                 ->setTextBody($this->body)
                 ->send();
 

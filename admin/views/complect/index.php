@@ -9,7 +9,7 @@ use yii\helpers\Url;
 /* @var $searchModel app\admin\models\ComplectSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Complects');
+$this->title = Yii::t('app', 'Complectation');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="complect-index">
@@ -33,7 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'name',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+            ],
         ],
         'options' => [
             'data' => [

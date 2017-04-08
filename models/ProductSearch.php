@@ -19,7 +19,6 @@ class ProductSearch extends Product
 
     public $product_ids = [];
 
-
     /**
      * @inheritdoc
      */
@@ -103,6 +102,7 @@ class ProductSearch extends Product
         $query->andFilterWhere([
             'product.id' => $this->product_ids,
             'category_id' => $this->category_id,
+            'product.enabled' => $this->enabled,
         ]);
 
         //$query->andFilterWhere(['like', 'slug', $this->slug]);

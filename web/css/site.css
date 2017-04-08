@@ -308,6 +308,13 @@ a {
   .product-buy .phone {
     margin: 5px 0 4px 0; }
 
+.pswp__bg {
+  opacity: 0.5 !important; }
+
+.filter-values label {
+  font-weight: normal;
+  margin-right: 8px; }
+
 @media (min-width: 768px) {
   p {
     line-height: 1.5; }

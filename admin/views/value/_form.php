@@ -2,19 +2,24 @@
 
 use app\models\Feature;
 use dench\language\models\Language;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Value */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $modal boolean */
 ?>
 
 <div class="value-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'id' => $model->formName(),
+    ]); ?>
 
-    <?= $form->field($model, 'feature_id')->dropDownList(Feature::getList(true, []), ['prompt' => '']) ?>
+    <?php if (!$modal) : ?>
+        <?= $form->field($model, 'feature_id')->dropDownList(Feature::getList(true, []), ['prompt' => '']) ?>
+    <?php endif; ?>
 
     <?php foreach (Language::suffixList() as $suffix => $name) : ?>
         <?= $form->field($model, 'name' . $suffix)->textInput(['maxlength' => true]) ?>
@@ -27,3 +32,30 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php
+if ($modal) {
+    $script = <<< JS
+$('#{$model->formName()}').on('beforeSubmit', function(e){
+    var form = $(this);
+    $.ajax({
+        url: form.attr("action"),
+        type: "post",
+        data: form.serialize(),
+        success: function (response) {
+            console.log(response);
+            if (response == 'success') {
+                $('#modal-value').modal('hide');
+                $.pjax.reload({container: '#pjax-grid-values'});
+            }
+        },
+        error: function () {
+            console.log("internal server error");
+        }
+    });
+    return false;
+});
+JS;
+    Yii::$app->view->registerJs($script);
+}
+?>

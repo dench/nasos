@@ -182,6 +182,7 @@ class Product extends ActiveRecord
     }
 
     /**
+     * @param boolean $enabled
      * @return \yii\db\ActiveQuery
      */
     public function getVariants()
