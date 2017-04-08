@@ -31,7 +31,7 @@ return [
     'Categories' => 'Категорії',
     'Pages' => 'Сторінки',
     'Other' => 'Різне',
-    'Home' => 'Сайт',
+    'Home' => 'Головна',
     'Brand' => 'Бренд',
     'Brands' => 'Бренди',
     'Currencies' => 'Валюта',

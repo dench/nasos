@@ -51,6 +51,7 @@ SiteAsset::register($this);
             'class' => 'navbar-nav',
         ],
         'items' => [
+            ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
             [
                 'label' => Yii::t('app', 'Products'),
                 'url' => ['/category/index'],
@@ -60,8 +61,8 @@ SiteAsset::register($this);
                 'active' => (Yii::$app->controller->id == 'product' || Yii::$app->controller->id == 'category')
             ],
             ['label' => Yii::t('app', 'About company'), 'url' => ['/site/about']],
-            ['label' => Yii::t('app', 'Gallery'), 'url' => ['/gallery/index']],
-            ['label' => Yii::t('app', 'Documentation'), 'url' => '/docs/index', 'options' => ['class' => 'hidden-sm']],
+            //['label' => Yii::t('app', 'Gallery'), 'url' => ['/gallery/index']],
+            //['label' => Yii::t('app', 'Documentation'), 'url' => '/docs/index', 'options' => ['class' => 'hidden-sm']],
             ['label' => Yii::t('app', 'Contacts'), 'url' => ['/site/contact']],
         ],
     ]);

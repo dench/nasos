@@ -77,7 +77,9 @@ use yii\helpers\Url;
         </div>
     </div>
 </section>
-
+<?php
+/*
+?>
 <section class="section section-news bg-white">
     <div class="container">
         <h2 class="section-title"><a href="#"><?= Yii::t('app', 'Company\'s news') ?></a></h2>
@@ -117,3 +119,4 @@ use yii\helpers\Url;
         </div>
     </div>
 </section>
+*/

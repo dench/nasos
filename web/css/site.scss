@@ -308,9 +308,6 @@ a {
   padding: 15px;
   border: 1px solid #eee;
   border-radius: 4px;
-  &-block {
-    min-height: 66px;
-  }
   &:hover {
     a {
       text-decoration: underline;
@@ -330,6 +327,12 @@ a {
   &-title {
     font-size: 16px;
     font-weight: bold;
+  }
+}
+
+.list-view {
+  .card-block {
+    min-height: 66px;
   }
 }
 
