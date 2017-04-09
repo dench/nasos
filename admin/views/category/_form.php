@@ -64,6 +64,14 @@ $this->registerJs($js);
                         'allowedContent' => true,
                     ]
                 ]) ?>
+                <?= $form->field($model, 'seo' . $suffix)->widget(CKEditor::className(), [
+                    'preset' => 'full',
+                    'clientOptions' => [
+                        'customConfig' => '/js/ckeditor.js',
+                        'language' => Yii::$app->language,
+                        'allowedContent' => true,
+                    ]
+                ]) ?>
             </div>
         <?php endforeach; ?>
 

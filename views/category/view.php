@@ -56,4 +56,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
 
     <?php Pjax::end(); ?>
+
+    <div class="page-seo">
+        <?= $page->seo ?>
+    </div>
 </div>

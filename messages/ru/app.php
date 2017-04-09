@@ -60,4 +60,5 @@ return [
     'Your E-mail' => 'Ваш E-mail',
     'Thank you for contacting us. We will respond to you as soon as possible.' => 'Благодарим Вас за обращение к нам. Мы ответим Вам как можно скорее.',
     'Submit' => 'Отправить',
+    'SEO text' => 'СЕО текст',
 ];

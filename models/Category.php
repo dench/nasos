@@ -33,6 +33,7 @@ use yii\web\NotFoundHttpException;
  * @property string $keywords
  * @property string $description
  * @property string $text
+ * @property string $seo
  *
  * @property Image $image
  * @property Category $parent
@@ -96,8 +97,8 @@ class Category extends ActiveRecord
             [['parent_id', 'image_id', 'position'], 'integer'],
             [['name', 'h1', 'title'], 'required'],
             [['slug', 'name', 'h1', 'title', 'keywords'], 'string', 'max' => 255],
-            [['description', 'text'], 'string'],
-            [['slug', 'name', 'h1', 'title', 'keywords', 'description', 'text'], 'trim'],
+            [['description', 'text', 'seo'], 'string'],
+            [['slug', 'name', 'h1', 'title', 'keywords', 'description', 'text', 'seo'], 'trim'],
             [['enabled', 'main'], 'boolean'],
             [['enabled'], 'default', 'value' => true],
             [['feature_ids', 'product_ids', 'image_ids'], 'each', 'rule' => ['integer']],
@@ -127,6 +128,7 @@ class Category extends ActiveRecord
             'description' => Yii::t('app', 'Description'),
             'text' => Yii::t('app', 'Text'),
             'main' => Yii::t('app', 'Main'),
+            'seo' => Yii::t('app', 'SEO text'),
         ];
     }
 

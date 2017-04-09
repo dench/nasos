@@ -213,8 +213,10 @@ a {
     font-size: 16px;
     font-weight: bold; }
 
-.list-view .card-block {
-  min-height: 66px; }
+.list-view {
+  margin-bottom: 30px; }
+  .list-view .card-block {
+    min-height: 66px; }
 
 .news-item {
   margin-bottom: 30px; }
@@ -273,6 +275,10 @@ a {
     font-weight: bold; }
   .page-text {
     margin-bottom: 50px; }
+  .page-seo {
+    color: #999999;
+    font-size: 13px;
+    padding: 20px 0; }
 
 .product-section {
   margin-bottom: 30px; }
