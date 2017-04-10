@@ -187,7 +187,7 @@ class Product extends ActiveRecord
      */
     public function getVariants()
     {
-        return $this->hasMany(Variant::className(), ['product_id' => 'id']);
+        return $this->hasMany(Variant::className(), ['product_id' => 'id'])->orderBy(['position' => SORT_ASC]);
     }
 
     /**
