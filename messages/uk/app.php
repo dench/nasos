@@ -39,6 +39,7 @@ return [
     'Status' => 'Статус',
     'Statuses' => 'Статуси',
     'Enabled' => 'Включено',
+    'Disabled' => 'Відключено',
     'Title' => 'Заголовок',
     'Keywords' => 'Ключові слова',
     'Description' => 'Опис',

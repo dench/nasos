@@ -24,7 +24,7 @@ return [
             'x' => 40,
             'y' => 30
         ],
-        'none' => '/img/photo-default.png',
+        'none' => '/img/photo-default.png?1',
         'size' => [
             'big' => [
                 'width' => 1024,

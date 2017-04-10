@@ -15,7 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="product-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success']) ?>
@@ -32,15 +31,48 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => SortableColumn::className(),
             ],
-            'name',
-            'brand.name',
-            'status.name',
+            [
+                'attribute' => 'name',
+                'content' => function($model, $key, $index, $column){
+                    return Html::a($model->name, ['variant/index', 'VariantSearch[product_id]' => $model->id]);
+                },
+            ],
+            [
+                'attribute' => 'brand_id',
+                'value' => 'brand.name',
+                'filter' => \app\models\Brand::getList(null),
+            ],
+            [
+                'attribute' => 'status_id',
+                'value' => 'status.name',
+                'filter' => \app\models\ProductStatus::getList(),
+            ],
             'created_at:date',
-            'enabled',
-
+            [
+                'attribute' => 'enabled',
+                'filter' => [
+                    Yii::t('app', 'Disabled'),
+                    Yii::t('app', 'Enabled'),
+                ],
+                'content' => function($model, $key, $index, $column){
+                    if ($model->enabled) {
+                        $class = 'glyphicon glyphicon-ok';
+                    } else {
+                        $class = '';
+                    }
+                    return Html::tag('i', '', ['class' => $class]);
+                },
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{update} {delete}',
+                'template' => '{view} {update} {delete}',
+                'buttons' => [
+                    'view' => function ($url, $model, $key) {
+                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['/product/index', 'slug' => $model->slug], [
+                            'target' => '_blank',
+                        ]);
+                    },
+                ],
             ],
         ],
         'options' => [

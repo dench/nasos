@@ -8,7 +8,7 @@
  * @var $model app\models\Product
  */
 ?>
-<?php if ($model->variants[0]->values) : ?>
+<?php if (@$model->variants[0]->values) : ?>
     <div class="table-responsive">
         <?= \app\widgets\FeaturesTable::widget([
             'variants' => $model->variants,

@@ -10,6 +10,7 @@
  */
 use dench\image\helpers\ImageHelper;
 
+$variant = @$model->variants[0];
 ?>
 
 <div class="col-sm-4 col-md-3">
@@ -25,14 +26,14 @@ use dench\image\helpers\ImageHelper;
             <h5 class="card-title">
                 <a href="<?= $link ?>"><?= $model->name ?></a>
             </h5>
-            <?php if ($model->variants[0]->price) : ?>
+            <?php if (@$variant->price) : ?>
             <div class="card-price">
                 <?php if ($model->price_from) : ?>
                     <?= Yii::t('app', 'from') ?>
                 <?php endif; ?>
-                <?= $model->variants[0]->currency->before ?>
-                <?= $model->variants[0]->price ?>
-                <?= $model->variants[0]->currency->after ?>
+                <?= @$variant->currency->before ?>
+                <?= @$variant->price ?>
+                <?= @$variant->currency->after ?>
             </div>
             <?php endif; ?>
         </div>

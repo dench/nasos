@@ -9,7 +9,7 @@
  */
 ?>
 <div class="row">
-<?php if ($model->variants[0]->price) { ?>
+<?php if (@$model->variants[0]->price) { ?>
     <?php if (count($model->variants) > 1) { ?>
         <div class="col-sm-12">
             <table class="table table-striped table-hover table-condensed table-default">
