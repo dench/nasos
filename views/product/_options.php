@@ -30,7 +30,11 @@ use yii\helpers\Url;
                         <?php } else { ?>
                             <th><?= $option->name ?></th>
                         <?php } ?>
-                        <td><?= $option->variants[0]->price ?></td>
+                        <td><?php
+                            $variants = $option->variants;
+                            $variant = current($variants);
+                            echo @$variant->price;
+                            ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

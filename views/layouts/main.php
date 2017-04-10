@@ -39,10 +39,11 @@ SiteAsset::register($this);
         'langs' => Language::nameList(),
     ]);
     NavBar::begin([
-        'brandLabel' => '<img src="/img/benza-icon.png" alt="Бенза"><span class="navbar-brand-name">Бенза</span>',
+        'brandLabel' => '<img src="/img/benza.png" alt="Бенза">',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-static-top',
+            'title' => 'Бенза',
         ],
         'headerHtml' => $lang,
     ]);
