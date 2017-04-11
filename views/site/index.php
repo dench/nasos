@@ -49,7 +49,7 @@ use yii\helpers\Url;
                 </div>
             </div>
             <div class="col-md-6 section-company-img">
-                <a href="<?= Url::to(['site/about']) ?>" rel="nofollow"><img src="<?= ImageHelper::thumb(current($page->image_ids), 'cover') ?>" alt="<?= $page->name ?>" class="img-responsive"></a>
+                <a href="<?= Url::to(['site/about']) ?>" rel="nofollow"><img src="<?= ImageHelper::thumb(current($page->image_ids), 'small') ?>" alt="<?= $page->name ?>" class="img-responsive"></a>
             </div>
         </div>
     </div>
