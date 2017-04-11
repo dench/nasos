@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\CallbackForm;
 use app\models\Category;
 use dench\page\models\Page;
 use Yii;
@@ -20,10 +21,6 @@ class SiteController extends Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
     }
@@ -55,6 +52,7 @@ class SiteController extends Controller
         $page = Page::viewPage(4);
 
         $model = new ContactForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
 
@@ -77,6 +75,22 @@ class SiteController extends Controller
 
         return $this->render('about', [
             'page' => $page,
+        ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function actionCallback()
+    {
+        $model = new CallbackForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->send(Yii::$app->params['adminEmail'])) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
+            return 'success';
+        }
+        return $this->renderAjax('callback', [
+            'model' => $model,
         ]);
     }
 }

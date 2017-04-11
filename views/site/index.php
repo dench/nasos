@@ -1,6 +1,8 @@
 <?php
 
 use dench\image\helpers\ImageHelper;
+use yii\bootstrap\Modal;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
@@ -23,9 +25,10 @@ use yii\helpers\Url;
                 </div>
                 <div class="col-sm-6">
                     <div class="header-contact">
-                        <div class="header-contact-phone">(093) 984-46-59</div>
-                        <div class="header-contact-time">9:00 - 19:00, <?= Yii::t('app', 'seven days a week') ?></div>
-                        <button class="btn btn-primary"><?= Yii::t('app', 'Callback') ?></button>
+                        <div class="header-contact-phone"><?= Yii::$app->params['phone1'] ?></div>
+                        <div class="header-contact-phone"><?= Yii::$app->params['phone2'] ?></div>
+                        <div class="header-contact-time">9:00 - 20:00, <?= Yii::t('app', 'seven days a week') ?></div>
+                        <button class="btn btn-primary modal-callback-open" data-target="<?= Url::to(['site/callback']) ?>"><?= Yii::t('app', 'Callback') ?></button>
                     </div>
                 </div>
             </div>
@@ -78,6 +81,22 @@ use yii\helpers\Url;
     </div>
 </section>
 <?php
+
+$script = <<< JS
+$('.modal-callback-open').on('click', function(e){
+    e.preventDefault();
+    $('#modal-callback').modal('show').find('#modal-callback-content').load($(this).attr('data-target'));
+});
+JS;
+Yii::$app->view->registerJs($script);
+
+Modal::begin([
+    'id' => 'modal-callback',
+    'header' => '<h3>' . Yii::t('app', 'Callback') . '</h3>',
+]);
+echo Html::tag('div', '', ['id' => 'modal-callback-content']);
+Modal::end();
+
 /*
 ?>
 <section class="section section-news bg-white">
