@@ -16,7 +16,7 @@ use yii\helpers\Url;
                 <div class="col-sm-6">
                     <div class="header-slogan">
                         <div class="header-slogan-big">
-                            <?= Yii::t('app', 'Products from Ukrainian manufacturer') ?>
+                            <?= Yii::t('app', 'Products from Ukrainian<br>manufacturer') ?>
                         </div>
                         <div class="header-slogan-small">
                             <div class="text-nowrap"><?= Yii::t('app', 'Set the task - we will solve it!') ?></div>

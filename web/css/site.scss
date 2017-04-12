@@ -33,7 +33,7 @@ body {
 
 .wrap {
   min-height: 100%;
-  padding-bottom: 150px;
+  padding-bottom: 120px;
 }
 
 a {
@@ -359,11 +359,17 @@ a {
 }
 
 .footer {
-  padding: 20px 0;
-  height: 150px;
-  margin-top: -150px;
+  text-align: center;
+  padding: 30px 0 20px 0;
+  min-height: 120px;
+  margin-top: -120px;
   .copyright {
     color: #888;
+    text-align: center;
+    padding-top: 20px;
+    .slogan {
+      display: none;
+    }
     img {
       max-height: 60px;
       display: block;
@@ -372,6 +378,15 @@ a {
     a {
       color: #888;
     }
+  }
+  .contacts {
+    color: #bbb;
+    a {
+      color: #bbb;
+    }
+  }
+  .phones {
+    white-space: nowrap;
   }
 }
 
@@ -588,6 +603,12 @@ a {
       text-align: left;
     }
   }
+  .footer {
+    text-align: left;
+    .copyright {
+      text-align: center;
+    }
+  }
 }
 
 @media (min-width: 992px) {
@@ -648,6 +669,16 @@ a {
   .navbar-nav.lang-change {
     > li {
       padding: 18px 0;
+    }
+  }
+  .footer {
+    text-align: left;
+    .copyright {
+      padding-top: 0;
+      text-align: right;
+      .slogan {
+        display: block;
+      }
     }
   }
 }
