@@ -29,12 +29,14 @@ class FeaturesSimpleTable extends Widget
         foreach ($this->variants as $variant) {
             $cols = [];
             foreach ($variant->values as $value) {
-                $cols[] = Html::tag($cols ? 'td' : 'th', $value->name);
+                $cols[$value->feature_id] = Html::tag($cols ? 'td' : 'th', $value->name);
                 $labels[$value->feature_id] = Html::tag('th', $value->feature->name . ($value->feature->after ? ', ' . $value->feature->after : ''));
             }
-            $cols[] = Html::tag('td', $variant->price);
-            $labels[0] = Html::tag('th', \Yii::t('app', 'Price') . ', ' . \Yii::t('app', 'UAH'));
-            $rows[] = Html::tag('tr', implode("\n", $cols));
+            if ($variant->price) {
+                $cols[0] = Html::tag('td', $variant->price);
+                $labels[0] = Html::tag('th', \Yii::t('app', 'Price') . ', ' . \Yii::t('app', 'UAH'));
+            }
+            $rows[$variant->id] = Html::tag('tr', implode("\n", $cols));
         }
 
         $thead = Html::tag('tr', implode("\n", $labels));

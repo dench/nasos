@@ -152,7 +152,7 @@ class Variant extends ActiveRecord
      */
     public function getValues()
     {
-        return $this->hasMany(Value::className(), ['id' => 'value_id'])->viaTable('variant_value', ['variant_id' => 'id']);
+        return $this->hasMany(Value::className(), ['id' => 'value_id'])->viaTable('variant_value', ['variant_id' => 'id'])->orderBy(['position' => SORT_ASC]);
     }
 
     /**
