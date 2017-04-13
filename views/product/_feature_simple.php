@@ -21,5 +21,5 @@
 <?php endif; ?>
 
 <div class="text-right">
-    <span class="btn btn-link" onclick="window.print();"><i class="glyphicon glyphicon-print"></i> <?= Yii::t('app', 'Print version')?></span>
+    <span class="btn btn-link btn-print" onclick="window.print();"><i class="glyphicon glyphicon-print"></i> <?= Yii::t('app', 'Print version')?></span>
 </div>

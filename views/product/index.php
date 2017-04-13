@@ -6,7 +6,7 @@
 
 echo $this->render('_breadcrumbs', [
     'model' => $model,
-])
+]);
 
 ?>
 <div class="container page product">

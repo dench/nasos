@@ -704,3 +704,12 @@ a {
     }
   }
 }
+
+@media print {
+  nav.navbar, .podmenu, .section-viewed, .btn-print, a::after, .footer {
+    display: none;
+  }
+  .wrap {
+    padding: 0;
+  }
+}
