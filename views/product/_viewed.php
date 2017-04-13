@@ -22,7 +22,7 @@ use yii\helpers\Url;
                         <div class="card block-link">
                             <div class="card-img">
                                 <?php if ($product->image) { ?>
-                                    <img src="<?= ImageHelper::thumb($product->image->id, 'cover') ?>" class="img-responsive" alt="<?= $product->name ?>">
+                                    <img src="<?= ImageHelper::thumb($product->image->id, 'cover') ?>" class="img-responsive" alt="<?= $product->image->alt ? $product->image->alt : $product->name ?>" title="<?= $product->title ?>">
                                 <?php } else { ?>
                                     <img src="<?= Yii::$app->params['image']['none'] ?>" class="img-responsive" alt="">
                                 <?php } ?>

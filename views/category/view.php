@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="col-sm-6 col-md-4">
                     <div class="card block-link">
                         <div class="card-img">
-                            <img src="<?= ImageHelper::thumb($category->image->id, 'cover') ?>" class="img-responsive" alt="<?= $category->name ?>">
+                            <img src="<?= ImageHelper::thumb($category->image->id, 'cover') ?>" class="img-responsive" alt="<?= $category->image->alt ? $category->image->alt : $category->name ?>" title="<?= $category->title ?>">
                         </div>
                         <div class="card-block">
                             <h5 class="card-title">

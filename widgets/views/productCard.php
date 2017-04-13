@@ -17,7 +17,7 @@ $variant = @$model->variants[0];
     <div class="card block-link">
         <div class="card-img">
             <?php if ($model->image) { ?>
-                <img src="<?= ImageHelper::thumb($model->image->id, 'cover') ?>" class="img-responsive" alt="<?= $model->name ?>">
+                <img src="<?= ImageHelper::thumb($model->image->id, 'cover') ?>" class="img-responsive" alt="<?= $model->image->alt ? $model->image->alt : $model->name ?>" title="<?= $model->title ?>">
             <?php } else { ?>
                 <img src="<?= Yii::$app->params['image']['none'] ?>" class="img-responsive" alt="">
             <?php } ?>

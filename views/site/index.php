@@ -49,7 +49,7 @@ use yii\helpers\Url;
                 </div>
             </div>
             <div class="col-md-6 section-company-img">
-                <a href="<?= Url::to(['site/about']) ?>" rel="nofollow"><img src="<?= ImageHelper::thumb(current($page->image_ids), 'small') ?>" alt="<?= $page->name ?>" class="img-responsive"></a>
+                <a href="<?= Url::to(['site/about']) ?>" rel="nofollow"><img src="<?= ImageHelper::thumb(current($page->image_ids), 'small') ?>"  alt="<?= $page->title ?>" title="<?= $page->title ?>" class="img-responsive"></a>
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@ use yii\helpers\Url;
                     <div class="card block-link">
                         <div class="card-img">
                             <?php if ($category->image) { ?>
-                                <img src="<?= ImageHelper::thumb($category->image->id, 'cover') ?>" class="img-responsive" alt="<?= $category->name ?>">
+                                <img src="<?= ImageHelper::thumb($category->image->id, 'cover') ?>" class="img-responsive" alt="<?= $category->image->alt ? $category->image->alt : $category->name ?>" title="<?= $category->title ?>">
                             <?php } else { ?>
                                 <img src="<?= Yii::$app->params['image']['none'] ?>" class="img-responsive" alt="">
                             <?php } ?>

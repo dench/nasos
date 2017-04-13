@@ -22,7 +22,7 @@ Yii::$app->view->registerJs($script, yii\web\View::POS_READY);
 <div class="product-photo">
     <?php if ($model->image) { ?>
         <a href="<?= ImageHelper::thumb($model->image->id, 'big') ?>" class="thumbnail" data-size="<?= $model->image->width ?>x<?= $model->image->height ?>">
-            <img src="<?= ImageHelper::thumb($model->image->id, 'cover') ?>" alt="<?= $model->name ?>">
+            <img src="<?= ImageHelper::thumb($model->image->id, 'cover') ?>" alt="<?= $model->image->alt ? $model->image->alt : $model->name ?>" title="<?= $model->title ?>">
         </a>
     <?php } else { ?>
         <div class="thumbnail">
@@ -56,7 +56,7 @@ JS;
         <?php foreach ($images as $image) : ?>
             <div class="col-xs-4 col-sm-3 col-md-4">
                 <a href="<?= ImageHelper::thumb($image->id, 'big') ?>" class="thumbnail<?php if ($model->image->id == $image->id) echo " active"; ?>" data-size="<?= $image->width ?>x<?= $image->height ?>">
-                    <img src="<?= ImageHelper::thumb($image->id, 'cover') ?>" alt="<?= $model->name ?>">
+                    <img src="<?= ImageHelper::thumb($image->id, 'cover') ?>" alt="<?= $model->image->alt ? $model->image->alt : $model->name ?>" title="<?= $model->title ?>">
                 </a>
             </div>
         <?php endforeach; ?>

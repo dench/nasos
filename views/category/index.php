@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card block-link">
                     <div class="card-img">
                         <?php if ($category->image) { ?>
-                            <img src="<?= ImageHelper::thumb($category->image->id, 'cover') ?>" class="img-responsive" alt="<?= $category->name ?>">
+                            <img src="<?= ImageHelper::thumb($category->image->id, 'cover') ?>" class="img-responsive" alt="<?= $category->image->alt ? $category->image->alt : $category->name ?>" title="<?= $category->title ?>">
                         <?php } else { ?>
                             <img src="<?= Yii::$app->params['image']['none'] ?>" class="img-responsive" alt="">
                         <?php } ?>
