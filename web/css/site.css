@@ -461,10 +461,7 @@ a {
   .news-item-btn {
     display: block; } }
 @media print {
-  nav.navbar, .podmenu, .section-viewed, .btn-print, a::after, .footer {
-    display: none; }
-
-  .wrap {
-    padding: 0; } }
+  nav.navbar, .podmenu, .btn-print, .section-viewed, a::after {
+    display: none; } }
 
 /*# sourceMappingURL=site.css.map */
