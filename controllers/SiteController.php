@@ -47,7 +47,7 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionContact()
+    public function actionContacts()
     {
         $page = Page::viewPage(4);
 
@@ -58,7 +58,7 @@ class SiteController extends Controller
 
             return $this->redirect(Url::current(['#' => 'feedback']));
         }
-        return $this->render('contact', [
+        return $this->render('contacts', [
             'page' => $page,
             'model' => $model,
         ]);
