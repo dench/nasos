@@ -29,16 +29,25 @@ class FeaturesSimpleTable extends Widget
         foreach ($this->variants as $variant) {
             $cols = [];
             foreach ($variant->values as $value) {
-                $cols[$value->feature_id] = Html::tag($cols ? 'td' : 'th', $value->name);
-                $labels[$value->feature_id] = Html::tag('th', $value->feature->name . ($value->feature->after ? ', ' . $value->feature->after : ''));
+                //$cols[$value->feature_id] = Html::tag(/*$cols ? 'td' : 'th'*/'td', $value->name);
+                $cols[$value->feature->position] = $value->name;
+                $labels[$value->feature->position] = Html::tag('th', $value->feature->name . ($value->feature->after ? ', ' . $value->feature->after : ''));
             }
             if ($variant->price) {
-                $cols[0] = Html::tag('td', $variant->price);
+                //$cols[0] = Html::tag('td', $variant->price);
+                $cols[0] = $variant->price;
                 $labels[0] = Html::tag('th', \Yii::t('app', 'Price') . ', ' . \Yii::t('app', 'UAH'));
+            }
+            ksort($cols);
+            $th = 1;
+            foreach ($cols as $k => $v) {
+                $cols[$k] = Html::tag($th ? 'th' : 'td', $v);
+                $th = 0;
             }
             $rows[$variant->id] = Html::tag('tr', implode("\n", $cols));
         }
 
+        ksort($labels);
         $thead = Html::tag('tr', implode("\n", $labels));
         $tbody = implode("\n", $rows);
 
