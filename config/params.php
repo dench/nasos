@@ -21,8 +21,8 @@ return [
         'watermark' => [
             'enabled' => 1,
             'file' => '@webroot/img/watermark.png',
-            'x' => 40,
-            'y' => 30
+            'x' => 50,
+            'y' => 70,
         ],
         'none' => '/img/photo-default.png?1',
         'size' => [
@@ -33,9 +33,6 @@ return [
             'small' => [
                 'width' => 600,
                 'height' => 600,
-                'watermark' => [
-                    'file' => '@webroot/img/watermark-small.png',
-                ],
             ],
             'cover' => [
                 'width' => 600,

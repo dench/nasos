@@ -57,7 +57,7 @@
 <?php } ?>
         <div class="product-buy">
             <small class="text-muted"><?= Yii::t('app', 'You can order by phone') ?></small>
-            <div class="phone"><?= Yii::$app->params['phone'] ?></div>
+            <div class="phone"><?= Yii::$app->params['phone1'] ?></div>
         </div>
     </div>
 </div>
