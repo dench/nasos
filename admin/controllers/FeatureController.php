@@ -79,6 +79,16 @@ class FeatureController extends Controller
         $model = new Feature();
 
         $model->loadDefaultValues();
+        
+        $values = new ActiveDataProvider([
+            'query' => Value::find()->where(['feature_id' => $id]),
+            'sort'=> [
+                'defaultOrder' => [
+                    'position' => SORT_ASC,
+                ],
+            ],
+            'pagination' => false,
+        ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Yii::t('app', 'Information added successfully'));
@@ -86,6 +96,7 @@ class FeatureController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'values' => $values,
             ]);
         }
     }
