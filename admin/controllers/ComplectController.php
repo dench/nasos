@@ -46,7 +46,7 @@ class ComplectController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ComplectSearch();
+        $searchModel = new ComplectSearch(['all' => Yii::$app->request->get('all')]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

@@ -12,13 +12,17 @@ use app\models\Feature;
  */
 class FeatureSearch extends Feature
 {
+    public $category_id;
+
+    public $all;
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'position'], 'integer'],
+            [['id', 'position', 'category_id'], 'integer'],
             [['filter', 'enabled'], 'boolean'],
             [['name', 'after'], 'safe'],
         ];
@@ -55,7 +59,19 @@ class FeatureSearch extends Feature
             ],
         ]);
 
+        if ($this->all) {
+            $dataProvider->pagination = false;
+        }
+
         $this->load($params);
+
+        if ($this->category_id) {
+            $query->joinWith(['categories']);
+        }
+
+        if ($this->name) {
+            $query->joinWith(['translations']);
+        }
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -69,7 +85,10 @@ class FeatureSearch extends Feature
             'position' => $this->position,
             'filter' => $this->filter,
             'enabled' => $this->enabled,
+            'category_id' => $this->category_id,
         ]);
+
+        $query->andFilterWhere(['like', 'feature_lang.name', $this->name]);
 
         return $dataProvider;
     }

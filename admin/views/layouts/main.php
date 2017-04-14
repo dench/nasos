@@ -44,11 +44,11 @@ AdminAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
+            ['label' => Yii::t('app', 'Categories'), 'url' => ['/admin/category/index']],
             ['label' => Yii::t('app', 'Products'), 'url' => ['/admin/product/index']],
             ['label' => Yii::t('app', 'Variants'), 'url' => ['/admin/variant/index']],
             ['label' => Yii::t('app', 'Features'), 'url' => ['/admin/feature/index']],
             ['label' => Yii::t('app', 'Complectation'), 'url' => ['/admin/complect/index']],
-            ['label' => Yii::t('app', 'Categories'), 'url' => ['/admin/category/index']],
             ['label' => Yii::t('app', 'Pages'), 'url' => ['/admin/page/default/index']],
             ['label' => Yii::t('app', 'Other'), 'url' => '#', 'items' => [
                 ['label' => Yii::t('app', 'Brands'), 'url' => ['/admin/brand/index']],

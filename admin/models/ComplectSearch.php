@@ -12,6 +12,8 @@ use app\models\Complect;
  */
 class ComplectSearch extends Complect
 {
+    public $all;
+
     /**
      * @inheritdoc
      */
@@ -53,6 +55,10 @@ class ComplectSearch extends Complect
                 ],
             ],
         ]);
+
+        if ($this->all) {
+            $dataProvider->pagination = false;
+        }
 
         $this->load($params);
 

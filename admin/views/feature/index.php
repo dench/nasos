@@ -12,11 +12,16 @@ use yii\helpers\Url;
 
 $this->title = Yii::t('app', 'Features');
 $this->params['breadcrumbs'][] = $this->title;
+
+if (!Yii::$app->request->get('all') && $dataProvider->totalCount > $dataProvider->count) {
+    $showAll = Html::a(Yii::t('app', 'Show all'), Url::current(['all' => 1]));
+} else {
+    $showAll = '';
+}
 ?>
 <div class="feature-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a(Yii::t('app', 'Create Feature'), ['create'], ['class' => 'btn btn-success']) ?>
@@ -29,16 +34,28 @@ $this->params['breadcrumbs'][] = $this->title;
                 'data-position' => $model->position,
             ];
         },
+        'layout' => "{summary}\n{$showAll}\n{items}\n{pager}",
         'columns' => [
             [
                 'class' => SortableColumn::className(),
             ],
             [
-                'attribute' => 'id',
-                'filter' => Feature::getList(null, null),
+                'attribute' => 'name',
                 'content' => function($model, $key, $index, $column){
                     return Html::a($model->name, ['value/index', 'ValueSearch[feature_id]' => $model->id]);
                 },
+            ],
+            [
+                'attribute' => 'category_id',
+                'value' => function ($model, $key, $index, $column) {
+                    $result = [];
+                    foreach ($model->categories as $category) {
+                        $result[] = $category->name;
+                    }
+                    return implode(', ', $result);
+                },
+                'filter' => \app\models\Category::getList(null),
+                'label' => Yii::t('app', 'Categories'),
             ],
             'after',
             'enabled',

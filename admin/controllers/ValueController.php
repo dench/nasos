@@ -46,7 +46,7 @@ class ValueController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ValueSearch();
+        $searchModel = new ValueSearch(['all' => Yii::$app->request->get('all')]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         $feature_id = Yii::$app->request->get('ValueSearch')['feature_id'];

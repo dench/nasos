@@ -49,7 +49,7 @@ class VariantController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new VariantSearch();
+        $searchModel = new VariantSearch(['all' => Yii::$app->request->get('all')]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

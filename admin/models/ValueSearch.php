@@ -12,6 +12,8 @@ use app\models\Value;
  */
 class ValueSearch extends Value
 {
+    public $all;
+
     /**
      * @inheritdoc
      */
@@ -53,6 +55,10 @@ class ValueSearch extends Value
                 ],
             ],
         ]);
+
+        if ($this->all) {
+            $dataProvider->pagination = false;
+        }
 
         $this->load($params);
 

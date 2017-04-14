@@ -46,7 +46,7 @@ class ProductController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProductSearch();
+        $searchModel = new ProductSearch(['all' => Yii::$app->request->get('all')]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

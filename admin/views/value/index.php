@@ -15,6 +15,12 @@ use yii\widgets\Pjax;
 
 $this->title = Yii::t('app', 'Values');
 $this->params['breadcrumbs'][] = $this->title;
+
+if (!Yii::$app->request->get('all') && $dataProvider->totalCount > $dataProvider->count) {
+    $showAll = Html::a(Yii::t('app', 'Show all'), Url::current(['all' => 1]));
+} else {
+    $showAll = '';
+}
 ?>
 <div class="value-index">
 
@@ -34,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'data-position' => $model->position,
             ];
         },
+        'layout' => "{summary}\n{$showAll}\n{items}\n{pager}",
         'columns' => [
             [
                 'class' => SortableColumn::className(),

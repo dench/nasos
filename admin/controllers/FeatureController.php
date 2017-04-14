@@ -48,7 +48,7 @@ class FeatureController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new FeatureSearch();
+        $searchModel = new FeatureSearch(['all' => Yii::$app->request->get('all')]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

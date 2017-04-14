@@ -12,6 +12,8 @@ use app\models\Variant;
  */
 class VariantSearch extends Variant
 {
+    public $all;
+
     /**
      * @inheritdoc
      */
@@ -53,6 +55,10 @@ class VariantSearch extends Variant
                 ],
             ],
         ]);
+
+        if ($this->all) {
+            $dataProvider->pagination = false;
+        }
 
         $this->load($params);
 

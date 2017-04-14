@@ -12,6 +12,8 @@ use app\models\Category;
  */
 class CategorySearch extends Category
 {
+    public $all;
+
     /**
      * @inheritdoc
      */
@@ -65,6 +67,10 @@ class CategorySearch extends Category
                 ],
             ],
         ]);
+
+        if ($this->all) {
+            $dataProvider->pagination = false;
+        }
 
         $this->load($params);
 

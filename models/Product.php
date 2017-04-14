@@ -62,7 +62,7 @@ class Product extends ActiveRecord
             LanguageBehavior::className(),
             TimestampBehavior::className(),
             SortableBehavior::className(),
-            [
+            'slug' => [
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'name',
                 'ensureUnique' => true

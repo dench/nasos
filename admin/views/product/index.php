@@ -11,6 +11,12 @@ use yii\helpers\Url;
 
 $this->title = Yii::t('app', 'Products');
 $this->params['breadcrumbs'][] = $this->title;
+
+if (!Yii::$app->request->get('all') && $dataProvider->totalCount > $dataProvider->count) {
+    $showAll = Html::a(Yii::t('app', 'Show all'), Url::current(['all' => 1]));
+} else {
+    $showAll = '';
+}
 ?>
 <div class="product-index">
 
@@ -27,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'data-position' => $model->position,
             ];
         },
+        'layout' => "{summary}\n{$showAll}\n{items}\n{pager}",
         'columns' => [
             [
                 'class' => SortableColumn::className(),
@@ -36,6 +43,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'content' => function($model, $key, $index, $column){
                     return Html::a($model->name, ['variant/index', 'VariantSearch[product_id]' => $model->id]);
                 },
+            ],
+            [
+                'attribute' => 'category_id',
+                'value' => function ($model, $key, $index, $column) {
+                    $result = [];
+                    foreach ($model->categories as $category) {
+                        $result[] = $category->name;
+                    }
+                    return implode(', ', $result);
+                },
+                'filter' => \app\models\Category::getList(null),
+                'label' => Yii::t('app', 'Categories'),
             ],
             [
                 'attribute' => 'brand_id',

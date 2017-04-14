@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0025444af6dcaafe3631252c74da3aaa",
+    "content-hash": "cd28235d656ab0fbf54fb5529fca60c5",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -546,16 +546,16 @@
         },
         {
             "name": "dench/yii2-language",
-            "version": "1.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dench/yii2-language.git",
-                "reference": "84cf42e6c86b04d6e928bdc96697b0047ce5c145"
+                "reference": "40ee2a24919bc5e4b4ad68bf8152022f505297c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dench/yii2-language/zipball/84cf42e6c86b04d6e928bdc96697b0047ce5c145",
-                "reference": "84cf42e6c86b04d6e928bdc96697b0047ce5c145",
+                "url": "https://api.github.com/repos/dench/yii2-language/zipball/40ee2a24919bc5e4b4ad68bf8152022f505297c8",
+                "reference": "40ee2a24919bc5e4b4ad68bf8152022f505297c8",
                 "shasum": ""
             },
             "require": {
@@ -584,7 +584,7 @@
                 "language",
                 "yii2"
             ],
-            "time": "2017-03-19T20:00:50+00:00"
+            "time": "2017-04-14 17:54:59"
         },
         {
             "name": "dench/yii2-page",
@@ -1776,6 +1776,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "dench/yii2-language": 20,
         "dench/yii2-page": 20,
         "dench/yii2-image": 20,
         "dench/yii2-sortable": 20
