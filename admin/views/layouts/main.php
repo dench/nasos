@@ -55,6 +55,7 @@ AdminAsset::register($this);
                 ['label' => Yii::t('app', 'Currencies'), 'url' => ['/admin/currency/index']],
                 ['label' => Yii::t('app', 'Units'), 'url' => ['/admin/unit/index']],
                 ['label' => Yii::t('app', 'Statuses'), 'url' => ['/admin/product-status/index']],
+                ['label' => Yii::t('app', 'Users'), 'url' => ['/admin/user/index']],
             ]],
             ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
             /*'<li>'

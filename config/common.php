@@ -15,7 +15,7 @@ return [
     'modules' => [
         'admin' => [
             'class' => 'app\admin\Module',
-            'as access' => [
+            /*'as access' => [
                 'class' => 'yii\filters\AccessControl',
                 'rules' => [
                     [
@@ -28,7 +28,7 @@ return [
                         'roles' => ['?'],
                     ],
                 ],
-            ],
+            ],*/
             'modules' => [
                 'page' => [
                     'class' => 'dench\page\Module',

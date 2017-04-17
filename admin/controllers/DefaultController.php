@@ -2,7 +2,7 @@
 
 namespace app\admin\controllers;
 
-use app\models\LoginForm;
+use app\admin\models\LoginForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -63,7 +63,7 @@ class DefaultController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
-        return $this->render('login', [
+        return $this->renderAjax('login', [
             'model' => $model,
         ]);
     }
