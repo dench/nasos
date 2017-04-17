@@ -16,7 +16,7 @@ use yii\helpers\Url;
                 <div class="col-sm-6">
                     <div class="header-slogan">
                         <div class="header-slogan-big">
-                            <?= Yii::t('app', 'Products from Ukrainian<br>manufacturer') ?>
+                            <?= Yii::t('app', 'Ukrainian producer of fueling solutions') ?>
                         </div>
                         <div class="header-slogan-small">
                             <div class="text-nowrap"><?= Yii::t('app', 'Set the task - we will solve it!') ?></div>
@@ -27,6 +27,7 @@ use yii\helpers\Url;
                     <div class="header-contact">
                         <div class="header-contact-phone"><?= Yii::$app->params['phone1'] ?></div>
                         <div class="header-contact-phone"><?= Yii::$app->params['phone2'] ?></div>
+                        <div class="header-contact-phone"><?= Yii::$app->params['phone3'] ?></div>
                         <div class="header-contact-time">9:00 - 20:00, <?= Yii::t('app', 'seven days a week') ?></div>
                         <button class="btn btn-primary modal-callback-open" data-target="<?= Url::to(['site/callback']) ?>"><?= Yii::t('app', 'Callback') ?></button>
                     </div>

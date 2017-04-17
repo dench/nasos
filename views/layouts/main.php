@@ -124,21 +124,27 @@ SiteAsset::register($this);
                     <p><i class="glyphicon glyphicon-earphone">&ensp;</i><?= Yii::$app->params['phone2'] ?></p>
                 </div>
             </div>
+            <div class="col-md-2 col-sm-3">
+                <div class="contacts phones">
+                    <p><i class="glyphicon glyphicon-earphone">&ensp;</i><?= Yii::$app->params['phone3'] ?></p>
+                    <p><i class="glyphicon glyphicon-earphone">&ensp;</i><?= Yii::$app->params['phone4'] ?></p>
+                </div>
+            </div>
             <div class="col-md-5 col-sm-6">
                 <div class="contacts">
                     <p><i class="glyphicon glyphicon-map-marker">&ensp;</i><a href="<?= Yii::$app->params['map_link'] ?>" target="_blank"><?= Yii::$app->params['address_' . Yii::$app->language] ?></a></p>
                     <p><i class="glyphicon glyphicon-time">&ensp;</i>Пн - Пт, с 9:00 до 18:00</p>
                 </div>
             </div>
-            <div class="col-md-5 col-sm-3">
+            <div class="col-md-3 col-sm-12">
                 <div class="copyright">
                     <p>© <a href="/"><?= Yii::$app->params['sitename'] ?></a> 2017</p>
-                    <p class="slogan"><?= Yii::t('app', 'Products from Ukrainian manufacturer') ?></p>
                 </div>
             </div>
         </div>
     </div>
 </footer>
+<?= $this->render('_counters') ?>
 <?php $this->endBody() ?>
 </body>
 </html>

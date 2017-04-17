@@ -146,9 +146,9 @@ a {
     font-size: 16px;
     margin: 20px 0; }
   .header-contact {
-    margin: 20px 0; }
+    margin: 10px 0; }
     .header-contact-phone {
-      font-size: 24px;
+      font-size: 22px;
       margin: 10px 0; }
     .header-contact-time {
       font-size: 16px;
@@ -425,7 +425,7 @@ a {
       .header-slogan-small {
         font-size: 20px; }
     .header-contact {
-      margin: 30px 0; }
+      margin: 10px 0; }
 
   .section-company-title {
     font-size: 36px;
