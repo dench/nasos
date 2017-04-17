@@ -1,3 +1,5 @@
 .htaccess
 index.php
 google*
+yandex*
+robots.txt
