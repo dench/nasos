@@ -58,7 +58,7 @@ use yii\helpers\Url;
 
 <section class="section section-category bg-grey">
     <div class="container">
-        <h2 class="section-title"><a href="<?= Url::to(['products']) ?>"><?= Yii::t('app', 'Our production') ?></a></h2>
+        <h2 class="section-title"><a href="<?= Url::to(['/category/index']) ?>"><?= Yii::t('app', 'Our production') ?></a></h2>
         <div class="row">
             <?php foreach ($categories as $category) : ?>
                 <div class="col-sm-6 col-md-4">
