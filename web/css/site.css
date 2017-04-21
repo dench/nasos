@@ -187,6 +187,17 @@ a {
   margin: 30px 0;
   text-align: center; }
 
+.status {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-size: contain;
+  z-index: 2; }
+  .status-2 {
+    width: 80px;
+    height: 80px;
+    background-image: url("../img/percent-10.png"); }
+
 .card {
   cursor: pointer;
   background-color: #ffffff;
@@ -194,7 +205,8 @@ a {
   margin: 15px 0;
   padding: 15px;
   border: 1px solid #eee;
-  border-radius: 4px; }
+  border-radius: 4px;
+  position: relative; }
   .card:hover a {
     text-decoration: underline; }
   .card:hover .card-img img {
@@ -208,10 +220,14 @@ a {
     -webkit-transition: all 0.2s ease-out;
     -moz-transition: all 0.2s ease-out;
     -o-transition: all 0.2s ease-out;
-    transition: all 0.2s ease-out; }
+    transition: all 0.2s ease-out;
+    z-index: 1; }
   .card-title {
     font-size: 16px;
     font-weight: bold; }
+  .card .status-2 {
+    width: 80px;
+    height: 80px; }
 
 .list-view {
   margin-bottom: 30px; }
@@ -291,6 +307,8 @@ a {
     font-size: 13px;
     padding: 20px 0; }
 
+.product-photo {
+  position: relative; }
 .product-section {
   margin-bottom: 30px; }
   .product-section-title {
@@ -325,6 +343,9 @@ a {
   border-radius: 3px; }
   .product-buy .phone {
     margin: 5px 0 4px 0; }
+.product .status-2 {
+  width: 120px;
+  height: 120px; }
 
 .pswp__bg {
   opacity: 0.5 !important; }

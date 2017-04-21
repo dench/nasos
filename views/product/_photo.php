@@ -14,21 +14,26 @@ use dench\image\helpers\ImageHelper;
 PhotoSwipe::register($this);
 Yii::$app->view->registerJsFile('@web/js/photoswipe.js', ['depends' => 'app\assets\PhotoSwipe']);
 $script = <<< JS
-    initPhotoSwipeFromDOM('.product-photo');
+    initPhotoSwipeFromDOM('.product-photo .photo');
 JS;
 Yii::$app->view->registerJs($script, yii\web\View::POS_READY);
 
 ?>
 <div class="product-photo">
-    <?php if ($model->image) { ?>
-        <a href="<?= ImageHelper::thumb($model->image->id, 'big') ?>" class="thumbnail" data-size="<?= $model->image->width ?>x<?= $model->image->height ?>">
-            <img src="<?= ImageHelper::thumb($model->image->id, 'cover') ?>" alt="<?= $model->image->alt ? $model->image->alt : $model->name ?>" title="<?= $model->title ?>">
-        </a>
-    <?php } else { ?>
-        <div class="thumbnail">
-            <img src="/img/photo-default.png" alt="photo-default">
-        </div>
-    <?php } ?>
+    <?php if (in_array(2, $model->status_ids)) : ?>
+        <i class="status status-2"></i>
+    <?php endif; ?>
+    <div class="photo">
+        <?php if ($model->image) { ?>
+            <a href="<?= ImageHelper::thumb($model->image->id, 'big') ?>" class="thumbnail" data-size="<?= $model->image->width ?>x<?= $model->image->height ?>">
+                <img src="<?= ImageHelper::thumb($model->image->id, 'cover') ?>" alt="<?= $model->image->alt ? $model->image->alt : $model->name ?>" title="<?= $model->title ?>">
+            </a>
+        <?php } else { ?>
+            <div class="thumbnail">
+                <img src="/img/photo-default.png" alt="photo-default">
+            </div>
+        <?php } ?>
+    </div>
 </div>
 <?php
 $images = [];

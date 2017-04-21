@@ -300,6 +300,19 @@ a {
   }
 }
 
+.status {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-size: contain;
+  z-index: 2;
+  &-2 {
+    width: 80px;
+    height: 80px;
+    background-image: url("../img/percent-10.png");
+  }
+}
+
 .card {
   cursor: pointer;
   background-color: #ffffff;
@@ -308,6 +321,7 @@ a {
   padding: 15px;
   border: 1px solid #eee;
   border-radius: 4px;
+  position: relative;
   &:hover {
     a {
       text-decoration: underline;
@@ -322,11 +336,18 @@ a {
     img {
       margin: 0 auto;
       @include transition(all 0.2s ease-out);
+      z-index: 1;
     }
   }
   &-title {
     font-size: 16px;
     font-weight: bold;
+  }
+  .status {
+    &-2 {
+      width: 80px;
+      height: 80px;
+    }
   }
 }
 
@@ -449,6 +470,9 @@ a {
 }
 
 .product {
+  &-photo {
+    position: relative;
+  }
   &-gallery {
     img {
 
@@ -497,6 +521,12 @@ a {
     border-radius: 3px;
     .phone {
       margin: 5px 0 4px 0;
+    }
+  }
+  .status {
+    &-2 {
+      width: 120px;
+      height: 120px;
     }
   }
 }

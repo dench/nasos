@@ -15,6 +15,9 @@ $variant = @$model->variants[0];
 
 <div class="col-sm-4 col-md-3">
     <div class="card block-link">
+        <?php if (in_array(2, $model->status_ids)) : ?>
+            <i class="status status-2"></i>
+        <?php endif; ?>
         <div class="card-img">
             <?php if ($model->image) { ?>
                 <img src="<?= ImageHelper::thumb($model->image->id, 'cover') ?>" class="img-responsive" alt="<?= $model->image->alt ? $model->image->alt : $model->name ?>" title="<?= $model->title ?>">

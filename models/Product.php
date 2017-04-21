@@ -20,7 +20,6 @@ use yii\web\NotFoundHttpException;
  * @property integer $id
  * @property string $slug
  * @property integer $brand_id
- * @property integer $status_id
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $position
@@ -39,7 +38,7 @@ use yii\web\NotFoundHttpException;
  * @property Category[] $categories
  * @property Variant[] $variants
  * @property Product[] $options
- * @property ProductStatus $status
+ * @property Status[] $statuses
  * @property Complect[] $complects
  * @property Image $image
  */
@@ -73,6 +72,7 @@ class Product extends ActiveRecord
                     'category_ids' => ['categories'],
                     'option_ids' => ['options'],
                     'complect_ids' => ['complects'],
+                    'status_ids' => ['statuses'],
                 ],
             ],
         ];
@@ -85,15 +85,14 @@ class Product extends ActiveRecord
     {
         return [
             [['name', 'h1', 'title', 'category_ids'], 'required'],
-            [['brand_id', 'status_id', 'position'], 'integer'],
+            [['brand_id', 'position'], 'integer'],
             [['slug', 'name', 'h1', 'title', 'keywords', 'view'], 'string', 'max' => 255],
             [['description', 'text'], 'string'],
             [['slug', 'name', 'h1', 'title', 'keywords', 'description', 'text'], 'trim'],
             [['enabled', 'price_from'], 'boolean'],
             [['enabled'], 'default', 'value' => true],
-            [['category_ids', 'option_ids', 'complect_ids'], 'each', 'rule' => ['integer']],
+            [['category_ids', 'option_ids', 'complect_ids', 'status_ids'], 'each', 'rule' => ['integer']],
             [['brand_id'], 'exist', 'skipOnError' => true, 'targetClass' => Brand::className(), 'targetAttribute' => ['brand_id' => 'id']],
-            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductStatus::className(), 'targetAttribute' => ['status_id' => 'id']],
         ];
     }
 
@@ -106,7 +105,6 @@ class Product extends ActiveRecord
             'id' => 'ID',
             'slug' => Yii::t('app', 'Slug'),
             'brand_id' => Yii::t('app', 'Brand'),
-            'status_id' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created'),
             'updated_at' => Yii::t('app', 'Updated'),
             'position' => Yii::t('app', 'Position'),
@@ -201,9 +199,9 @@ class Product extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getStatus()
+    public function getStatuses()
     {
-        return $this->hasOne(ProductStatus::className(), ['id' => 'status_id']);
+        return $this->hasMany(Status::className(), ['id' => 'status_id'])->viaTable('product_status', ['product_id' => 'id']);
     }
 
     /**

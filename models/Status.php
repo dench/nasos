@@ -10,21 +10,21 @@ use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
 /**
- * This is the model class for table "product_status".
+ * This is the model class for table "status".
  *
  * @property integer $id
  * @property string $color
  * @property integer $position
  * @property boolean $enabled
  */
-class ProductStatus extends ActiveRecord
+class Status extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'product_status';
+        return 'status';
     }
 
     /**
@@ -75,8 +75,8 @@ class ProductStatus extends ActiveRecord
     /**
      * @return array
      */
-    public static function getList()
+    public static function getList($enabled)
     {
-        return ArrayHelper::map(self::find()->orderBy('position')->all(), 'id', 'name');
+        return ArrayHelper::map(self::find()->andFilterWhere(['enabled' => $enabled])->orderBy('position')->all(), 'id', 'name');
     }
 }

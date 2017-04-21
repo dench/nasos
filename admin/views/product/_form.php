@@ -4,11 +4,11 @@ use app\models\Brand;
 use app\models\Category;
 use app\models\Complect;
 use app\models\Product;
-use app\models\ProductStatus;
+use app\models\Status;
 use dench\language\models\Language;
 use dosamigos\ckeditor\CKEditor;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
@@ -80,7 +80,7 @@ $this->registerJs($js);
 
             <?= $form->field($model, 'brand_id')->dropDownList(Brand::getList(true), ['prompt' => '']) ?>
 
-            <?= $form->field($model, 'status_id')->dropDownList(ProductStatus::getList(), ['prompt' => '']) ?>
+            <?= $form->field($model, 'status_ids')->checkboxList(Status::getList(null)) ?>
 
             <?= $form->field($model, 'view')->dropDownList(['container' => 'container', 'accessory' => 'accessory'], ['prompt' => '']) ?>
 

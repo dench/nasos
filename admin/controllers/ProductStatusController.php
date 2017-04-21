@@ -4,7 +4,7 @@ namespace app\admin\controllers;
 
 use dench\sortable\actions\SortingAction;
 use Yii;
-use app\models\ProductStatus;
+use app\models\Status;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -35,7 +35,7 @@ class ProductStatusController extends Controller
         return [
             'sorting' => [
                 'class' => SortingAction::className(),
-                'query' => ProductStatus::find(),
+                'query' => Status::find(),
             ],
         ];
     }
@@ -47,7 +47,7 @@ class ProductStatusController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => ProductStatus::find(),
+            'query' => Status::find(),
         ]);
 
         return $this->render('index', [
@@ -74,7 +74,7 @@ class ProductStatusController extends Controller
      */
     public function actionCreate()
     {
-        $model = new ProductStatus();
+        $model = new Status();
 
         $model->loadDefaultValues();
 
@@ -125,12 +125,12 @@ class ProductStatusController extends Controller
      * Finds the ProductStatus model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ProductStatus the loaded model
+     * @return Status the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ProductStatus::findOne($id)) !== null) {
+        if (($model = Status::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -141,12 +141,12 @@ class ProductStatusController extends Controller
      * Finds the Page model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ProductStatus|\yii\db\ActiveRecord
+     * @return Status|\yii\db\ActiveRecord
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModelMulti($id)
     {
-        if (($model = ProductStatus::find()->where(['id' => $id])->multilingual()->one()) !== null) {
+        if (($model = Status::find()->where(['id' => $id])->multilingual()->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
