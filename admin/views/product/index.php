@@ -63,6 +63,18 @@ if (!Yii::$app->request->get('all') && $dataProvider->totalCount > $dataProvider
             ],
             'created_at:date',
             [
+                'attribute' => 'status_id',
+                'value' => function ($model, $key, $index, $column) {
+                    $result = [];
+                    foreach ($model->statuses as $status) {
+                        $result[] = $status->name;
+                    }
+                    return implode(', ', $result);
+                },
+                'filter' => \app\models\Status::getList(null),
+                'label' => Yii::t('app', 'Status'),
+            ],
+            [
                 'attribute' => 'enabled',
                 'filter' => [
                     Yii::t('app', 'Disabled'),

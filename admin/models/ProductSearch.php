@@ -14,6 +14,8 @@ class ProductSearch extends Product
 {
     public $category_id;
 
+    public $status_id;
+
     public $all;
 
     /**
@@ -32,7 +34,7 @@ class ProductSearch extends Product
     public function rules()
     {
         return [
-            [['id', 'brand_id', 'created_at', 'updated_at', 'position', 'enabled', 'category_id'], 'integer'],
+            [['id', 'brand_id', 'created_at', 'updated_at', 'position', 'enabled', 'category_id', 'status_id'], 'integer'],
             [['slug', 'name', 'title', 'keywords', 'description', 'text'], 'safe'],
         ];
     }
@@ -78,6 +80,10 @@ class ProductSearch extends Product
             $query->joinWith(['categories']);
         }
 
+        if ($this->status_id) {
+            $query->joinWith(['statuses']);
+        }
+
         if ($this->name) {
             $query->joinWith(['translations']);
         }
@@ -93,6 +99,7 @@ class ProductSearch extends Product
             'id' => $this->id,
             'brand_id' => $this->brand_id,
             'category_id' => $this->category_id,
+            'status_id' => $this->status_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'position' => $this->position,
