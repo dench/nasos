@@ -28,7 +28,7 @@ use yii\helpers\Url;
                         <div class="header-contact-phone"><?= Yii::$app->params['phone1'] ?></div>
                         <div class="header-contact-phone"><?= Yii::$app->params['phone2'] ?></div>
                         <div class="header-contact-phone"><?= Yii::$app->params['phone3'] ?></div>
-                        <div class="header-contact-time">9:00 - 20:00, <?= Yii::t('app', 'seven days a week') ?></div>
+                        <div class="header-contact-time"><?= Yii::t('app', 'Calls from 9:00 to 20:00 Mon-Fri') ?></div>
                         <button class="btn btn-primary modal-callback-open" data-target="<?= Url::to(['site/callback']) ?>"><?= Yii::t('app', 'Callback') ?></button>
                     </div>
                 </div>

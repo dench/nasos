@@ -133,7 +133,7 @@ SiteAsset::register($this);
             <div class="col-md-5 col-sm-6">
                 <div class="contacts">
                     <p><i class="glyphicon glyphicon-map-marker">&ensp;</i><a href="<?= Yii::$app->params['map_link'] ?>" target="_blank"><?= Yii::$app->params['address_' . Yii::$app->language] ?></a></p>
-                    <p><i class="glyphicon glyphicon-time">&ensp;</i>Пн - Пт, с 9:00 до 18:00</p>
+                    <p><i class="glyphicon glyphicon-time">&ensp;</i><?= Yii::t('app', 'Calls from 9:00 to 20:00 Mon-Fri') ?></p>
                 </div>
             </div>
             <div class="col-md-3 col-sm-12">
