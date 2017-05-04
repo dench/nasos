@@ -9,8 +9,8 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\ProductSearch */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $page app\models\Category */
+/* @var $features app\models\Feature[] */
 
-$features = Feature::getFilterList(true, [$model->category_id]);
 ?>
 
 <?php if (count($features)) : ?>

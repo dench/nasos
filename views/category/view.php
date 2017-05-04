@@ -5,6 +5,7 @@
 /* @var $products \app\models\Product[] */
 /* @var $searchModel app\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $features app\models\Feature[] */
 
 use dench\image\helpers\ImageHelper;
 use yii\helpers\Url;
@@ -25,7 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php Pjax::begin(['id' => 'pjax']); ?>
 
-        <?= $this->render('_search', ['model' => $searchModel, 'page' => $page]); ?>
+        <?= $this->render('_search', [
+            'model' => $searchModel,
+            'page' => $page,
+            'features' => $features])
+        ?>
 
         <div class="row">
             <?php foreach ($categories as $category) : ?>

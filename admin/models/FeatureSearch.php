@@ -23,7 +23,6 @@ class FeatureSearch extends Feature
     {
         return [
             [['id', 'position', 'category_id'], 'integer'],
-            [['filter', 'enabled'], 'boolean'],
             [['name', 'after'], 'safe'],
         ];
     }
@@ -83,7 +82,6 @@ class FeatureSearch extends Feature
         $query->andFilterWhere([
             'id' => $this->id,
             'position' => $this->position,
-            'filter' => $this->filter,
             'enabled' => $this->enabled,
             'category_id' => $this->category_id,
         ]);

@@ -37,8 +37,14 @@ use yii\widgets\Pjax;
         <?php endforeach; ?>
 
         <div class="tab-pane fade" id="main-tab">
-            <?= $form->field($model, 'category_ids')->checkboxList(Category::getList(true)) ?>
-            <?= $form->field($model, 'filter')->checkbox() ?>
+            <div class="row">
+                <div class="col-md-6">
+                    <?= $form->field($model, 'category_ids')->checkboxList(Category::getList(true)) ?>
+                </div>
+                <div class="col-md-6">
+                    <?= $form->field($model, 'filter_ids')->checkboxList(Category::getList(true)) ?>
+                </div>
+            </div>
             <?= $form->field($model, 'enabled')->checkbox() ?>
         </div>
 

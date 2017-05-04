@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Category;
+use app\models\Feature;
 use app\models\ProductSearch;
 use dench\page\models\Page;
 use Yii;
@@ -31,11 +32,14 @@ class CategoryController extends Controller
         $searchModel = new ProductSearch(['category_id' => $page->id, 'enabled' => true]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $features = Feature::getFilterList(true, [$searchModel->category_id]);
+
         return $this->render('view', [
             'page' => $page,
             'categories' => $page->categories,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'features' => $features,
         ]);
     }
 

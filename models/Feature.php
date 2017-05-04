@@ -17,10 +17,10 @@ use yii\helpers\ArrayHelper;
  * @property integer $name
  * @property integer $after
  * @property integer $position
- * @property boolean $filter
  * @property boolean $enabled
  *
  * @property Category[] $categories
+ * @property Category[] $filters
  * @property Value[] $values
  * @property Variant[] $variants
  */
@@ -47,6 +47,7 @@ class Feature extends ActiveRecord
                 'relations' => [
                     'variant_ids' => ['variants'],
                     'category_ids' => ['categories'],
+                    'filter_ids' => ['filters'],
                 ],
             ],
         ];
@@ -62,10 +63,9 @@ class Feature extends ActiveRecord
             [['name'], 'string', 'max' => 255],
             [['after'], 'string', 'max' => 32],
             [['position'], 'integer'],
-            [['enabled', 'filter'], 'boolean'],
+            [['enabled'], 'boolean'],
             [['enabled'], 'default', 'value' => true],
-            [['filter'], 'default', 'value' => false],
-            [['variant_ids', 'category_ids'], 'each', 'rule' => ['integer']],
+            [['variant_ids', 'category_ids', 'filter_ids'], 'each', 'rule' => ['integer']],
         ];
     }
 
@@ -79,8 +79,8 @@ class Feature extends ActiveRecord
             'name' => Yii::t('app', 'Name'),
             'after' => Yii::t('app', 'After'),
             'position' => Yii::t('app', 'Position'),
-            'filter' => Yii::t('app', 'Filter'),
             'enabled' => Yii::t('app', 'Enabled'),
+            'filter_ids' => Yii::t('app', 'Filter'),
         ];
     }
 
@@ -98,6 +98,14 @@ class Feature extends ActiveRecord
     public function getCategories()
     {
         return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable('feature_category', ['feature_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFilters()
+    {
+        return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable('feature_filter', ['feature_id' => 'id']);
     }
 
     /**
@@ -144,6 +152,6 @@ class Feature extends ActiveRecord
      */
     public static function getFilterList($enabled, array $category_ids)
     {
-        return self::find()->where(['filter' => true])->joinWith(['categories'])->andFilterWhere(['feature.enabled' => $enabled])->andFilterWhere(['category_id' => $category_ids])->orderBy('position')->all();
+        return self::find()->joinWith(['filters'])->andFilterWhere(['feature.enabled' => $enabled])->andFilterWhere(['category_id' => $category_ids])->orderBy('position')->all();
     }
 }
