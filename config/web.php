@@ -32,6 +32,7 @@ $config = [
                 'products' => 'category/index',
                 'products/<slug:[0-9a-z\-]+>' => 'category/view',
                 'product/<slug:[0-9a-z\-]+>' => 'product/index',
+                'sitemap.xml' => 'sitemap/index'
             ],
         ],
         'reCaptcha' => [
