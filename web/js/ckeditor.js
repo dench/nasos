@@ -12,5 +12,5 @@ CKEDITOR.editorConfig = function(config){
         { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
         { name: 'document', items: [ 'Source' ] }
     ];
-    config.extraPlugins = 'showblocks,font,find';
+    config.extraPlugins = 'showblocks,font,find,div,justify';
 };
