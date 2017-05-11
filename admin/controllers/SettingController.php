@@ -2,18 +2,17 @@
 
 namespace app\admin\controllers;
 
-use dench\sortable\actions\SortingAction;
 use Yii;
-use app\models\Unit;
-use yii\data\ActiveDataProvider;
+use app\models\Setting;
+use app\admin\models\SettingSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UnitController implements the CRUD actions for Unit model.
+ * SettingController implements the CRUD actions for Setting model.
  */
-class UnitController extends Controller
+class SettingController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,34 +29,24 @@ class UnitController extends Controller
         ];
     }
 
-    public function actions()
-    {
-        return [
-            'sorting' => [
-                'class' => SortingAction::className(),
-                'query' => Unit::find(),
-            ],
-        ];
-    }
-
     /**
-     * Lists all Unit models.
+     * Lists all Setting models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Unit::find(),
-        ]);
+        $searchModel = new SettingSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Unit model.
-     * @param integer $id
+     * Displays a single Setting model.
+     * @param string $id
      * @return mixed
      */
     public function actionView($id)
@@ -68,18 +57,17 @@ class UnitController extends Controller
     }
 
     /**
-     * Creates a new Unit model.
+     * Creates a new Setting model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Unit();
+        $model = new Setting();
 
         $model->loadDefaultValues();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Yii::t('app', 'Information added successfully'));
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -89,9 +77,9 @@ class UnitController extends Controller
     }
 
     /**
-     * Updates an existing Unit model.
+     * Updates an existing Setting model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -99,7 +87,6 @@ class UnitController extends Controller
         $model = $this->findModelMulti($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Yii::t('app', 'Information has been saved successfully'));
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -109,9 +96,9 @@ class UnitController extends Controller
     }
 
     /**
-     * Deletes an existing Unit model.
+     * Deletes an existing Setting model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -122,15 +109,15 @@ class UnitController extends Controller
     }
 
     /**
-     * Finds the Unit model based on its primary key value.
+     * Finds the Setting model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Unit the loaded model
+     * @param string $id
+     * @return Setting the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Unit::findOne($id)) !== null) {
+        if (($model = Setting::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -138,15 +125,15 @@ class UnitController extends Controller
     }
 
     /**
-     * Finds the Unit model based on its primary key value.
+     * Finds the Setting model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Unit|\yii\db\ActiveRecord
+     * @return Setting|\yii\db\ActiveRecord
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModelMulti($id)
     {
-        if (($model = Unit::find()->where(['id' => $id])->multilingual()->one()) !== null) {
+        if (($model = Setting::find()->where(['id' => $id])->multilingual()->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

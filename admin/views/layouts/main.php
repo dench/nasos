@@ -56,16 +56,9 @@ AdminAsset::register($this);
                 ['label' => Yii::t('app', 'Units'), 'url' => ['/admin/unit/index']],
                 ['label' => Yii::t('app', 'Statuses'), 'url' => ['/admin/product-status/index']],
                 ['label' => Yii::t('app', 'Users'), 'url' => ['/admin/user/index']],
+                ['label' => Yii::t('app', 'Settings'), 'url' => ['/admin/setting/index']],
             ]],
             ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
-            /*'<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                Yii::t('app', 'Log out'),
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>'*/
         ],
     ]);
     NavBar::end();

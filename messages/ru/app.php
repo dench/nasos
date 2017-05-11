@@ -70,4 +70,5 @@ return [
     'Login' => 'Войти',
     'Remember me' => 'Запомнить',
     'Calls from 9:00 to 20:00 Mon-Fri' => 'Звонки с 9:00 до 20:00 Пн-Пт',
+    'Settings' => 'Настройки',
 ];
