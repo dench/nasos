@@ -46,6 +46,7 @@ AdminAsset::register($this);
         'items' => [
             ['label' => Yii::t('app', 'Categories'), 'url' => ['/admin/category/index']],
             ['label' => Yii::t('app', 'Products'), 'url' => ['/admin/product/index']],
+            ['label' => Yii::t('app', 'Products') . ' 2', 'url' => ['/admin/product2/index']],
             ['label' => Yii::t('app', 'Variants'), 'url' => ['/admin/variant/index']],
             ['label' => Yii::t('app', 'Features'), 'url' => ['/admin/feature/index']],
             ['label' => Yii::t('app', 'Complectation'), 'url' => ['/admin/complect/index']],

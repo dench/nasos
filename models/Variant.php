@@ -81,7 +81,7 @@ class Variant extends ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'currency_id', 'unit_id'], 'required'],
+            [['currency_id', 'unit_id'], 'required'],
             [['product_id', 'price', 'price_old', 'currency_id', 'unit_id', 'available', 'position'], 'integer'],
             [['code', 'name'], 'string', 'max' => 255],
             [['enabled'], 'boolean'],
