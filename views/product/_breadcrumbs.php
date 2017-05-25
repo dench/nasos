@@ -17,4 +17,4 @@ $this->params['breadcrumbs'][] = [
     'label' => $model->categories[0]->name,
     'url' => ['category/view', 'slug' => $model->categories[0]->slug],
 ];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $model->name;
