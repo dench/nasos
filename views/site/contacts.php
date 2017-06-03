@@ -9,7 +9,7 @@ use himiklab\yii2\recaptcha\ReCaptcha;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $page->name;
 ?>
 <div class="container page">
 
