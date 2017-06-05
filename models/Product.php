@@ -34,6 +34,11 @@ use yii\web\NotFoundHttpException;
  * @property string $description
  * @property string $text
  *
+ * @property array $category_ids
+ * @property array $option_ids
+ * @property array $complect_ids
+ * @property array $status_ids
+ *
  * @property Brand $brand
  * @property Category[] $categories
  * @property Variant[] $variants

@@ -2,6 +2,7 @@
 
 namespace app\admin\controllers;
 
+use app\models\Feature;
 use app\models\Model;
 use app\models\Variant;
 use dench\image\models\Image;
@@ -147,6 +148,7 @@ class Product2Controller extends Controller
      */
     public function actionUpdate($id)
     {
+        /** @var $model Product */
         $model = $this->findModelMulti($id);
 
         /** @var $modelsVariant Variant[] */
@@ -157,66 +159,83 @@ class Product2Controller extends Controller
             $variantImages[] = $modelVariant->images;
         }
 
+        $features = Feature::getObjectList(true, $model->category_ids);
+
         if ($post = Yii::$app->request->post()) {
             $model->load($post);
 
             $oldIDs = ArrayHelper::map($modelsVariant, 'id', 'id');
             $modelsVariant = Model::createMultiple(Variant::classname(), $modelsVariant);
+            foreach ($modelsVariant as $modelVariant) {
+                $modelVariant->image_ids = [];
+            }
             Model::loadMultiple($modelsVariant, Yii::$app->request->post());
-            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsVariant, 'id', 'id')));
-
-            // ajax validation
-            if (Yii::$app->request->isAjax) {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return ArrayHelper::merge(
-                    ActiveForm::validateMultiple($modelsVariant),
-                    ActiveForm::validate($model)
-                );
+            $variantImages = [];
+            foreach ($modelsVariant as $modelVariant) {
+                Yii::error($modelVariant);
+                if (isset($modelVariant->enabled)) {
+                    $variantImages[] = $modelVariant->images;
+                }
             }
+            if (!Yii::$app->request->isPjax) {
 
-            /** @var Image[] $images */
-            $images = [];
-            $image_ids = isset($post['Image']) ? $post['Image'] : [];
-            foreach ($image_ids as $key => $image) {
-                $images[$key] = Image::findOne($key);
-            }
-            if ($images) {
-                Model::loadMultiple($images, $post);
-            }
+                $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsVariant, 'id', 'id')));
 
-            $valid = $model->validate();
-            $valid = Model::validateMultiple($modelsVariant) && $valid;
-            $valid = Model::validateMultiple($images) && $valid;
+                // ajax validation
+                if (Yii::$app->request->isAjax) {
+                    Yii::$app->response->format = Response::FORMAT_JSON;
+                    return ArrayHelper::merge(
+                        ActiveForm::validateMultiple($modelsVariant),
+                        ActiveForm::validate($model)
+                    );
+                }
 
-            if ($valid) {
-                $transaction = \Yii::$app->db->beginTransaction();
-                try {
-                    if ($flag = $model->save(false)) {
-                        if (!empty($deletedIDs)) {
-                            Variant::deleteAll(['id' => $deletedIDs]);
-                        }
-                        foreach ($modelsVariant as $modelVariant) {
-                            /** @var Variant $modelVariant */
-                            $modelVariant->product_id = $model->id;
-                            if (!($flag = $modelVariant->save(false))) {
-                                $transaction->rollBack();
-                                break;
+                /** @var Image[] $images */
+                $images = [];
+                $image_ids = isset($post['Image']) ? $post['Image'] : [];
+                foreach ($image_ids as $key => $image) {
+                    $images[$key] = Image::findOne($key);
+                }
+                if ($images) {
+                    Model::loadMultiple($images, $post);
+                }
+
+                $valid = $model->validate();
+                $valid = Model::validateMultiple($modelsVariant) && $valid;
+                $valid = Model::validateMultiple($images) && $valid;
+
+                if ($valid) {
+                    $transaction = \Yii::$app->db->beginTransaction();
+                    try {
+                        if ($flag = $model->save(false)) {
+                            if (!empty($deletedIDs)) {
+                                Variant::deleteAll(['id' => $deletedIDs]);
+                            }
+                            foreach ($modelsVariant as $modelVariant) {
+                                /** @var Variant $modelVariant */
+                                $modelVariant->product_id = $model->id;
+                                if (!($flag = $modelVariant->save(false))) {
+                                    $transaction->rollBack();
+                                    break;
+                                }
+                            }
+                            foreach ($images as $key => $image) {
+                                //Yii::error([print_r($image->id,1)]);
+                                if (!($flag = $image->save(false))) {
+                                    $transaction->rollBack();
+                                    break;
+                                }
                             }
                         }
-                        foreach ($images as $key => $image) {
-                            if (!($flag = $image->save(false))) {
-                                $transaction->rollBack();
-                                break;
-                            }
+                        if ($flag) {
+                            $transaction->commit();
+                            Yii::$app->session->setFlash('success',
+                                Yii::t('app', 'Information has been saved successfully'));
+                            return $this->redirect(['index']);
                         }
+                    } catch (Exception $e) {
+                        $transaction->rollBack();
                     }
-                    if ($flag) {
-                        $transaction->commit();
-                        Yii::$app->session->setFlash('success', Yii::t('app', 'Information has been saved successfully'));
-                        return $this->redirect(['index']);
-                    }
-                } catch (Exception $e) {
-                    $transaction->rollBack();
                 }
             }
         }
@@ -225,6 +244,7 @@ class Product2Controller extends Controller
             'model' => $model,
             'modelsVariant' => (empty($modelsVariant)) ? [new Variant()] : $modelsVariant,
             'variantImages' => $variantImages,
+            'features' => $features,
         ]);
     }
 

@@ -5,12 +5,15 @@ use app\models\Category;
 use app\models\Complect;
 use app\models\Product;
 use app\models\Status;
+use app\models\Value;
 use dench\image\widgets\ImageUpload;
 use dench\language\models\Language;
 use dosamigos\ckeditor\CKEditor;
+use kartik\select2\Select2;
 use wbraganca\dynamicform\DynamicFormWidget;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
@@ -44,12 +47,25 @@ $('.variantsWrapper').on('afterInsert', function(e, item) {
     var iD = $(this).find('input:last').attr('id');
     var key = iD.split('-');
     console.log(key[1]);
+    reloadPjax();
+});
+$('.variantsWrapper').on('afterDelete', function(e, item) {
+    reloadPjax();
 });
 $('.variantsWrapper').on('beforeDelete', function(e, item) {
     var iD = $(this).find('input:last').attr('id');
     var key = iD.split('-');
     console.log(key[1]);
 });
+function reloadPjax() {
+    $.pjax.reload({
+        container: '#images-pjax', 
+        timeout: 2000,
+        url: '',
+        type: 'POST',
+        data: $('#product-form').serialize()
+    });
+}
 ";
 
 $this->registerJs($js);
@@ -148,6 +164,9 @@ $this->registerJs($js);
                 'available',
                 'unit_id',
                 'enabled',
+
+                'image_ids',
+                'files',
             ];
 
             foreach (Language::suffixList() as $suffix => $name) {
@@ -158,7 +177,7 @@ $this->registerJs($js);
                 'widgetContainer' => 'variantsWrapper',
                 'widgetBody' => '.variant-items',
                 'widgetItem' => '.variant-item',
-                'limit' => 10,
+                'limit' => 99,
                 'min' => 1,
                 'insertButton' => '.add-variant',
                 'deleteButton' => '.remove-variant',
@@ -166,43 +185,82 @@ $this->registerJs($js);
                 'formId' => 'product-form',
                 'formFields' => $formFields,
             ]); ?>
+
             <div class="variant-items">
                 <?php foreach ($modelsVariant as $index => $modelVariant) : ?>
-
-                    <?= $this->render('_form_variant', [
-                        'form' => $form,
-                        'modelVariant' => $modelVariant,
-                        'index' => $index,
-                    ]) ?>
-
+                    <div class="well variant-item" data-position="<?= $modelVariant->position ?>" data-key="<?= $modelVariant->id ?>">
+                        <?= $this->render('_form_variant', [
+                            'form' => $form,
+                            'modelVariant' => $modelVariant,
+                            'index' => $index,
+                        ]) ?>
+                    </div>
                 <?php endforeach; ?>
             </div>
             <div class="form-group text-right">
                 <?= Html::button(Yii::t('app', 'Add variant'), ['class' => 'btn btn-default add-variant']) ?>
             </div>
+
             <?php DynamicFormWidget::end(); ?>
         </div>
 
         <div class="tab-pane fade" id="images-tab">
             <div class="variants-images">
+                <?php Pjax::begin(['id' => 'images-pjax']); ?>
                 <?php foreach ($variantImages as $index => $images) : ?>
-                    <div class="variant-images">
+                    <div class="well variant-images">
                         <?= ImageUpload::widget([
                             'images' => $images,
                             'modelInputName' => 'Variant[' . $index . '][image_ids]',
                             'fileInputName' => 'files' . $index,
+                            'col' => 'col-sm-3',
+                            'label' => '',
                         ]) ?>
                     </div>
                 <?php endforeach; ?>
+                <?php Pjax::end(); ?>
             </div>
         </div>
 
         <div class="tab-pane fade" id="feature-tab">
-
+                <?php if (empty($features)) : ?>
+                    <?= Html::tag('div', Yii::t('app', 'Choose a product!'), ['class' => 'alert alert-danger']) ?>
+                <?php else : ?>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th><?= Yii::t('app', 'Name') ?></th>
+                                <?php foreach ($modelsVariant as $index => $modelVariant) : ?>
+                                    <td><?= $modelVariant->name ?></td>
+                                <?php endforeach; ?>
+                            </tr>
+                            <?php foreach ($features as $feature) : ?>
+                                <tr>
+                                    <td><?= $feature->name . ($feature->after ? ', ' . $feature->after : '') ?></td>
+                                    <?php foreach ($modelsVariant as $index => $modelVariant) : ?>
+                                        <td>
+                                            <?= Select2::widget([
+                                                'name' => 'Variant[' . $index . '][value_ids][]',
+                                                'data' => Value::getList($feature->id),
+                                                'value' => $modelVariant->value_ids,
+                                                'size' => Select2::SMALL,
+                                                'options' => ['placeholder' => Yii::t('app', 'Select'), 'multiple' => true],
+                                                'pluginOptions' => [
+                                                    'allowClear' => true,
+                                                ],
+                                                'showToggleAll' => false,
+                                            ]) ?>
+                                        </td>
+                                    <?php endforeach; ?>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                <?php endif; ?>
         </div>
 
         <div class="form-group">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-lg btn-success' : 'btn btn-lg btn-success']) ?>
         </div>
     </div>
 
