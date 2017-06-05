@@ -6,7 +6,7 @@ use yii\helpers\Url;
 /** @var $page dench\page\models\Page */
 /** @var $categories app\models\Category[] */
 
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $page->name;
 ?>
 <div class="container page">
 

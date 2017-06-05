@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Products'),
     'url' => ['category/index'],
 ];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $page->name;
 ?>
 <div class="container page">
     <h1 class="page-title"><?= $page->h1 ?></h1>
