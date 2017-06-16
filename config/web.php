@@ -22,7 +22,7 @@ $config = [
         ],
         'urlManager' => [
             'class' => 'dench\language\LangUrlManager',
-            'defaultLanguage' => 'uk',
+            'defaultLanguage' => 'ru',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
