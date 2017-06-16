@@ -9,7 +9,7 @@ return [
     'version' => '0.1',
     'name' => 'Site',
     'basePath' => dirname(__DIR__),
-    'language' => 'uk',
+    'language' => 'ru',
     'sourceLanguage' => 'en',
     'bootstrap' => ['log'],
     'modules' => [
