@@ -20,7 +20,7 @@ return [
         'jpeg_quality' => 90,
         'watermark' => [
             'enabled' => true,
-            'absolute' => true,
+            'absolute' => false,
             'file' => '@webroot/img/watermark.png',
             'x' => 50,
             'y' => 70,
