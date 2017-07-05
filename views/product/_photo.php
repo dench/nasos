@@ -25,7 +25,7 @@ Yii::$app->view->registerJs($script, yii\web\View::POS_READY);
     <?php endif; ?>
     <div class="photo">
         <?php if ($model->image) { ?>
-            <a href="<?= ImageHelper::thumb($model->image->id, 'big') ?>" class="thumbnail" data-size="<?= $model->image->width ?>x<?= $model->image->height ?>">
+            <a href="<?= ImageHelper::thumb($model->image->id, 'big') ?>" class="thumbnail" data-size="<?= Yii::$app->params['image']['size']['big']['width'] ?>x<?= Yii::$app->params['image']['size']['big']['height'] ?>">
                 <img src="<?= ImageHelper::thumb($model->image->id, 'cover') ?>" alt="<?= $model->image->alt ? $model->image->alt : $model->name ?>" title="<?= $model->title ?>">
             </a>
         <?php } else { ?>

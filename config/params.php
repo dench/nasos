@@ -17,7 +17,6 @@ return [
 
     'image' => [
         'path' => 'image',
-        'jpeg_quality' => 90,
         'watermark' => [
             'enabled' => true,
             'absolute' => false,
@@ -27,19 +26,30 @@ return [
         ],
         'none' => '/img/photo-default.png?1',
         'size' => [
-            'big' => [
-                'width' => 1024,
-                'height' => 768,
-            ],
             'small' => [
                 'width' => 600,
                 'height' => 600,
+                'method' => 'clip',
+            ],
+            'big' => [
+                'width' => 1024,
+                'height' => 1024,
+                'method' => 'fill',
+                'bg' => '#FFFFFF',
             ],
             'cover' => [
                 'width' => 600,
                 'height' => 600,
                 'method' => 'fill',
                 'bg' => '#FFFFFF',
+            ],
+            'fill' => [
+                'width' => 400,
+                'height' => 400,
+                'method' => 'fill',
+                'watermark' => [
+                    'enabled' => false,
+                ],
             ],
         ],
     ],

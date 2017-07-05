@@ -71,4 +71,5 @@ return [
     'Remember me' => 'Запам\'ятати',
     'Calls from 9:00 to 20:00 Mon-Fri' => 'Дзвінки з 9:00 до 20:00 Пн-Пт',
     'Settings' => 'Налаштування',
+    'Information' => 'Інформація',
 ];

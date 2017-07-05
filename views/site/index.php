@@ -106,10 +106,10 @@ Modal::end();
         <div class="row news">
             <div class="col-md-6">
                 <div class="row news-item">
-                    <div class="col-xs-4 col-sm-3 col-md-4 news-item-img">
-                        <img src="/img/photo-default.png" class="img-responsive" alt="">
+                    <div class="col-xs-4 col-sm-3 col-md-5 col-lg-4 news-item-img">
+                        <img src="/img/photo-default.png" class="img-responsive img-thumbnail" alt="">
                     </div>
-                    <div class="col-xs-8 col-sm-9 col-md-8">
+                    <div class="col-xs-8 col-sm-9 col-md-7 col-lg-8">
                         <h4 class="news-item-title"><a href="#">PA2 - Лопастной насос</a></h4>
                         <div class="news-item-text">
                             Насос имеет встроенный фильтр грубой очистки и обводной клапан, который «обводит» обводной клапан.
@@ -122,10 +122,10 @@ Modal::end();
             </div>
             <div class="col-md-6">
                 <div class="row news-item">
-                    <div class="col-xs-4 col-sm-3 col-md-4 news-item-img">
-                        <img src="/img/photo-default.png" class="img-responsive" alt="">
+                    <div class="col-xs-4 col-sm-3 col-md-5 col-lg-4 news-item-img">
+                        <img src="/img/photo-default.png" class="img-responsive img-thumbnail" alt="">
                     </div>
-                    <div class="col-xs-8 col-sm-9 col-md-8">
+                    <div class="col-xs-8 col-sm-9 col-md-7 col-lg-8">
                         <h4 class="news-item-title"><a href="#">PA2 - Лопастной насос</a></h4>
                         <div class="news-item-text">
                             Насос имеет встроенный фильтр грубой очистки и обводной клапан, который «обводит» обводной клапан.
