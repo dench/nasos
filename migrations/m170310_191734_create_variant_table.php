@@ -12,6 +12,8 @@ class m170310_191734_create_variant_table extends Migration
      */
     public function up()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+
         $this->createTable('variant', [
             'id' => $this->primaryKey(),
             'product_id' => $this->integer()->notNull(),
@@ -25,18 +27,18 @@ class m170310_191734_create_variant_table extends Migration
             'updated_at' => $this->integer()->notNull(),
             'position' => $this->integer()->notNull()->defaultValue(0),
             'enabled' => $this->boolean()->notNull()->defaultValue(1),
-        ]);
+        ], $tableOptions);
 
         $this->createTable('variant_lang', [
             'variant_id' => $this->integer()->notNull(),
             'lang_id' => $this->string(3)->notNull(),
             'name' => $this->string(),
-        ]);
+        ], $tableOptions);
 
         $this->createTable('variant_value', [
             'variant_id' => $this->integer()->notNull(),
             'value_id' => $this->integer()->notNull(),
-        ]);
+        ], $tableOptions);
 
         $this->addPrimaryKey('pk-variant_lang', 'variant_lang', ['variant_id', 'lang_id']);
 

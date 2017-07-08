@@ -12,11 +12,13 @@ class m170325_195942_create_category_image_table extends Migration
      */
     public function up()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+
         $this->createTable('category_image', [
             'category_id' => $this->integer()->notNull(),
             'image_id' => $this->integer()->notNull(),
             'position' => $this->integer()->notNull()->defaultValue(0),
-        ]);
+        ], $tableOptions);
 
         $this->addPrimaryKey('pk-category_image', 'category_image', ['category_id', 'image_id']);
 

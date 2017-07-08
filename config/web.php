@@ -67,6 +67,7 @@ $config = [
                 // java -jar compiler.jar --js vendor/yiisoft/yii2/assets/yii.captcha.js --js_output_file web/js/yii/yii.captcha.min.js
                 // java -jar compiler.jar --js vendor/yiisoft/yii2/assets/yii.gridView.js --js_output_file web/js/yii/yii.gridView.min.js
                 // java -jar compiler.jar --js vendor/yiisoft/yii2/assets/yii.validation.js --js_output_file web/js/yii/yii.validation.min.js
+                // java -jar compiler.jar --js vendor/bower/yii2-pjax/jquery.pjax.js --js_output_file web/js/yii/jquery.pjax.min.js
                 // java -jar compiler.jar --js web/js/photoswipe.js --js_output_file web/js/photoswipe.min.js
                 // java -jar yuicompressor.jar --type css vendor/bower/photoswipe/dist/photoswipe.css -o web/css/photoswipe/photoswipe.min.css
                 // java -jar yuicompressor.jar --type css vendor/bower/photoswipe/dist/default-skin/default-skin.css -o web/css/photoswipe/default-skin.min.css
@@ -81,6 +82,10 @@ $config = [
                 'yii\widgets\ActiveFormAsset' => [
                     'sourcePath' => '@webroot/js/yii',
                     'js' => ['yii.activeForm.min.js'],
+                ],
+                'yii\widgets\PjaxAsset' => [
+                    'sourcePath' => '@webroot/js/yii',
+                    'js' => ['jquery.pjax.min.js'],
                 ],
                 /*'GridViewAsset' => [
                     'sourcePath' => '@webroot/js/yii',

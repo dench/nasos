@@ -12,18 +12,20 @@ class m170310_172711_create_brand_table extends Migration
      */
     public function up()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+
         $this->createTable('brand', [
             'id' => $this->primaryKey(),
             'image_id' => $this->integer(),
             'position' => $this->integer()->notNull()->defaultValue(0),
             'enabled' => $this->boolean()->notNull()->defaultValue(1),
-        ]);
+        ], $tableOptions);
 
         $this->createTable('brand_lang', [
             'brand_id' => $this->integer()->notNull(),
             'lang_id' => $this->string(3)->notNull(),
             'name' => $this->string()->notNull(),
-        ]);
+        ], $tableOptions);
 
         $this->addPrimaryKey('pk-brand_lang', 'brand_lang', ['brand_id', 'lang_id']);
 

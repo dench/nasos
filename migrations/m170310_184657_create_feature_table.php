@@ -12,23 +12,25 @@ class m170310_184657_create_feature_table extends Migration
      */
     public function up()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+
         $this->createTable('feature', [
             'id' => $this->primaryKey(),
             'position' => $this->integer()->notNull()->defaultValue(0),
             'enabled' => $this->boolean()->notNull()->defaultValue(1),
-        ]);
+        ], $tableOptions);
 
         $this->createTable('feature_lang', [
             'feature_id' => $this->integer()->notNull(),
             'lang_id' => $this->string(3)->notNull(),
             'name' => $this->string()->notNull(),
             'after' => $this->string(32),
-        ]);
+        ], $tableOptions);
 
         $this->createTable('feature_category', [
             'feature_id' => $this->integer()->notNull(),
             'category_id' => $this->integer()->notNull(),
-        ]);
+        ], $tableOptions);
 
         $this->addPrimaryKey('pk-feature_lang', 'feature_lang', ['feature_id', 'lang_id']);
 

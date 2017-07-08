@@ -12,11 +12,13 @@ class m170319_121332_create_product_option_table extends Migration
      */
     public function up()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+
         $this->createTable('product_option', [
             'product_id' => $this->integer()->notNull(),
             'option_id' => $this->integer()->notNull(),
             'position' => $this->integer()->notNull()->defaultValue(0),
-        ]);
+        ], $tableOptions);
 
         $this->addPrimaryKey('pk-product_option', 'product_option', ['product_id', 'option_id']);
 

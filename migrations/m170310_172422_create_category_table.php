@@ -12,6 +12,8 @@ class m170310_172422_create_category_table extends Migration
      */
     public function up()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+
         $this->createTable('category', [
             'id' => $this->primaryKey(),
             'parent_id' => $this->integer(),
@@ -21,7 +23,7 @@ class m170310_172422_create_category_table extends Migration
             'updated_at' => $this->integer()->notNull(),
             'position' => $this->integer()->notNull()->defaultValue(0),
             'enabled' => $this->boolean()->notNull()->defaultValue(1),
-        ]);
+        ], $tableOptions);
 
         $this->createTable('category_lang', [
             'category_id' => $this->integer()->notNull(),
@@ -32,7 +34,7 @@ class m170310_172422_create_category_table extends Migration
             'keywords' => $this->string(),
             'description' => $this->text(),
             'text' => $this->text(),
-        ]);
+        ], $tableOptions);
 
         $this->addPrimaryKey('pk-category_lang', 'category_lang', ['category_id', 'lang_id']);
 

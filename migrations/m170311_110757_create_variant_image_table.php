@@ -12,11 +12,13 @@ class m170311_110757_create_variant_image_table extends Migration
      */
     public function up()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+
         $this->createTable('variant_image', [
             'variant_id' => $this->integer()->notNull(),
             'image_id' => $this->integer()->notNull(),
             'position' => $this->integer()->notNull()->defaultValue(0),
-        ]);
+        ], $tableOptions);
 
         $this->addPrimaryKey('pk-variant_image', 'variant_image', ['variant_id', 'image_id']);
         
