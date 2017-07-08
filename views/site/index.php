@@ -65,7 +65,6 @@ use yii\helpers\Url;
             ]);
         });
         ?>
-        ?>
     </div>
 </section>
 <?php
