@@ -9,11 +9,10 @@
  */
 
 use app\widgets\ProductCard;
-?>
 
-<?php
-    echo ProductCard::widget([
+echo Yii::$app->cache->getOrSet('_product_card-' . $model->id . '-' . Yii::$app->language, function () use ($model) {
+    return ProductCard::widget([
         'model' => $model,
         'link' => ['product/index', 'slug' => $model->slug],
     ]);
-?>
+});

@@ -242,4 +242,22 @@ class Category extends ActiveRecord
     {
         return Category::find()->where(['enabled' => true, 'main' => true])->all();
     }
+
+    /**
+     * @return \yii\db\ActiveQuery[]
+     */
+    public static function getPodmenu()
+    {
+        return Yii::$app->cache->getOrSet('podmenu-' . Yii::$app->language, function () {
+            $items = [];
+            foreach (self::getMain() as $item) {
+                $items[$item->id] = [
+                    'id' => $item->id,
+                    'slug' => $item->slug,
+                    'name' => $item->name,
+                ];
+            }
+            return $items;
+        });
+    }
 }

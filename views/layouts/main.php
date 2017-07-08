@@ -86,11 +86,11 @@ $this->registerJs($js);
                 <?php
                 $category_ids = isset($this->params['category_ids']) ? $this->params['category_ids'] : [];
                 $items = [];
-                foreach (Category::getMain() as $category) {
+                foreach (Category::getPodmenu() as $category) {
                     $items[] = [
-                        'label' => $category->name,
-                        'url' => ['/category/view', 'slug' => $category->slug],
-                        'active' => (in_array($category->id, $category_ids))
+                        'label' => $category['name'],
+                        'url' => ['/category/view', 'slug' => $category['slug']],
+                        'active' => (in_array($category['id'], $category_ids))
                     ];
                 }
                 echo Nav::widget([
