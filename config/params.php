@@ -73,7 +73,7 @@ return [
                 'method' => 'fill',
                 'bg' => '#FFFFFF',
                 'watermark' => [
-                    'enabled' => false,
+                    'width' => 35,
                 ],
             ],
         ],
