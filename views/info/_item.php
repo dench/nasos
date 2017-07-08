@@ -17,7 +17,7 @@ use yii\helpers\Url;
         <div class="col-xxs-4 col-xs-3 col-sm-3 col-md-5 col-lg-4 news-item-img">
             <a href="<?= Url::to(['view', 'slug' => $model->slug]) ?>" rel="nofollow">
                 <?php if ($model->image) : ?>
-                    <img src="<?= ImageHelper::thumb($model->image->id, 'small') ?>" alt="<?= $model->image->alt ?>" class="img-responsive img-thumbnail">
+                    <img src="<?= ImageHelper::thumb($model->image->id, 'cover') ?>" alt="<?= $model->image->alt ?>" class="img-responsive img-thumbnail">
                 <?php else : ?>
                     <img src="<?= Yii::$app->params['image']['none'] ?>" class="img-responsive img-thumbnail img-none">
                 <?php endif; ?>

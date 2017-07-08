@@ -31,6 +31,14 @@ return [
                 'height' => 450,
                 'method' => 'clip',
             ],
+            'cover' => [
+                'width' => 200,
+                'height' => 200,
+                'method' => 'crop',
+                'watermark' => [
+                    'enabled' => false,
+                ],
+            ],
             'fill' => [
                 'width' => 400,
                 'height' => 400,
