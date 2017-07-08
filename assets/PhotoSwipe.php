@@ -23,6 +23,5 @@ class PhotoSwipe extends AssetBundle
         'photoswipe-ui-default.min.js',
     ];
     public $depends = [
-        'app\assets\SiteAsset'
     ];
 }
