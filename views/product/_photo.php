@@ -15,8 +15,6 @@ PhotoSwipe::register($this);
 Yii::$app->view->registerJsFile('@web/js/photoswipe.min.js', ['depends' => 'app\assets\PhotoSwipe']);
 $script = <<< JS
     initPhotoSwipeFromDOM('.product-photo .photo');
-    $('head').append('<link href="/css/photoswipe/photoswipe.min.css" rel="stylesheet">');
-    $('head').append('<link href="/css/photoswipe/default-skin.min.css" rel="stylesheet"></head>');
 JS;
 Yii::$app->view->registerJs($script, yii\web\View::POS_READY);
 
