@@ -26,6 +26,11 @@ return [
         ],
         'none' => '/img/photo-default.png?1',
         'size' => [
+            'page' => [
+                'width' => 600,
+                'height' => 450,
+                'method' => 'clip',
+            ],
             'fill' => [
                 'width' => 400,
                 'height' => 400,
