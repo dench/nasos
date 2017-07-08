@@ -15,8 +15,8 @@ class PhotoSwipe extends AssetBundle
 {
     public $sourcePath = '@bower/photoswipe/dist';
     public $css = [
-        'photoswipe.css',
-        'default-skin/default-skin.css',
+        '/css/photoswipe/photoswipe.min.css',
+        '/css/photoswipe/default-skin.min.css',
     ];
     public $js = [
         'photoswipe.min.js',

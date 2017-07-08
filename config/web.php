@@ -67,6 +67,9 @@ $config = [
                 // java -jar compiler.jar --js vendor/yiisoft/yii2/assets/yii.captcha.js --js_output_file web/js/yii/yii.captcha.min.js
                 // java -jar compiler.jar --js vendor/yiisoft/yii2/assets/yii.gridView.js --js_output_file web/js/yii/yii.gridView.min.js
                 // java -jar compiler.jar --js vendor/yiisoft/yii2/assets/yii.validation.js --js_output_file web/js/yii/yii.validation.min.js
+                // java -jar compiler.jar --js web/js/photoswipe.js --js_output_file web/js/photoswipe.min.js
+                // java -jar yuicompressor.jar --type css vendor/bower/photoswipe/dist/photoswipe.css -o web/css/photoswipe/photoswipe.min.css
+                // java -jar yuicompressor.jar --type css vendor/bower/photoswipe/dist/default-skin/default-skin.css -o web/css/photoswipe/default-skin.min.css
                 'yii\web\YiiAsset' => [
                     'sourcePath' => '@webroot/js/yii',
                     'js' => ['yii.min.js'],

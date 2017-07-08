@@ -12,7 +12,7 @@ use app\assets\PhotoSwipe;
 use dench\image\helpers\ImageHelper;
 
 PhotoSwipe::register($this);
-Yii::$app->view->registerJsFile('@web/js/photoswipe.js', ['depends' => 'app\assets\PhotoSwipe']);
+Yii::$app->view->registerJsFile('@web/js/photoswipe.min.js', ['depends' => 'app\assets\PhotoSwipe']);
 $script = <<< JS
     initPhotoSwipeFromDOM('.product-photo .photo');
 JS;
