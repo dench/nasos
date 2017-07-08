@@ -64,6 +64,7 @@ $config = [
                 ],
                 'yii\bootstrap\BootstrapAsset' => [
                     'sourcePath' => '@webroot/bootstrap',
+                    'css' => [],
                 ],
             ],
         ],
