@@ -10,14 +10,12 @@
 /* @var $content string */
 
 use app\assets\AdminAsset;
-use app\assets\CommonAsset;
 use app\widgets\Alert;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
-CommonAsset::register($this);
 AdminAsset::register($this);
 ?>
 <?php $this->beginPage() ?>

@@ -10,10 +10,8 @@ use dench\language\models\Language;
 use dench\language\widgets\Lang;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
-use app\assets\CommonAsset;
 use yii\widgets\Breadcrumbs;
 
-CommonAsset::register($this);
 SiteAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -119,25 +117,25 @@ SiteAsset::register($this);
 <footer class="footer footer-inverse bg-inverse">
     <div class="container">
         <div class="row">
-            <div class="col-md-2 col-sm-3">
+            <div class="col-sm-3 col-md-2">
                 <div class="contacts phones">
                     <p><i class="glyphicon glyphicon-earphone">&ensp;</i><?= Yii::$app->params['phone1'] ?></p>
                     <p><i class="glyphicon glyphicon-earphone">&ensp;</i><?= Yii::$app->params['phone2'] ?></p>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-3">
+            <div class="col-sm-3 col-md-2">
                 <div class="contacts phones">
                     <p><i class="glyphicon glyphicon-earphone">&ensp;</i><?= Yii::$app->params['phone3'] ?></p>
                     <p><i class="glyphicon glyphicon-earphone">&ensp;</i><?= Yii::$app->params['phone4'] ?></p>
                 </div>
             </div>
-            <div class="col-md-5 col-sm-6">
+            <div class="col-sm-6 col-md-5">
                 <div class="contacts">
                     <p><i class="glyphicon glyphicon-map-marker">&ensp;</i><a href="<?= Yii::$app->params['map_link'] ?>" target="_blank"><?= Yii::$app->params['address_' . Yii::$app->language] ?></a></p>
                     <p><i class="glyphicon glyphicon-time">&ensp;</i><?= Yii::t('app', 'Calls from 9:00 to 20:00 Mon-Fri') ?></p>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-12">
+            <div class="col-sm-12 col-md-3">
                 <div class="copyright">
                     <p>© <a href="/"><?= Yii::$app->params['sitename'] ?></a> 2017</p>
                 </div>

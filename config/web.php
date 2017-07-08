@@ -43,6 +43,24 @@ $config = [
             'siteKey' => $params['recaptchaSiteKey'],
             'secret' => $params['recaptchaSecretKey'],
         ],
+        'assetManager' => [
+            'class' => 'yii\web\AssetManager',
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'js' => [
+                        'jquery.min.js'
+                    ]
+                ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'js' => [
+                        'js/bootstrap.min.js',
+                    ]
+                ],
+                'yii\bootstrap\BootstrapAsset' => [
+                    'sourcePath' => '@webroot/bootstrap',
+                ],
+            ],
+        ],
     ],
 ];
 

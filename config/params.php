@@ -26,27 +26,52 @@ return [
         ],
         'none' => '/img/photo-default.png?1',
         'size' => [
-            'small' => [
-                'width' => 600,
-                'height' => 600,
-                'method' => 'clip',
-            ],
-            'big' => [
-                'width' => 1024,
-                'height' => 1024,
-                'method' => 'fill',
-                'bg' => '#FFFFFF',
-            ],
-            'cover' => [
-                'width' => 600,
-                'height' => 600,
-                'method' => 'fill',
-                'bg' => '#FFFFFF',
-            ],
             'fill' => [
                 'width' => 400,
                 'height' => 400,
                 'method' => 'fill',
+                'watermark' => [
+                    'enabled' => false,
+                ],
+            ],
+            'category' => [
+                'width' => 340,
+                'height' => 340,
+                'method' => 'fill',
+                'bg' => '#FFFFFF',
+                'watermark' => [
+                    'width' => 102,
+                ],
+            ],
+            'big' => [
+                'width' => 1000,
+                'height' => 1000,
+                'method' => 'fill',
+                'bg' => '#FFFFFF',
+            ],
+            'normal' => [
+                'width' => 450,
+                'height' => 450,
+                'method' => 'fill',
+                'bg' => '#FFFFFF',
+                'watermark' => [
+                    'width' => 130,
+                ],
+            ],
+            'small' => [
+                'width' => 240,
+                'height' => 240,
+                'method' => 'fill',
+                'bg' => '#FFFFFF',
+                'watermark' => [
+                    'width' => 72,
+                ],
+            ],
+            'micro' => [
+                'width' => 135,
+                'height' => 135,
+                'method' => 'fill',
+                'bg' => '#FFFFFF',
                 'watermark' => [
                     'enabled' => false,
                 ],

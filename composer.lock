@@ -503,12 +503,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dench/yii2-image.git",
-                "reference": "04d9d8bf708893a7c30b0244670d2010b992f08f"
+                "reference": "3a80df5197eb2642aff8a9baa493a66a29f2d80d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dench/yii2-image/zipball/04d9d8bf708893a7c30b0244670d2010b992f08f",
-                "reference": "04d9d8bf708893a7c30b0244670d2010b992f08f",
+                "url": "https://api.github.com/repos/dench/yii2-image/zipball/3a80df5197eb2642aff8a9baa493a66a29f2d80d",
+                "reference": "3a80df5197eb2642aff8a9baa493a66a29f2d80d",
                 "shasum": ""
             },
             "require": {
@@ -538,7 +538,7 @@
                 "image",
                 "yii2"
             ],
-            "time": "2017-07-01 17:57:44"
+            "time": "2017-07-08 11:46:46"
         },
         {
             "name": "dench/yii2-language",
@@ -588,12 +588,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dench/yii2-page.git",
-                "reference": "61596f6c06d3a69c94a42daccda8edec6af6bde7"
+                "reference": "377596a177e4d892d92be865f18ba9b30cd72728"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dench/yii2-page/zipball/61596f6c06d3a69c94a42daccda8edec6af6bde7",
-                "reference": "61596f6c06d3a69c94a42daccda8edec6af6bde7",
+                "url": "https://api.github.com/repos/dench/yii2-page/zipball/377596a177e4d892d92be865f18ba9b30cd72728",
+                "reference": "377596a177e4d892d92be865f18ba9b30cd72728",
                 "shasum": ""
             },
             "require": {
@@ -627,7 +627,7 @@
                 "page",
                 "yii2"
             ],
-            "time": "2017-07-03 18:23:43"
+            "time": "2017-07-04 19:23:33"
         },
         {
             "name": "dench/yii2-sortable",

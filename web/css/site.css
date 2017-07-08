@@ -13,6 +13,10 @@ body {
 a {
   color: #363948; }
 
+div.required label.control-label:after {
+  content: " *";
+  color: red; }
+
 .btn {
   cursor: pointer;
   border: 0; }
@@ -138,7 +142,8 @@ a {
   text-align: center;
   background-image: url("../img/ukraine.png");
   background-size: contain;
-  background-repeat: no-repeat; }
+  background-repeat: no-repeat;
+  background-position: center center; }
   .header-slogan-big {
     font-size: 22px;
     margin: 20px 0; }
@@ -357,6 +362,15 @@ a {
   font-weight: normal;
   margin-right: 8px; }
 
+@media (min-width: 480px) {
+  .news-item {
+    background-color: #F5F5F5;
+    margin-left: 0;
+    margin-right: 0; }
+    .news-item-title {
+      margin-top: 15px; }
+    .news-item-img {
+      padding-left: 0; } }
 @media (min-width: 768px) {
   p {
     line-height: 1.5; }
@@ -386,6 +400,7 @@ a {
     right: 15px; }
 
   .header {
+    background-position: left center;
     padding: 10px 0; }
     .header-slogan {
       text-align: left; }
@@ -404,19 +419,14 @@ a {
   .section-title {
     font-size: 30px; }
 
-  .news-item {
-    background-color: #F5F5F5;
-    margin-left: 0;
-    margin-right: 0; }
-    .news-item-title {
-      margin-top: 15px;
-      font-size: 18px; }
-    .news-item-img {
-      padding-left: 0; }
-    .news-item-text {
-      font-size: 16px; }
-    .news-item-btn {
-      display: block; }
+  .news-item-title {
+    font-size: 18px; }
+  .news-item-img {
+    padding-left: 0; }
+  .news-item-text {
+    font-size: 16px; }
+  .news-item-btn {
+    display: block; }
 
   .product-code {
     text-align: left; }

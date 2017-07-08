@@ -34,10 +34,10 @@ $this->params['breadcrumbs'][] = $page->name;
 
         <div class="row">
             <?php foreach ($categories as $category) : ?>
-                <div class="col-sm-6 col-md-4">
+                <div class="col-xs-6 col-sm-6 col-md-4">
                     <div class="card block-link">
                         <div class="card-img">
-                            <img src="<?= ImageHelper::thumb($category->image->id, 'cover') ?>" class="img-responsive" alt="<?= $category->image->alt ? $category->image->alt : $category->name ?>" title="<?= $category->title ?>">
+                            <img src="<?= ImageHelper::thumb($category->image->id, 'small') ?>" class="img-responsive" alt="<?= $category->image->alt ? $category->image->alt : $category->name ?>" title="<?= $category->title ?>">
                         </div>
                         <div class="card-block">
                             <h5 class="card-title">

@@ -50,7 +50,7 @@ use yii\helpers\Url;
                 </div>
             </div>
             <div class="col-md-6 section-company-img">
-                <a href="<?= Url::to(['site/about']) ?>" rel="nofollow"><img src="<?= ImageHelper::thumb(current($page->image_ids), 'small') ?>"  alt="<?= $page->title ?>" title="<?= $page->title ?>" class="img-responsive"></a>
+                <a href="<?= Url::to(['site/about']) ?>" rel="nofollow"><img src="<?= ImageHelper::thumb(current($page->image_ids), 'normal') ?>"  alt="<?= $page->title ?>" title="<?= $page->title ?>" class="img-responsive"></a>
             </div>
         </div>
     </div>
@@ -61,11 +61,11 @@ use yii\helpers\Url;
         <h2 class="section-title"><a href="<?= Url::to(['/category/index']) ?>"><?= Yii::t('app', 'Our production') ?></a></h2>
         <div class="row">
             <?php foreach ($categories as $category) : ?>
-                <div class="col-sm-6 col-md-4">
+                <div class="col-xs-6 col-sm-6 col-md-4">
                     <div class="card block-link">
                         <div class="card-img">
                             <?php if ($category->image) { ?>
-                                <img src="<?= ImageHelper::thumb($category->image->id, 'cover') ?>" class="img-responsive" alt="<?= $category->image->alt ? $category->image->alt : $category->name ?>" title="<?= $category->title ?>">
+                                <img src="<?= ImageHelper::thumb($category->image->id, 'category') ?>" class="img-responsive" alt="<?= $category->image->alt ? $category->image->alt : $category->name ?>" title="<?= $category->title ?>">
                             <?php } else { ?>
                                 <img src="<?= Yii::$app->params['image']['none'] ?>" class="img-responsive" alt="">
                             <?php } ?>

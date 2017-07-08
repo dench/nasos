@@ -18,11 +18,11 @@ use yii\helpers\Url;
             <h3><?= Yii::t('app', 'You looked through') ?></h3>
             <div class="row">
                 <?php foreach ($viewed as $product) : ?>
-                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                    <div class="col-xxs-6 col-sm-3 col-md-3 col-lg-2">
                         <div class="card block-link">
                             <div class="card-img">
                                 <?php if ($product->image) { ?>
-                                    <img src="<?= ImageHelper::thumb($product->image->id, 'cover') ?>" class="img-responsive" alt="<?= $product->image->alt ? $product->image->alt : $product->name ?>" title="<?= $product->title ?>">
+                                    <img src="<?= ImageHelper::thumb($product->image->id, 'micro') ?>" class="img-responsive" alt="<?= $product->image->alt ? $product->image->alt : $product->name ?>" title="<?= $product->title ?>">
                                 <?php } else { ?>
                                     <img src="<?= Yii::$app->params['image']['none'] ?>" class="img-responsive" alt="">
                                 <?php } ?>
