@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "682154fa2e597b25ee3ae1547b3e976e",
+    "content-hash": "cd28235d656ab0fbf54fb5529fca60c5",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -588,12 +588,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dench/yii2-page.git",
-                "reference": "377596a177e4d892d92be865f18ba9b30cd72728"
+                "reference": "616f5c77818b33a240bb39d3db0da673ed1c22c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dench/yii2-page/zipball/377596a177e4d892d92be865f18ba9b30cd72728",
-                "reference": "377596a177e4d892d92be865f18ba9b30cd72728",
+                "url": "https://api.github.com/repos/dench/yii2-page/zipball/616f5c77818b33a240bb39d3db0da673ed1c22c2",
+                "reference": "616f5c77818b33a240bb39d3db0da673ed1c22c2",
                 "shasum": ""
             },
             "require": {
@@ -627,7 +627,7 @@
                 "page",
                 "yii2"
             ],
-            "time": "2017-07-04 19:23:33"
+            "time": "2017-07-08 15:06:08"
         },
         {
             "name": "dench/yii2-sortable",
@@ -1040,52 +1040,6 @@
                 "yii2"
             ],
             "time": "2017-04-12T09:00:24+00:00"
-        },
-        {
-            "name": "ogheo/yii2-htmlcompress",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ogheo/yii2-htmlcompress.git",
-                "reference": "e1fcbc75bf1b6146fd42d929f94f55f337c6d8e4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ogheo/yii2-htmlcompress/zipball/e1fcbc75bf1b6146fd42d929f94f55f337c6d8e4",
-                "reference": "e1fcbc75bf1b6146fd42d929f94f55f337c6d8e4",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "ogheo\\htmlcompress\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Oleg Gheorghita",
-                    "email": "oleg.gheo@gmail.com"
-                }
-            ],
-            "description": "Compress HTML output into a single line",
-            "homepage": "https://github.com/ogheo/yii2-htmlcompress",
-            "keywords": [
-                "compress",
-                "html",
-                "minify",
-                "minimize",
-                "output",
-                "view",
-                "yii2"
-            ],
-            "time": "2017-06-14T19:13:28+00:00"
         },
         {
             "name": "omgdef/yii2-multilingual-behavior",

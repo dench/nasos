@@ -17,10 +17,6 @@ $config = [
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
         ],
-        'view' => [
-            'class' => '\ogheo\htmlcompress\View',
-            'compress' => YII_ENV_DEV ? false : true,
-        ],
         'request' => [
             'class' => 'dench\language\LangRequest'
         ],
@@ -66,6 +62,27 @@ $config = [
                     'sourcePath' => '@webroot/bootstrap',
                     'css' => [],
                 ],
+                // java -jar compiler.jar --js vendor/yiisoft/yii2/assets/yii.js --js_output_file web/js/yii/yii.min.js
+                // java -jar compiler.jar --js vendor/yiisoft/yii2/assets/yii.activeForm.js --js_output_file web/js/yii/yii.activeForm.min.js
+                // java -jar compiler.jar --js vendor/yiisoft/yii2/assets/yii.captcha.js --js_output_file web/js/yii/yii.captcha.min.js
+                // java -jar compiler.jar --js vendor/yiisoft/yii2/assets/yii.gridView.js --js_output_file web/js/yii/yii.gridView.min.js
+                // java -jar compiler.jar --js vendor/yiisoft/yii2/assets/yii.validation.js --js_output_file web/js/yii/yii.validation.min.js
+                'yii\web\YiiAsset' => [
+                    'sourcePath' => '@webroot/js/yii',
+                    'js' => ['yii.min.js'],
+                ],
+                'yii\validators\ValidationAsset' => [
+                    'sourcePath' => '@webroot/js/yii',
+                    'js' => ['yii.validation.min.js'],
+                ],
+                'yii\widgets\ActiveFormAsset' => [
+                    'sourcePath' => '@webroot/js/yii',
+                    'js' => ['yii.activeForm.min.js'],
+                ],
+                /*'GridViewAsset' => [
+                    'sourcePath' => '@webroot/js/yii',
+                    'js' => ['yii.gridView.min.js'],
+                ],*/
             ],
         ],
     ],
