@@ -25,7 +25,8 @@
         "bower-asset/twbs/bootstrap-sass": "*",
         "bower-asset/photoswipe": "*",
         "kartik-v/bootstrap-fileinput": "4.3.8",
-        "himiklab/yii2-recaptcha-widget" : "*"
+        "himiklab/yii2-recaptcha-widget" : "*",
+        "ogheo/yii2-htmlcompress": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

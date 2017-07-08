@@ -13,7 +13,7 @@ class SiteAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
-        'js/site.js'
+        //'js/site.js' Inside HTML code for speed
     ];
     public $depends = [
         'yii\web\YiiAsset',

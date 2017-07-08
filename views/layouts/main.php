@@ -13,6 +13,19 @@ use yii\bootstrap\Nav;
 use yii\widgets\Breadcrumbs;
 
 SiteAsset::register($this);
+
+$js = <<<JS
+$(function(){
+    $('.block-link').click(function(){
+        document.location.href = $(this).find('a').attr('href');
+    });
+    $('body').bind('copy', function() {
+        return false;
+    });
+});
+JS;
+
+$this->registerJs($js);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

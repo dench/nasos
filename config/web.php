@@ -17,6 +17,10 @@ $config = [
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
         ],
+        'view' => [
+            'class' => '\ogheo\htmlcompress\View',
+            'compress' => YII_ENV_DEV ? false : true,
+        ],
         'request' => [
             'class' => 'dench\language\LangRequest'
         ],
@@ -47,14 +51,16 @@ $config = [
             'class' => 'yii\web\AssetManager',
             'bundles' => [
                 'yii\web\JqueryAsset' => [
-                    'js' => [
-                        'jquery.min.js'
-                    ]
+                    'sourcePath' => null,
+                    'js' => ['https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'],
                 ],
                 'yii\bootstrap\BootstrapPluginAsset' => [
-                    'js' => [
-                        'js/bootstrap.min.js',
-                    ]
+                    'sourcePath' => null,
+                    'js' => ['https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'],
+                    'jsOptions' => [
+                        'integrity' => 'sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa',
+                        'crossorigin' => 'anonymous',
+                    ],
                 ],
                 'yii\bootstrap\BootstrapAsset' => [
                     'sourcePath' => '@webroot/bootstrap',
