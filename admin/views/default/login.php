@@ -11,7 +11,6 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = 'Login';
 
-CommonAsset::register($this);
 AdminAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
