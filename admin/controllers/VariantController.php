@@ -4,6 +4,7 @@ namespace app\admin\controllers;
 
 use app\models\Feature;
 use dench\image\models\Image;
+use dench\language\models\Language;
 use dench\sortable\actions\SortingAction;
 use Yii;
 use app\models\Variant;
@@ -113,6 +114,9 @@ class VariantController extends Controller
                     $image->save(false);
                 }
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Information added successfully'));
+                foreach (Language::find()->select('id')->column() as $lang) {
+                    Yii::$app->cache->delete('_product_card-' . $model->product->id . '-' . $lang);
+                }
                 return $this->redirect(['index']);
             }
         }
@@ -163,6 +167,9 @@ class VariantController extends Controller
                     $image->save(false);
                 }
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Information has been saved successfully'));
+                foreach (Language::find()->select('id')->column() as $lang) {
+                    Yii::$app->cache->delete('_product_card-' . $model->product->id . '-' . $lang);
+                }
                 return $this->redirect(['index']);
             }
         }

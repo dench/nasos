@@ -12,6 +12,8 @@ class m170310_185835_create_product_table extends Migration
      */
     public function up()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+
         $this->createTable('product', [
             'id' => $this->primaryKey(),
             'slug' => $this->string()->notNull(),
@@ -21,7 +23,7 @@ class m170310_185835_create_product_table extends Migration
             'updated_at' => $this->integer()->notNull(),
             'position' => $this->integer()->notNull()->defaultValue(0),
             'enabled' => $this->boolean()->notNull()->defaultValue(1),
-        ]);
+        ], $tableOptions);
 
         $this->createTable('product_lang', [
             'product_id' => $this->integer()->notNull(),
@@ -32,12 +34,12 @@ class m170310_185835_create_product_table extends Migration
             'keywords' => $this->string()->notNull()->defaultValue(''),
             'description' => $this->text(),
             'text' => $this->text(),
-        ]);
+        ], $tableOptions);
 
         $this->createTable('product_category', [
             'product_id' => $this->integer()->notNull(),
             'category_id' => $this->integer()->notNull(),
-        ]);
+        ], $tableOptions);
 
         $this->addPrimaryKey('pk-product_lang', 'product_lang', ['product_id', 'lang_id']);
 

@@ -12,7 +12,7 @@ echo $this->render('_breadcrumbs', [
 <div class="container page product">
     <h1 class="page-title"><?= $model->h1 ?></h1>
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-sm-5">
             <?= $this->render('_photo', [
                 'model' => $model,
             ]) ?>
@@ -20,7 +20,7 @@ echo $this->render('_breadcrumbs', [
                 'model' => $model,
             ]) ?>
         </div>
-        <div class="col-md-7">
+        <div class="col-sm-7">
             <?= $this->render('_feature', [
                 'model' => $model,
             ]) ?>

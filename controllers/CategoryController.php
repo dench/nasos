@@ -15,7 +15,7 @@ class CategoryController extends Controller
     {
         $page = Page::viewPage(2);
 
-        $categories = Category::getMain();
+        $categories = !Yii::$app->cache->exists('_categories-' . Yii::$app->language) ? Category::getMain() : [];
 
         return $this->render('index', [
             'page' => $page,

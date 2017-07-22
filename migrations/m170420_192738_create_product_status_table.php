@@ -12,10 +12,12 @@ class m170420_192738_create_product_status_table extends Migration
      */
     public function up()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+
         $this->createTable('product_status', [
             'product_id' => $this->integer()->notNull(),
             'status_id' => $this->integer()->notNull(),
-        ]);
+        ], $tableOptions);
 
         $this->addPrimaryKey('pk-product_status', 'product_status', ['product_id', 'status_id']);
 

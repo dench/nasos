@@ -3,6 +3,7 @@
 namespace app\admin\controllers;
 
 use dench\image\models\Image;
+use dench\language\models\Language;
 use dench\sortable\actions\SortingAction;
 use Yii;
 use app\models\Category;
@@ -108,6 +109,10 @@ class CategoryController extends Controller
                     $image->save(false);
                 }
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Information added successfully'));
+                foreach (Language::find()->select('id')->column() as $lang) {
+                    Yii::$app->cache->delete('_categories-' . $lang);
+                    Yii::$app->cache->delete('podmenu-' . $lang);
+                }
                 return $this->redirect(['index']);
             }
         }
@@ -155,6 +160,10 @@ class CategoryController extends Controller
                     $image->save(false);
                 }
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Information has been saved successfully'));
+                foreach (Language::find()->select('id')->column() as $lang) {
+                    Yii::$app->cache->delete('_categories-' . $lang);
+                    Yii::$app->cache->delete('podmenu-' . $lang);
+                }
                 return $this->redirect(['index']);
             }
         }

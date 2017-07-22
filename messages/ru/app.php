@@ -71,5 +71,6 @@ return [
     'Remember me' => 'Запомнить',
     'Calls from 9:00 to 20:00 Mon-Fri' => 'Звонки с 9:00 до 20:00 Пн-Пт',
     'Settings' => 'Настройки',
+    'Information' => 'Информация',
     'Information has been saved successfully' => 'Информация была успешно сохранена',
 ];

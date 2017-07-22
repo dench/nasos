@@ -12,16 +12,18 @@ class m170310_184658_create_value_table extends Migration
      */
     public function up()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+
         $this->createTable('value', [
             'id' => $this->primaryKey(),
             'feature_id' => $this->integer()->notNull(),
-        ]);
+        ], $tableOptions);
 
         $this->createTable('value_lang', [
             'value_id' => $this->integer()->notNull(),
             'lang_id' => $this->string(3)->notNull(),
             'name' => $this->string()->notNull(),
-        ]);
+        ], $tableOptions);
 
         $this->addPrimaryKey('pk-value_lang', 'value_lang', ['value_id', 'lang_id']);
 

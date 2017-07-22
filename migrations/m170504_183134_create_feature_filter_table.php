@@ -12,10 +12,12 @@ class m170504_183134_create_feature_filter_table extends Migration
      */
     public function up()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+
         $this->createTable('feature_filter', [
             'feature_id' => $this->integer()->notNull(),
             'category_id' => $this->integer()->notNull(),
-        ]);
+        ], $tableOptions);
 
         $this->addPrimaryKey('pk-feature_filter', 'feature_filter', ['feature_id', 'category_id']);
 

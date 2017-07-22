@@ -12,17 +12,19 @@ class m170319_131748_create_complect_table extends Migration
      */
     public function up()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+
         $this->createTable('complect', [
             'id' => $this->primaryKey(),
             'product_id' => $this->integer()->notNull(),
             'position' => $this->integer()->notNull()->defaultValue(0),
-        ]);
+        ], $tableOptions);
 
         $this->createTable('complect_lang', [
             'complect_id' => $this->integer()->notNull(),
             'lang_id' => $this->string(3)->notNull(),
             'name' => $this->string()->notNull(),
-        ]);
+        ], $tableOptions);
 
         $this->addPrimaryKey('pk-complect_lang', 'complect_lang', ['complect_id', 'lang_id']);
 

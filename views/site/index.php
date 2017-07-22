@@ -50,7 +50,7 @@ use yii\helpers\Url;
                 </div>
             </div>
             <div class="col-md-6 section-company-img">
-                <a href="<?= Url::to(['site/about']) ?>" rel="nofollow"><img src="<?= ImageHelper::thumb(current($page->image_ids), 'small') ?>"  alt="<?= $page->title ?>" title="<?= $page->title ?>" class="img-responsive"></a>
+                <a href="<?= Url::to(['site/about']) ?>" rel="nofollow"><img src="<?= ImageHelper::thumb(current($page->image_ids), 'page') ?>"  alt="<?= $page->title ?>" title="<?= $page->title ?>" class="img-responsive"></a>
             </div>
         </div>
     </div>
@@ -59,26 +59,12 @@ use yii\helpers\Url;
 <section class="section section-category bg-grey">
     <div class="container">
         <h2 class="section-title"><a href="<?= Url::to(['/category/index']) ?>"><?= Yii::t('app', 'Our production') ?></a></h2>
-        <div class="row">
-            <?php foreach ($categories as $category) : ?>
-                <div class="col-sm-6 col-md-4">
-                    <div class="card block-link">
-                        <div class="card-img">
-                            <?php if ($category->image) { ?>
-                                <img src="<?= ImageHelper::thumb($category->image->id, 'cover') ?>" class="img-responsive" alt="<?= $category->image->alt ? $category->image->alt : $category->name ?>" title="<?= $category->title ?>">
-                            <?php } else { ?>
-                                <img src="<?= Yii::$app->params['image']['none'] ?>" class="img-responsive" alt="">
-                            <?php } ?>
-                        </div>
-                        <div class="card-block">
-                            <h5 class="card-title">
-                                <a href="<?= Url::to(['category/view', 'slug' => $category->slug]) ?>" class="text-nowrap"><?= $category->name ?></a>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
+        <?= Yii::$app->cache->getOrSet('_categories-' . Yii::$app->language, function () use ($categories) {
+            return $this->render('../category/_categories', [
+                'categories' => $categories,
+            ]);
+        });
+        ?>
     </div>
 </section>
 <?php
@@ -106,10 +92,10 @@ Modal::end();
         <div class="row news">
             <div class="col-md-6">
                 <div class="row news-item">
-                    <div class="col-xs-4 col-sm-3 col-md-4 news-item-img">
-                        <img src="/img/photo-default.png" class="img-responsive" alt="">
+                    <div class="col-xs-4 col-sm-3 col-md-5 col-lg-4 news-item-img">
+                        <img src="/img/photo-default.png" class="img-responsive img-thumbnail" alt="">
                     </div>
-                    <div class="col-xs-8 col-sm-9 col-md-8">
+                    <div class="col-xs-8 col-sm-9 col-md-7 col-lg-8">
                         <h4 class="news-item-title"><a href="#">PA2 - Лопастной насос</a></h4>
                         <div class="news-item-text">
                             Насос имеет встроенный фильтр грубой очистки и обводной клапан, который «обводит» обводной клапан.
@@ -122,10 +108,10 @@ Modal::end();
             </div>
             <div class="col-md-6">
                 <div class="row news-item">
-                    <div class="col-xs-4 col-sm-3 col-md-4 news-item-img">
-                        <img src="/img/photo-default.png" class="img-responsive" alt="">
+                    <div class="col-xs-4 col-sm-3 col-md-5 col-lg-4 news-item-img">
+                        <img src="/img/photo-default.png" class="img-responsive img-thumbnail" alt="">
                     </div>
-                    <div class="col-xs-8 col-sm-9 col-md-8">
+                    <div class="col-xs-8 col-sm-9 col-md-7 col-lg-8">
                         <h4 class="news-item-title"><a href="#">PA2 - Лопастной насос</a></h4>
                         <div class="news-item-text">
                             Насос имеет встроенный фильтр грубой очистки и обводной клапан, который «обводит» обводной клапан.

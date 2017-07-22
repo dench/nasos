@@ -61,6 +61,9 @@ return [
                 'fs' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                 ],
+                'page' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                ],
             ],
         ],
     ],

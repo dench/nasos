@@ -1,3 +1,5 @@
+@import "../bootstrap/css/bootstrap.scss";
+
 $border-color-active: #DDDDDD;
 $bg-inverse: #363948;
 $bg-inverse-light: #585A69;
@@ -20,7 +22,6 @@ $secondary-color: #FFCE00;
 }
 
 
-
 html {
   height: 100%;
 }
@@ -38,6 +39,11 @@ body {
 
 a {
   color: $bg-inverse;
+}
+
+div.required label.control-label:after {
+  content: " *";
+  color: red;
 }
 
 .btn {
@@ -227,6 +233,7 @@ a {
   background-image: url("../img/ukraine.png");
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center center;
   &-slogan {
     &-big {
       font-size: 22px;
@@ -272,7 +279,7 @@ a {
     }
     &-link {
       text-align: center;
-      margin: 20px 0 30px 0;
+      margin: 20px 0;
     }
   }
   &-category {
@@ -379,6 +386,10 @@ a {
   }
 }
 
+.img-thumbnail {
+  border-radius: 0;
+}
+
 .footer {
   text-align: center;
   padding: 30px 0 20px 0;
@@ -443,7 +454,7 @@ a {
   }
   &-striped > tbody > tr {
     &:nth-of-type(odd) {
-      background-color: #f5f5f5;
+      background-color: $bg-grey;
     }
     &:hover {
       background-color: #eee;
@@ -514,7 +525,7 @@ a {
   &-buy {
     padding: 5px 0;
     text-align: center;
-    background-color: #f5f5f5;
+    background-color: $bg-grey;
     margin-bottom: 20px;
     border: 1px solid #eee;
     border-radius: 3px;
@@ -538,6 +549,22 @@ a {
   label {
     font-weight: normal;
     margin-right: 8px;
+  }
+}
+
+@media (min-width: 480px) {
+  .news {
+    &-item {
+      background-color: $bg-grey;
+      margin-left: 0;
+      margin-right: 0;
+      &-title {
+        margin-top: 15px;
+      }
+      &-img {
+        padding-left: 0;
+      }
+    }
   }
 }
 
@@ -577,6 +604,7 @@ a {
     }
   }
   .header {
+    background-position: left center;
     padding: 10px 0;
     &-slogan {
       text-align: left;
@@ -606,11 +634,7 @@ a {
   }
   .news {
     &-item {
-      background-color: $bg-grey;
-      margin-left: 0;
-      margin-right: 0;
       &-title {
-        margin-top: 15px;
         font-size: 18px;
       }
       &-img {

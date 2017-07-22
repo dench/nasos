@@ -9,11 +9,11 @@ class SiteAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        '//fonts.googleapis.com/css?family=Ubuntu:400,700',
+        //'//fonts.googleapis.com/css?family=Ubuntu:400,700',
         'css/site.css',
     ];
     public $js = [
-        'js/site.js'
+        //'js/site.js' Inside HTML code for speed
     ];
     public $depends = [
         'yii\web\YiiAsset',

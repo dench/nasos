@@ -10,11 +10,20 @@ use dench\language\models\Language;
 use dench\language\widgets\Lang;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
-use app\assets\CommonAsset;
 use yii\widgets\Breadcrumbs;
 
-CommonAsset::register($this);
 SiteAsset::register($this);
+
+$js = <<<JS
+$('.block-link').click(function(){
+    document.location.href = $(this).find('a').attr('href');
+});
+$('body').bind('copy', function() {
+    return false;
+});
+JS;
+
+$this->registerJs($js);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -43,7 +52,6 @@ SiteAsset::register($this);
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-static-top',
-            'title' => 'Бенза',
         ],
         'headerHtml' => $lang,
     ]);
@@ -52,7 +60,7 @@ SiteAsset::register($this);
             'class' => 'navbar-nav',
         ],
         'items' => [
-            ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
+            ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index'], 'options' => ['class' => 'hidden-sm']],
             [
                 'label' => Yii::t('app', 'Products'),
                 'url' => ['/category/index'],
@@ -62,8 +70,10 @@ SiteAsset::register($this);
                 'active' => (Yii::$app->controller->id == 'product' || Yii::$app->controller->id == 'category')
             ],
             ['label' => Yii::t('app', 'About company'), 'url' => ['/site/about']],
-            //['label' => Yii::t('app', 'Gallery'), 'url' => ['/gallery/index']],
-            //['label' => Yii::t('app', 'Documentation'), 'url' => '/docs/index', 'options' => ['class' => 'hidden-sm']],
+            [
+                'label' => Yii::t('app', 'Information'),
+                'url' => ['/info/index'],
+                'active' => Yii::$app->controller->id == 'info'],
             ['label' => Yii::t('app', 'Contacts'), 'url' => ['/site/contacts']],
         ],
     ]);
@@ -76,11 +86,11 @@ SiteAsset::register($this);
                 <?php
                 $category_ids = isset($this->params['category_ids']) ? $this->params['category_ids'] : [];
                 $items = [];
-                foreach (Category::getMain() as $category) {
+                foreach (Category::getPodmenu() as $category) {
                     $items[] = [
-                        'label' => $category->name,
-                        'url' => ['/category/view', 'slug' => $category->slug],
-                        'active' => (in_array($category->id, $category_ids))
+                        'label' => $category['name'],
+                        'url' => ['/category/view', 'slug' => $category['slug']],
+                        'active' => (in_array($category['id'], $category_ids))
                     ];
                 }
                 echo Nav::widget([
@@ -118,25 +128,25 @@ SiteAsset::register($this);
 <footer class="footer footer-inverse bg-inverse">
     <div class="container">
         <div class="row">
-            <div class="col-md-2 col-sm-3">
+            <div class="col-sm-3 col-md-2">
                 <div class="contacts phones">
                     <p><i class="glyphicon glyphicon-earphone">&ensp;</i><?= Yii::$app->params['phone1'] ?></p>
                     <p><i class="glyphicon glyphicon-earphone">&ensp;</i><?= Yii::$app->params['phone2'] ?></p>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-3">
+            <div class="col-sm-3 col-md-2">
                 <div class="contacts phones">
                     <p><i class="glyphicon glyphicon-earphone">&ensp;</i><?= Yii::$app->params['phone3'] ?></p>
                     <p><i class="glyphicon glyphicon-earphone">&ensp;</i><?= Yii::$app->params['phone4'] ?></p>
                 </div>
             </div>
-            <div class="col-md-5 col-sm-6">
+            <div class="col-sm-6 col-md-5">
                 <div class="contacts">
                     <p><i class="glyphicon glyphicon-map-marker">&ensp;</i><a href="<?= Yii::$app->params['map_link'] ?>" target="_blank"><?= Yii::$app->params['address_' . Yii::$app->language] ?></a></p>
                     <p><i class="glyphicon glyphicon-time">&ensp;</i><?= Yii::t('app', 'Calls from 9:00 to 20:00 Mon-Fri') ?></p>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-12">
+            <div class="col-sm-12 col-md-3">
                 <div class="copyright">
                     <p>© <a href="/"><?= Yii::$app->params['sitename'] ?></a> 2017</p>
                 </div>
