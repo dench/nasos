@@ -215,9 +215,7 @@ class Product extends ActiveRecord
     public function getImage()
     {
         if ($variant = current($this->variants)) {
-            if ($image_id = current($variant->image_ids)) {
-                return Image::findOne($image_id);
-            }
+            return $variant->image;
         }
 
         return null;

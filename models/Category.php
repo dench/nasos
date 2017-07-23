@@ -27,6 +27,7 @@ use yii\web\NotFoundHttpException;
  * @property boolean $enabled
  * @property boolean $main
  *
+ *
  * @property string $name
  * @property string $h1
  * @property string $title
@@ -41,9 +42,13 @@ use yii\web\NotFoundHttpException;
  * @property Feature[] $features
  * @property Product[] $products
  * @property Image[] $images
+ * @property Image[] $imagesAll
+ * @property array $imageEnabled
  */
 class Category extends ActiveRecord
 {
+    private $_imageEnabled = null;
+
     /**
      * @inheritdoc
      */
@@ -80,6 +85,10 @@ class Category extends ActiveRecord
                                     $image_ids = array_values($primaryModel->image_ids);
                                     return array_search($relatedPk, $image_ids);
                                 },
+                                'enabled' => function($updater, $relatedPk, $rowCondition) {
+                                    $primaryModel = $updater->getBehavior()->owner;
+                                    return !empty($primaryModel->imageEnabled[$relatedPk]) ? 1 : 0;
+                                },
                             ],
                         ],
                     ],
@@ -101,7 +110,7 @@ class Category extends ActiveRecord
             [['slug', 'name', 'h1', 'title', 'keywords', 'description', 'text', 'seo'], 'trim'],
             [['enabled', 'main'], 'boolean'],
             [['enabled'], 'default', 'value' => true],
-            [['feature_ids', 'product_ids', 'image_ids'], 'each', 'rule' => ['integer']],
+            [['feature_ids', 'product_ids', 'image_ids', 'imageEnabled'], 'each', 'rule' => ['integer']],
             [['image_id'], 'exist', 'skipOnError' => true, 'targetClass' => Image::className(), 'targetAttribute' => ['image_id' => 'id']],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parent_id' => 'id']],
         ];
@@ -205,7 +214,21 @@ class Category extends ActiveRecord
     public function getImages()
     {
         $name = $this->tableName();
+        return $this->hasMany(Image::className(), ['id' => 'image_id'])
+            ->viaTable($name . '_image', [$name . '_id' => 'id'])
+            ->leftJoin($name . '_image', 'id=image_id')
+            ->where([$name . '_image.' . $name . '_id' => $this->id])
+            ->andFilterWhere([$name . '_image.enabled' => true])
+            ->orderBy([$name . '_image.position' => SORT_ASC])
+            ->indexBy('id');
+    }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImagesAll()
+    {
+        $name = $this->tableName();
         return $this->hasMany(Image::className(), ['id' => 'image_id'])
             ->viaTable($name . '_image', [$name . '_id' => 'id'])
             ->leftJoin($name . '_image', 'id=image_id')
@@ -214,16 +237,31 @@ class Category extends ActiveRecord
             ->indexBy('id');
     }
 
+    public function getImageEnabled()
+    {
+        if ($this->_imageEnabled != null) {
+            return $this->_imageEnabled;
+        }
+        $name = $this->tableName();
+        return $this->_imageEnabled = (new \yii\db\Query())
+            ->select(['enabled'])
+            ->from($name . '_image')
+            ->where([$name . '_id' => $this->id])
+            ->indexBy('image_id')
+            ->column();
+    }
+
+    public function setImageEnabled($value)
+    {
+        $this->_imageEnabled = $value;
+    }
+
     /**
-     * @return Image
+     * @return \yii\db\ActiveQuery
      */
     public function getImage()
     {
-        if ($image_id = current($this->image_ids)) {
-            return Image::findOne($image_id);
-        }
-
-        return null;
+        return $this->hasOne(Image::className(), ['id' => 'image_id']);
     }
 
     /**

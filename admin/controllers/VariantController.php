@@ -10,6 +10,7 @@ use Yii;
 use app\models\Variant;
 use app\admin\models\VariantSearch;
 use yii\base\Model;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -109,10 +110,14 @@ class VariantController extends Controller
                 if (!$image->validate()) $error['image'][$key] = $image->errors;
             }
             if (empty($error)) {
-                $model->save(false);
                 foreach ($images as $key => $image) {
                     $image->save(false);
                 }
+                if (!$model->image_id && $images) {
+                    $image = current($images);
+                    $model->image_id = $image->id;
+                }
+                $model->save(false);
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Information added successfully'));
                 foreach (Language::find()->select('id')->column() as $lang) {
                     Yii::$app->cache->delete('_product_card-' . $model->product->id . '-' . $lang);
@@ -140,21 +145,25 @@ class VariantController extends Controller
 
         $features = Feature::getObjectList(true, $model->product->category_ids);
 
-        $images = $model->images;
+        $images = $model->imagesAll;
 
         if ($post = Yii::$app->request->post()) {
             $model->load($post);
+            $old_ids = ArrayHelper::map($images, 'id', 'id');
             /** @var Image[] $images */
             $images = [];
             $image_ids = isset($post['Image']) ? $post['Image'] : [];
+            $new_ids = [];
             foreach ($image_ids as $key => $image) {
                 $images[$key] = Image::findOne($key);
+                $new_ids[$key] = $key;
             }
             if ($images) {
                 Model::loadMultiple($images, $post);
             } else {
                 $model->image_ids = [];
             }
+            $deleted_ids = array_diff($old_ids, $new_ids);
 
             $error = [];
             if (!$model->validate()) $error['model'] = $model->errors;
@@ -162,10 +171,19 @@ class VariantController extends Controller
                 if (!$image->validate()) $error['image'][$key] = $image->errors;
             }
             if (empty($error)) {
-                $model->save(false);
                 foreach ($images as $key => $image) {
                     $image->save(false);
                 }
+                foreach ($deleted_ids as $d_id) {
+                    if ($deleted_image = Image::findOne($d_id)) {
+                        $deleted_image->delete();
+                    }
+                }
+                if (!$model->image_id && $images) {
+                    $image = current($images);
+                    $model->image_id = $image->id;
+                }
+                $model->save(false);
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Information has been saved successfully'));
                 foreach (Language::find()->select('id')->column() as $lang) {
                     Yii::$app->cache->delete('_product_card-' . $model->product->id . '-' . $lang);

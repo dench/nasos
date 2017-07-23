@@ -93,6 +93,8 @@ $this->registerJs($js);
         <div class="tab-pane fade" id="tab-images">
             <?= ImageUpload::widget([
                 'images' => $images,
+                'image_id' => $model->image_id,
+                'imageEnabled' => $model->imageEnabled,
                 'col' => 'col-sm-4 col-md-3',
                 'size' => 'category',
                 'label' => null,

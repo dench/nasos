@@ -26,6 +26,7 @@ use yii\db\ActiveRecord;
  * @property integer $updated_at
  * @property integer $position
  * @property boolean $enabled
+ * @property integer $image_id
  *
  * @property string $name
  *
@@ -34,9 +35,14 @@ use yii\db\ActiveRecord;
  * @property Unit $unit
  * @property Value[] $values
  * @property Image[] $images
+ * @property Image[] $imagesAll
+ * @property Image $image
+ * @property array $imageEnabled
  */
 class Variant extends ActiveRecord
 {
+    private $_imageEnabled = null;
+
     /**
      * @inheritdoc
      */
@@ -67,6 +73,10 @@ class Variant extends ActiveRecord
                                     $image_ids = array_values($primaryModel->image_ids);
                                     return array_search($relatedPk, $image_ids);
                                 },
+                                'enabled' => function($updater, $relatedPk, $rowCondition) {
+                                    $primaryModel = $updater->getBehavior()->owner;
+                                    return !empty($primaryModel->imageEnabled[$relatedPk]) ? 1 : 0;
+                                },
                             ],
                         ],
                     ],
@@ -82,14 +92,15 @@ class Variant extends ActiveRecord
     {
         return [
             [['currency_id', 'unit_id'], 'required'],
-            [['product_id', 'price', 'price_old', 'currency_id', 'unit_id', 'available', 'position'], 'integer'],
+            [['product_id', 'price', 'price_old', 'currency_id', 'unit_id', 'available', 'position', 'image_id'], 'integer'],
             [['code', 'name'], 'string', 'max' => 255],
             [['enabled'], 'boolean'],
             [['enabled'], 'default', 'value' => true],
-            [['value_ids', 'image_ids'], 'each', 'rule' => ['integer']],
+            [['value_ids', 'image_ids', 'imageEnabled'], 'each', 'rule' => ['integer']],
             [['currency_id'], 'exist', 'skipOnError' => true, 'targetClass' => Currency::className(), 'targetAttribute' => ['currency_id' => 'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
             [['unit_id'], 'exist', 'skipOnError' => true, 'targetClass' => Unit::className(), 'targetAttribute' => ['unit_id' => 'id']],
+            [['image_id'], 'exist', 'skipOnError' => true, 'targetClass' => Image::className(), 'targetAttribute' => ['image_id' => 'id']],
         ];
     }
 
@@ -112,6 +123,7 @@ class Variant extends ActiveRecord
             'updated_at' => Yii::t('app', 'Updated'),
             'position' => Yii::t('app', 'Position'),
             'enabled' => Yii::t('app', 'Enabled'),
+            'image_id' => Yii::t('app', 'Image'),
         ];
     }
 
@@ -161,12 +173,53 @@ class Variant extends ActiveRecord
     public function getImages()
     {
         $name = $this->tableName();
+        return $this->hasMany(Image::className(), ['id' => 'image_id'])
+            ->viaTable($name . '_image', [$name . '_id' => 'id'])
+            ->leftJoin($name . '_image', 'id=image_id')
+            ->where([$name . '_image.' . $name . '_id' => $this->id])
+            ->andFilterWhere([$name . '_image.enabled' => true])
+            ->orderBy([$name . '_image.position' => SORT_ASC])
+            ->indexBy('id');
+    }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImagesAll()
+    {
+        $name = $this->tableName();
         return $this->hasMany(Image::className(), ['id' => 'image_id'])
             ->viaTable($name . '_image', [$name . '_id' => 'id'])
             ->leftJoin($name . '_image', 'id=image_id')
             ->where([$name . '_image.' . $name . '_id' => $this->id])
             ->orderBy([$name . '_image.position' => SORT_ASC])
             ->indexBy('id');
+    }
+
+    public function getImageEnabled()
+    {
+        if ($this->_imageEnabled != null) {
+            return $this->_imageEnabled;
+        }
+        $name = $this->tableName();
+        return $this->_imageEnabled = (new \yii\db\Query())
+            ->select(['enabled'])
+            ->from($name . '_image')
+            ->where([$name . '_id' => $this->id])
+            ->indexBy('image_id')
+            ->column();
+    }
+
+    public function setImageEnabled($value)
+    {
+        $this->_imageEnabled = $value;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImage()
+    {
+        return $this->hasOne(Image::className(), ['id' => 'image_id']);
     }
 }

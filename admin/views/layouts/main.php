@@ -34,7 +34,7 @@ AdminAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => Yii::t('app', 'Admin'),
-        'brandUrl' => ['/admin/default/index'],
+        'brandUrl' => ['default/index'],
         'options' => [
             'class' => 'navbar-inverse navbar-static-top',
         ],

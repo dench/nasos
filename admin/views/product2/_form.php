@@ -46,16 +46,18 @@ $js .= "
 $('.variantsWrapper').on('afterInsert', function(e, item) {
     var iD = $(this).find('input:last').attr('id');
     var key = iD.split('-');
-    console.log(key[1]);
+    //console.log(key[1]);
     reloadPjax();
 });
 $('.variantsWrapper').on('afterDelete', function(e, item) {
     reloadPjax();
 });
 $('.variantsWrapper').on('beforeDelete', function(e, item) {
-    var iD = $(this).find('input:last').attr('id');
-    var key = iD.split('-');
-    console.log(key[1]);
+    //var iD = $(this).find('input:last').attr('id');
+    //var key = iD.split('-');
+    //console.log(key[1]);
+    var iD = item.firstElementChild.value;
+    $('.i' + iD).parents('.variant-images').remove();
 });
 function reloadPjax() {
     $.pjax.reload({
@@ -181,7 +183,7 @@ $this->registerJs($js);
                 'min' => 1,
                 'insertButton' => '.add-variant',
                 'deleteButton' => '.remove-variant',
-                'model' => $modelsVariant[0],
+                'model' => current($modelsVariant),
                 'formId' => 'product-form',
                 'formFields' => $formFields,
             ]); ?>
@@ -211,10 +213,13 @@ $this->registerJs($js);
                     <div class="well variant-images">
                         <?= ImageUpload::widget([
                             'images' => $images,
-                            'modelInputName' => 'Variant[' . $index . '][image_ids]',
+                            'image_id' => $modelsVariant[$index]->image_id,
+                            'imageEnabled' => $modelsVariant[$index]->imageEnabled,
+                            'col' => 'col-sm-4 col-md-3 i' . $modelsVariant[$index]->id,
+                            'size' => 'fill',
+                            'modelInputName' => 'Variant[' . $index . ']',
                             'fileInputName' => 'files' . $index,
-                            'col' => 'col-sm-3',
-                            'label' => '',
+                            'label' => null,
                         ]) ?>
                     </div>
                 <?php endforeach; ?>
