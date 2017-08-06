@@ -2,8 +2,8 @@
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
-/* @var $viewed app\models\Product[] */
 /* @var $similar app\models\Product[] */
+/* @var $viewed boolean */
 
 
 echo $this->render('_breadcrumbs', [
