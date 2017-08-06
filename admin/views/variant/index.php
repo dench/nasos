@@ -23,7 +23,7 @@ if (!Yii::$app->request->get('all') && $dataProvider->totalCount > $dataProvider
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Variant'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create {0}', Yii::t('app', 'Variant')), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

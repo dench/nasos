@@ -90,25 +90,17 @@ class Product2Controller extends Controller
 
         $modelsVariant[0]->loadDefaultValues();
 
-        $variantImages[0] = $modelsVariant[0]->images;
+        $variantImages[0] = $modelsVariant[0]->imagesAll;
 
         $features = Feature::getObjectList(true, $model->category_ids);
 
         if ($post = Yii::$app->request->post()) {
-            $model->load($post);
-
-            $modelsVariant = Model::createMultiple(Variant::classname(), $modelsVariant);
-            foreach ($modelsVariant as $modelVariant) {
-                $modelVariant->image_ids = [];
-            }
-            Model::loadMultiple($modelsVariant, Yii::$app->request->post());
-            $variantImages = [];
-            foreach ($modelsVariant as $modelVariant) {
-                if (isset($modelVariant->enabled)) {
-                    $variantImages[] = $modelVariant->images;
-                }
-            }
             if (!Yii::$app->request->isPjax) {
+
+                $model->load($post);
+
+                $modelsVariant = Model::createMultiple(Variant::classname(), $modelsVariant);
+                Model::loadMultiple($modelsVariant, Yii::$app->request->post());
 
                 // ajax validation
                 if (Yii::$app->request->isAjax) {
@@ -139,6 +131,9 @@ class Product2Controller extends Controller
                         if ($flag = $model->save(false)) {
                             foreach ($modelsVariant as $modelVariant) {
                                 /** @var Variant $modelVariant */
+                                if (!$modelVariant->image_id && !empty($modelVariant->image_ids)) {
+                                    $modelVariant->image_id = current($modelVariant->image_ids);
+                                }
                                 $modelVariant->product_id = $model->id;
                                 if (!($flag = $modelVariant->save(false))) {
                                     $transaction->rollBack();
@@ -160,6 +155,26 @@ class Product2Controller extends Controller
                         }
                     } catch (Exception $e) {
                         $transaction->rollBack();
+                    }
+                }
+            } else {
+                if (!empty($model->category_ids)) {
+                    $features = Feature::getObjectList(true, $model->category_ids);
+                } else {
+                    $features = [];
+                }
+                $modelsVariant = Model::createMultiple(Variant::classname(), $modelsVariant);
+                Model::loadMultiple($modelsVariant, $post);
+                $variantImages = [];
+                foreach ($modelsVariant as $key => $modelVariant) {
+                    foreach ($modelVariant->image_ids as $image_id) {
+                        $image = Image::findOne($image_id);
+                        $variantImages[$key][$image_id] = $image;
+                    }
+                    if (isset($variantImages[$key])) {
+                        Model::loadMultiple($variantImages[$key], $post);
+                    } else {
+                        $variantImages[$key] = $modelVariant->imagesAll;
                     }
                 }
             }
@@ -189,24 +204,20 @@ class Product2Controller extends Controller
 
         $variantImages = [];
         foreach ($modelsVariant as $key => $modelVariant) {
-            $variantImages[$key] = $modelVariant->images;
+            $variantImages[$key] = $modelVariant->imagesAll;
         }
 
         $features = Feature::getObjectList(true, $model->category_ids);
 
         if ($post = Yii::$app->request->post()) {
 
-            if (!Yii::$app->request->isPjax) {
+            $model->load($post);
 
-                $model->load($post);
+            if (!Yii::$app->request->isPjax) {
 
                 $oldIDs = ArrayHelper::map($modelsVariant, 'id', 'id');
                 $modelsVariant = Model::createMultiple(Variant::classname(), $modelsVariant);
-                Model::loadMultiple($modelsVariant, Yii::$app->request->post());
-                /*foreach ($modelsVariant as $modelVariant) {
-                    $modelVariant->image_ids = [];
-                }*/
-
+                Model::loadMultiple($modelsVariant, $post);
                 $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsVariant, 'id', 'id')));
 
                 // ajax validation
@@ -240,23 +251,12 @@ class Product2Controller extends Controller
                 $valid = Model::validateMultiple($modelsVariant) && $valid;
                 $valid = Model::validateMultiple($images) && $valid;
 
-                foreach ($modelsVariant as $key => $variant) {
-                    Yii::error($variant->errors, 'variant');
-                }
-
-                foreach ($images as $key => $image) {
-                    Yii::error($image->errors, 'image');
-                }
-
                 if ($valid) {
                     $transaction = \Yii::$app->db->beginTransaction();
                     try {
                         if ($flag = $model->save(false)) {
                             if (!empty($deletedIDs)) {
                                 Variant::deleteAll(['id' => $deletedIDs]);
-                            }
-                            foreach ($images as $key => $image) {
-                                $image->save(false);
                             }
                             foreach ($deleted_ids as $d_id) {
                                 if ($deleted_image = Image::findOne($d_id)) {
@@ -292,39 +292,25 @@ class Product2Controller extends Controller
                     }
                 }
             } else {
-
-                Yii::error($post['Variant']);
-
-                Yii::error($variantImages);
-
-                /*$modelsVariant = Model::createMultiple(Variant::classname(), $modelsVariant);
-
-                //Yii::error($post);
-
+                if (!empty($model->category_ids)) {
+                    $features = Feature::getObjectList(true, $model->category_ids);
+                } else {
+                    $features = [];
+                }
+                $modelsVariant = Model::createMultiple(Variant::classname(), $modelsVariant);
+                Model::loadMultiple($modelsVariant, $post);
                 $variantImages = [];
                 foreach ($modelsVariant as $key => $modelVariant) {
-                    //Yii::error($modelVariant);
-                    if (isset($modelVariant->enabled)) {
-                        $variantImages[$key] = $modelVariant->images;
-                        foreach ($variantImages[$key] as $k => $image) {
-                            if (isset($post['Image'][$image->id])) {
-                                $variantImages[$key][$k]->alt = $post['Image'][$image->id]['alt'];
-                                $variantImages[$key][$k]->name = $post['Image'][$image->id]['name'];
-                            } else {
-                                unset($variantImages[$key][$k]);
-                            }
-                        }
+                    foreach ($modelVariant->image_ids as $image_id) {
+                        $image = Image::findOne($image_id);
+                        $variantImages[$key][$image_id] = $image;
+                    }
+                    if (isset($variantImages[$key])) {
+                        Model::loadMultiple($variantImages[$key], $post);
+                    } else {
+                        $variantImages[$key] = $modelVariant->imagesAll;
                     }
                 }
-
-                foreach ($post['Variant'] as $variant) {
-                    Yii::error($variant);
-                    if (empty($variant['id'])) {
-                        $new = new Variant();
-                        $variantImages[] = $new->images;
-                    }
-                }*/
-
             }
         }
 

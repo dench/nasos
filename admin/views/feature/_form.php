@@ -49,6 +49,9 @@ use yii\widgets\Pjax;
         </div>
 
         <div class="tab-pane fade" id="values-tab">
+            <p>
+                <?= Html::a(Yii::t('app', 'Create {0}', Yii::t('app', 'Value')), ['value/create', 'feature_id' => $model->id], ['class' => 'btn btn-success modal-value-open']) ?>
+            </p>
             <?php Pjax::begin([
                 'id' => 'pjax-grid-values',
             ]) ?>

@@ -115,7 +115,7 @@ class Variant extends ActiveRecord
             'code' => Yii::t('app', 'Vendor code'),
             'name' => Yii::t('app', 'Name'),
             'price' => Yii::t('app', 'Price'),
-            'price_old' => Yii::t('app', 'Price Old'),
+            'price_old' => Yii::t('app', 'Price old'),
             'currency_id' => Yii::t('app', 'Currency'),
             'unit_id' => Yii::t('app', 'Unit'),
             'available' => Yii::t('app', 'Available'),

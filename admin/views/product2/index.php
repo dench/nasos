@@ -20,11 +20,10 @@ if (!Yii::$app->request->get('all') && $dataProvider->totalCount > $dataProvider
 ?>
 <div class="product-index">
 
-    <!--<h1><?= Html::encode($this->title) ?></h1>-->
-    <h1 style="color: red;">В разработке</h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create {0}', Yii::t('app', 'Product')), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

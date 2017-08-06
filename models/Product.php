@@ -122,6 +122,10 @@ class Product extends ActiveRecord
             'text' => Yii::t('app', 'Text'),
             'price_from' => Yii::t('app', 'from'),
             'view' => Yii::t('app', 'View template'),
+            'category_ids' => Yii::t('app', 'Categories'),
+            'status_ids' => Yii::t('app', 'Statuses'),
+            'complect_ids' => Yii::t('app', 'Complectation'),
+            'option_ids' => Yii::t('app', 'Additional options'),
         ];
     }
 

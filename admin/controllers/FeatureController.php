@@ -81,7 +81,7 @@ class FeatureController extends Controller
         $model->loadDefaultValues();
         
         $values = new ActiveDataProvider([
-            'query' => Value::find()->where(['feature_id' => $id]),
+            'query' => Value::find()->where(['feature_id' => null]),
             'sort'=> [
                 'defaultOrder' => [
                     'position' => SORT_ASC,

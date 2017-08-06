@@ -11,6 +11,7 @@ use dench\language\models\Language;
 use dosamigos\ckeditor\CKEditor;
 use kartik\select2\Select2;
 use wbraganca\dynamicform\DynamicFormWidget;
+use yii\base\Widget;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
@@ -42,37 +43,59 @@ $('#product-name" . $suffix . "').focus(function(){
 
 }
 
+$var = "Variant";
+
 $js .= "
 $('.variantsWrapper').on('afterInsert', function(e, item) {
-    var iD = $(this).find('input:last').attr('id');
-    var key = iD.split('-');
-    //console.log(key[1]);
-    reloadPjax();
+    reloadPjaxImages();
+    reloadPjaxFeature();
 });
 $('.variantsWrapper').on('afterDelete', function(e, item) {
-    reloadPjax();
+    reloadPjaxImages();
+    reloadPjaxFeature();
 });
 $('.variantsWrapper').on('beforeDelete', function(e, item) {
-    //var iD = $(this).find('input:last').attr('id');
-    //var key = iD.split('-');
-    //console.log(key[1]);
-    var iD = item.firstElementChild.value;
-    $('.i' + iD).parents('.variant-images').remove();
+    var key = item.firstElementChild.id.split('-')[1];
+    $('.variants-images').find('input[name^=\"".$var."['+key+'][image_id]\"]').parents('.variant-images').remove();
+    $('.variants-images').find('input[name^=\"".$var."\"]').each(function(){
+        var name_old = $(this).attr('name');
+        var k = parseInt(name_old.replace('".$var."[', '').split(']')[0]);
+        if (k > key) {
+            var name_new = name_old.replace('".$var."['+k+']', '".$var."['+(k-1)+']');
+            $(this).attr('name', name_new);
+        }
+    });
 });
-function reloadPjax() {
+function reloadPjaxImages() {
     $.pjax.reload({
         container: '#images-pjax', 
         timeout: 2000,
         url: '',
         type: 'POST',
-        data: $('#product-form').serialize()
+        data: $('#product-form').serialize(),
+        async: false,
     });
 }
+function reloadPjaxFeature() {
+    $.pjax.reload({
+        container: '#feature-pjax', 
+        timeout: 2000,
+        url: '',
+        type: 'POST',
+        data: $('#product-form').serialize(),
+        async: false,
+    });
+}
+$('#product-category_ids').change(function(){
+    reloadPjaxFeature();
+});
 ";
 
 $this->registerJs($js);
 ?>
-
+<div id="w33"></div>
+<div id="w34"></div>
+<div id="w35"></div>
 <div class="product-form">
 
     <?php $form = ActiveForm::begin([
@@ -118,9 +141,16 @@ $this->registerJs($js);
         <?php endforeach; ?>
 
         <div class="tab-pane fade" id="main-tab">
-            <?= $form->field($model, 'category_ids')->dropDownList(Category::getList(null), [
-                'multiple' => true,
-                'size' => 10,
+            <?= $form->field($model, 'category_ids')->widget(Select2::className(), [
+                'data' => Category::getList(null),
+                'options' => [
+                    'placeholder' => Yii::t('app', 'Select'),
+                    'multiple' => true,
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true,
+                ],
+                'showToggleAll' => false,
             ]) ?>
 
             <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
@@ -137,10 +167,7 @@ $this->registerJs($js);
         </div>
 
         <div class="tab-pane fade" id="complects-tab">
-            <?= $form->field($model, 'complect_ids')->dropDownList(Complect::getList(), [
-                'multiple' => true,
-                'size' => 30,
-            ]) ?>
+            <?= $form->field($model, 'complect_ids')->checkboxList(Complect::getList()) ?>
         </div>
 
         <div class="tab-pane fade" id="options-tab">
@@ -213,9 +240,9 @@ $this->registerJs($js);
                     <div class="well variant-images">
                         <?= ImageUpload::widget([
                             'images' => $images,
-                            'image_id' => $modelsVariant[$index]->image_id,
-                            'imageEnabled' => $modelsVariant[$index]->imageEnabled,
-                            'col' => 'col-sm-4 col-md-3 i' . $modelsVariant[$index]->id,
+                            'image_id' => @$modelsVariant[$index]->image_id,
+                            'imageEnabled' => @$modelsVariant[$index]->imageEnabled,
+                            'col' => 'col-sm-4 col-md-3',
                             'size' => 'fill',
                             'modelInputName' => 'Variant[' . $index . ']',
                             'fileInputName' => 'files' . $index,
@@ -228,8 +255,10 @@ $this->registerJs($js);
         </div>
 
         <div class="tab-pane fade" id="feature-tab">
+            <?php Pjax::begin(['id' => 'feature-pjax']); ?>
+            <?php Widget::$autoIdPrefix = 'f'; ?>
                 <?php if (empty($features)) : ?>
-                    <?= Html::tag('div', Yii::t('app', 'Choose a product!'), ['class' => 'alert alert-danger']) ?>
+                    <?= Html::tag('div', Yii::t('app', 'Select a category!'), ['class' => 'alert alert-danger']) ?>
                 <?php else : ?>
                     <div class="table-responsive">
                         <table class="table">
@@ -254,6 +283,7 @@ $this->registerJs($js);
                                                     'allowClear' => true,
                                                 ],
                                                 'showToggleAll' => false,
+                                                //'pjaxContainerId' => 'feature-pjax',
                                             ]) ?>
                                         </td>
                                     <?php endforeach; ?>
@@ -262,6 +292,8 @@ $this->registerJs($js);
                         </table>
                     </div>
                 <?php endif; ?>
+            <?php Widget::$autoIdPrefix = 'w'; ?>
+            <?php Pjax::end(); ?>
         </div>
 
         <div class="form-group">

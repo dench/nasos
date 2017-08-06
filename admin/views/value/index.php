@@ -27,7 +27,7 @@ if (!Yii::$app->request->get('all') && $dataProvider->totalCount > $dataProvider
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Value'), ['create', 'feature_id' => $feature_id], ['class' => 'btn btn-success buttonCreate']) ?>
+        <?= Html::a(Yii::t('app', 'Create {0}', Yii::t('app', 'Value')), ['create', 'feature_id' => $feature_id], ['class' => 'btn btn-success buttonCreate']) ?>
     </p>
     <?php Pjax::begin([
         'id' => 'pjax-grid-values',

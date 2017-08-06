@@ -546,15 +546,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dench/yii2-language.git",
-                "reference": "3388b866af9f017ac56c16649ccfcf4b0ef2f9d4"
+                "reference": "ab2a4ebf2e1f92c51411b2f7b87076d176c84b4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dench/yii2-language/zipball/3388b866af9f017ac56c16649ccfcf4b0ef2f9d4",
-                "reference": "3388b866af9f017ac56c16649ccfcf4b0ef2f9d4",
+                "url": "https://api.github.com/repos/dench/yii2-language/zipball/ab2a4ebf2e1f92c51411b2f7b87076d176c84b4d",
+                "reference": "ab2a4ebf2e1f92c51411b2f7b87076d176c84b4d",
                 "shasum": ""
             },
             "require": {
+                "dench/yii2-sortable": "@dev",
                 "omgdef/yii2-multilingual-behavior": "*",
                 "yiisoft/yii2": "*"
             },
@@ -580,7 +581,7 @@
                 "language",
                 "yii2"
             ],
-            "time": "2017-06-16 19:57:12"
+            "time": "2017-08-01 11:47:16"
         },
         {
             "name": "dench/yii2-page",
@@ -1145,7 +1146,7 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.3.5",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -1198,7 +1199,7 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v3.3.5",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",

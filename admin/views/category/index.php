@@ -23,7 +23,7 @@ if (!Yii::$app->request->get('all') && $dataProvider->totalCount > $dataProvider
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Category'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create {0}', Yii::t('app', 'Category')), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -41,7 +41,7 @@ if (!Yii::$app->request->get('all') && $dataProvider->totalCount > $dataProvider
             [
                 'attribute' => 'name',
                 'content' => function($model, $key, $index, $column){
-                    return Html::a($model->name, ['product/index', 'ProductSearch[category_id]' => $model->id]);
+                    return Html::a($model->name, ['product2/index', 'ProductSearch[category_id]' => $model->id]);
                 },
             ],
             'slug',

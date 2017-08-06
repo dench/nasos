@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Product;
+use app\models\ProductSearch;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -33,8 +34,19 @@ class ProductController extends Controller
             'expire' => time()+3600*24*30
         ]));
         $viewed_ids = array_diff($viewed_ids, [$model->id]);
-        $viewed = Product::find()->where(['id' => $viewed_ids])->all();
+        $similar = Product::find()->where(['id' => $viewed_ids])->all();
         /* End - Save viewed products */
+
+        /**
+         * Similar products
+         */
+        if (count($similar) < 1) {
+            $viewed = 0;
+            $similar = Product::find()->joinWith(['categories'])->where(['product.enabled' => 1, 'category_id' => $model->category_ids[0]])->limit(6)->all();
+        } else {
+            $viewed = 1;
+        }
+        /* Similar products */
 
         $view = 'index';
 
@@ -45,6 +57,7 @@ class ProductController extends Controller
         return $this->render($view, [
             'model' => $model,
             'viewed' => $viewed,
+            'similar' => $similar,
         ]);
     }
 

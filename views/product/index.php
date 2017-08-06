@@ -3,6 +3,8 @@
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
 /* @var $viewed app\models\Product[] */
+/* @var $similar app\models\Product[] */
+
 
 echo $this->render('_breadcrumbs', [
     'model' => $model,
@@ -42,6 +44,7 @@ echo $this->render('_breadcrumbs', [
 
 </div>
 
-<?= $this->render('_viewed', [
+<?= $this->render('_similar', [
     'viewed' => $viewed,
+    'similar' => $similar,
 ]) ?>

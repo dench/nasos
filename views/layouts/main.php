@@ -41,7 +41,7 @@ $this->registerJs($js);
     <?php
     $lang = Lang::widget([
         'options' => [
-            'class' => 'navbar-right nav lang-change',
+            'class' => 'navbar-nav navbar-right nav lang-change',
         ],
         'short' => true,
         'current' => Language::getCurrent(),
