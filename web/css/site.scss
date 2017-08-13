@@ -554,7 +554,7 @@ div.required label.control-label:after {
 
 .table-responsive {
   td, th {
-    white-space: normal;
+    white-space: normal !important;
   }
 }
 
