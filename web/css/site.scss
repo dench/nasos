@@ -552,6 +552,22 @@ div.required label.control-label:after {
   }
 }
 
+.table-responsive {
+  td, th {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 480px) {
+  .col-xxs-6 {
+    padding: 0 5px;
+  }
+  .card {
+    padding: 10px;
+    overflow: hidden;
+  }
+}
+
 @media (min-width: 480px) {
   .news {
     &-item {
