@@ -6,6 +6,7 @@ use app\models\CallbackForm;
 use app\models\Category;
 use dench\page\models\Page;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -36,9 +37,22 @@ class SiteController extends Controller
 
         $categories = !Yii::$app->cache->exists('_categories-' . Yii::$app->language) ? Category::getMain() : [];
 
+        $info = Page::findOne(5);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $info->getChilds()->where(['enabled' => 1])->limit(2),
+            'sort'=> [
+                'defaultOrder' => [
+                    'position' => SORT_ASC,
+                ],
+            ],
+            'pagination' => false,
+        ]);
+
         return $this->render('index', [
             'page' => $page,
             'categories' => $categories,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

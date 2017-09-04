@@ -4,6 +4,7 @@ use dench\image\helpers\ImageHelper;
 use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
 /* @var $page dench\page\models\Page */
@@ -84,45 +85,22 @@ Modal::begin([
 echo Html::tag('div', '', ['id' => 'modal-callback-content']);
 Modal::end();
 
-/*
 ?>
+
 <section class="section section-news bg-white">
     <div class="container">
         <h2 class="section-title"><a href="#"><?= Yii::t('app', 'Company\'s news') ?></a></h2>
-        <div class="row news">
-            <div class="col-md-6">
-                <div class="row news-item">
-                    <div class="col-xs-4 col-sm-3 col-md-5 col-lg-4 news-item-img">
-                        <img src="/img/photo-default.png" class="img-responsive img-thumbnail" alt="">
-                    </div>
-                    <div class="col-xs-8 col-sm-9 col-md-7 col-lg-8">
-                        <h4 class="news-item-title"><a href="#">PA2 - Лопастной насос</a></h4>
-                        <div class="news-item-text">
-                            Насос имеет встроенный фильтр грубой очистки и обводной клапан, который «обводит» обводной клапан.
-                            <div class="news-item-btn">
-                                <a href="#" rel="nofollow" class="btn btn-default"><?= Yii::t('app', 'Read more') ?></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="row news-item">
-                    <div class="col-xs-4 col-sm-3 col-md-5 col-lg-4 news-item-img">
-                        <img src="/img/photo-default.png" class="img-responsive img-thumbnail" alt="">
-                    </div>
-                    <div class="col-xs-8 col-sm-9 col-md-7 col-lg-8">
-                        <h4 class="news-item-title"><a href="#">PA2 - Лопастной насос</a></h4>
-                        <div class="news-item-text">
-                            Насос имеет встроенный фильтр грубой очистки и обводной клапан, который «обводит» обводной клапан.
-                            <div class="news-item-btn">
-                                <a href="#" rel="nofollow" class="btn btn-default"><?= Yii::t('app', 'Read more') ?></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="news">
+            <?php
+            echo ListView::widget([
+                'dataProvider' => $dataProvider,
+                'itemView' => '_item',
+                'layout' => "<div class=\"row cards\">{items}</div>\n<div class=\"clear-pager text-center\">{pager}</div>",
+                'emptyTextOptions' => [
+                    'class' => 'alert alert-danger',
+                ],
+            ]);
+            ?>
         </div>
     </div>
 </section>
-*/
