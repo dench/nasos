@@ -2,6 +2,7 @@
 
 namespace app\admin\controllers;
 
+use dench\language\models\Language;
 use app\models\Feature;
 use app\models\Model;
 use app\models\Variant;
