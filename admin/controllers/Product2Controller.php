@@ -285,6 +285,9 @@ class Product2Controller extends Controller
                             $transaction->commit();
                             Yii::$app->session->setFlash('success',
                                 Yii::t('app', 'Information has been saved successfully'));
+                            foreach (Language::find()->select('id')->column() as $lang) {
+                                Yii::$app->cache->delete('_product_card-' . $id . '-' . $lang);
+                            }
                             return $this->redirect(['index']);
                         }
                     } catch (Exception $e) {
