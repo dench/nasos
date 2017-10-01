@@ -5,6 +5,7 @@ $bg-inverse: #363948;
 $bg-inverse-light: #585A69;
 $bg-grey: #F5F5F5;
 $secondary-color: #FFCE00;
+$color-link: #337ab7;
 
 @mixin transition($params) {
   -webkit-transition: $params;
@@ -38,7 +39,7 @@ body {
 }
 
 a {
-  color: $bg-inverse;
+  color: $color-link;
 }
 
 div.required label.control-label:after {
@@ -259,6 +260,9 @@ div.required label.control-label:after {
 
 .breadcrumb {
   font-size: 12px;
+  a {
+    color: $bg-inverse;
+  }
   > li + li:before {
     font-family: 'Glyphicons Halflings', sans-serif;
     content: "\e080";
@@ -280,6 +284,9 @@ div.required label.control-label:after {
     &-link {
       text-align: center;
       margin: 20px 0;
+      a {
+        color: $bg-inverse;
+      }
     }
   }
   &-category {
@@ -304,6 +311,9 @@ div.required label.control-label:after {
     text-transform: uppercase;
     margin: 30px 0;
     text-align: center;
+    a {
+      color: $bg-inverse;
+    }
   }
 }
 
@@ -329,6 +339,9 @@ div.required label.control-label:after {
   border: 1px solid #eee;
   border-radius: 4px;
   position: relative;
+  a {
+    color: $bg-inverse;
+  }
   &:hover {
     a {
       text-decoration: underline;
@@ -368,6 +381,9 @@ div.required label.control-label:after {
 .news {
   &-item {
     margin-bottom: 30px;
+    a {
+      color: $bg-inverse;
+    }
     &-title {
       margin-top: 0;
       font-weight: bold;
