@@ -1,7 +1,7 @@
 <?php
 
 use app\models\Category;
-use dench\image\widgets\ImageUpload;
+use dench\image\widgets\ImagesForm;
 use dench\language\models\Language;
 use dosamigos\ckeditor\CKEditor;
 use yii\helpers\Html;
@@ -91,7 +91,7 @@ $this->registerJs($js);
         </div>
 
         <div class="tab-pane fade" id="tab-images">
-            <?= ImageUpload::widget([
+            <?= ImagesForm::widget([
                 'images' => $images,
                 'image_id' => $model->image_id,
                 'imageEnabled' => $model->imageEnabled,

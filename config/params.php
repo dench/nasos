@@ -17,6 +17,8 @@ return [
 
     'image' => [
         'path' => 'image',
+        'jpeg_quality' => 85,
+        'convert' => true,
         'watermark' => [
             'enabled' => true,
             'absolute' => false,

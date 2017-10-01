@@ -4,12 +4,15 @@ namespace app\controllers;
 
 use app\models\Product;
 use app\models\ProductSearch;
+use dench\block\traits\BlockTrait;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 class ProductController extends Controller
 {
+    use BlockTrait;
+
     public function actionIndex($slug)
     {
         $model = Product::viewPage($slug);

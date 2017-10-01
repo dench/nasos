@@ -84,4 +84,5 @@ return [
     'Add variant' => 'Додати варіант',
     'Remove variant' => 'Видалити варіант',
     'Create {0}' => 'Створити {0}',
+    'Blocks' => 'Блоки',
 ];

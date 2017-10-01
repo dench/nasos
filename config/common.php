@@ -33,6 +33,9 @@ return [
                 'page' => [
                     'class' => 'dench\page\Module',
                 ],
+                'block' => [
+                    'class' => 'dench\block\Module',
+                ],
             ],
         ],
         'image' => [

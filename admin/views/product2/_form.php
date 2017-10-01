@@ -6,7 +6,7 @@ use app\models\Complect;
 use app\models\Product;
 use app\models\Status;
 use app\models\Value;
-use dench\image\widgets\ImageUpload;
+use dench\image\widgets\ImagesForm;
 use dench\language\models\Language;
 use dosamigos\ckeditor\CKEditor;
 use kartik\select2\Select2;
@@ -238,7 +238,7 @@ $this->registerJs($js);
                 <?php Pjax::begin(['id' => 'images-pjax']); ?>
                 <?php foreach ($variantImages as $index => $images) : ?>
                     <div class="well variant-images">
-                        <?= ImageUpload::widget([
+                        <?= ImagesForm::widget([
                             'images' => $images,
                             'image_id' => @$modelsVariant[$index]->image_id,
                             'imageEnabled' => @$modelsVariant[$index]->imageEnabled,

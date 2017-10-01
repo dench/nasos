@@ -48,6 +48,7 @@ AdminAsset::register($this);
             ['label' => Yii::t('app', 'Complectation'), 'url' => ['/admin/complect/index']],
             ['label' => Yii::t('app', 'Pages'), 'url' => ['/admin/page/default/index']],
             ['label' => Yii::t('app', 'Other'), 'url' => '#', 'items' => [
+                ['label' => Yii::t('app', 'Blocks'), 'url' => ['/admin/block/default/index']],
                 ['label' => Yii::t('app', 'Brands'), 'url' => ['/admin/brand/index']],
                 ['label' => Yii::t('app', 'Currencies'), 'url' => ['/admin/currency/index']],
                 ['label' => Yii::t('app', 'Units'), 'url' => ['/admin/unit/index']],
