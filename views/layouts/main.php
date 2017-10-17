@@ -130,14 +130,26 @@ $this->registerJs($js);
         <div class="row">
             <div class="col-sm-3 col-md-2">
                 <div class="contacts phones">
-                    <p><i class="glyphicon glyphicon-earphone">&ensp;</i><?= Yii::$app->params['phone1'] ?></p>
-                    <p><i class="glyphicon glyphicon-earphone">&ensp;</i><?= Yii::$app->params['phone2'] ?></p>
+                    <?php
+                        if (isset(Yii::$app->params['phone1'])) {
+                            echo '<p><i class="glyphicon glyphicon-earphone">&ensp;</i>' . Yii::$app->params['phone1'] . '</p>';
+                        }
+                        if (isset(Yii::$app->params['phone2'])) {
+                            echo '<p><i class="glyphicon glyphicon-earphone">&ensp;</i>' . Yii::$app->params['phone2'] . '</p>';
+                        }
+                    ?>
                 </div>
             </div>
             <div class="col-sm-3 col-md-2">
                 <div class="contacts phones">
-                    <p><i class="glyphicon glyphicon-earphone">&ensp;</i><?= Yii::$app->params['phone3'] ?></p>
-                    <p><i class="glyphicon glyphicon-earphone">&ensp;</i><?= Yii::$app->params['phone4'] ?></p>
+                    <?php
+                        if (isset(Yii::$app->params['phone3'])) {
+                            echo '<p><i class="glyphicon glyphicon-earphone">&ensp;</i>' . Yii::$app->params['phone3'] . '</p>';
+                        }
+                        if (isset(Yii::$app->params['phone4'])) {
+                            echo '<p><i class="glyphicon glyphicon-earphone">&ensp;</i>' . Yii::$app->params['phone4'] . '</p>';
+                        }
+                    ?>
                 </div>
             </div>
             <div class="col-sm-6 col-md-5">
