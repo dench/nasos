@@ -85,4 +85,6 @@ return [
     'Remove variant' => 'Удалить вариант',
     'Create {0}' => 'Создать {0}',
     'Blocks' => 'Блоки',
+    'Show all features' => 'Показать все характеристики',
+    'Hide features' => 'Свернуть характеристики',
 ];

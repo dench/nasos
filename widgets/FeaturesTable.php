@@ -8,6 +8,7 @@
 
 namespace app\widgets;
 
+use Yii;
 use yii\base\Widget;
 use yii\bootstrap\Html;
 
@@ -102,16 +103,43 @@ class FeaturesTable extends Widget
         asort($sortable);
 
         $rows_sortable = [];
+        $rows_hide = [];
 
         foreach ($sortable as $key => $sort) {
             $rows_sortable[$key] = $rows[$key];
         }
 
-        $tbody = implode("\n", $rows_sortable);
+        $hide = 18;
+        $tpl = '<thead>{thead}</thead><tbody>{tbody}</tbody>';
 
-        $table = strtr('<thead>{thead}</thead><tbody>{tbody}</tbody>', [
+        if (count($rows_sortable) > $hide) {
+            $rows_hide = array_slice($rows_sortable, $hide, null, true);
+            $rows_sortable = array_slice($rows_sortable, 0, $hide, true);
+            $tpl = '<thead>{thead}</thead><tbody>{tbody}</tbody><tbody class="features-hidden" style="display: none;">{tbody_hide}</tbody><tbody><tr><th colspan="'.($count+1).'"><a class="showFeaturesAll" href="#">'.Yii::t('app', 'Show all features').' <i class="glyphicon glyphicon-arrow-down"></i></a><a class="hideFeaturesAll" href="#">'.Yii::t('app', 'Hide features').' <i class="glyphicon glyphicon-arrow-up"></i></a></th></tr></tbody>';
+            $js = <<<JS
+$('.showFeaturesAll').click(function(e){
+    e.preventDefault();
+    $(this).hide();
+    $('.hideFeaturesAll').show();
+    $('.features-hidden').show('slow');
+});
+$('.hideFeaturesAll').click(function(e){
+    e.preventDefault();
+    $(this).hide();
+    $('.showFeaturesAll').show();
+    $('.features-hidden').hide('slow');
+});
+JS;
+            Yii::$app->view->registerJs($js);
+        }
+
+        $tbody = implode("\n", $rows_sortable);
+        $tbody_hide = implode("\n", $rows_hide);
+
+        $table = strtr($tpl, [
             '{thead}' => $thead,
             '{tbody}' => $tbody,
+            '{tbody_hide}' => $tbody_hide,
         ]);
         return Html::tag('table', $table, $this->options);
     }

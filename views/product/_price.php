@@ -9,8 +9,8 @@
  */
 ?>
 <div class="row">
-<?php if (@$model->variants[0]->price) { ?>
-    <?php if (count($model->variants) > 1) { ?>
+<?php if (@$model->variants[0]->price): ?>
+    <?php if (count($model->variants) > 1): ?>
         <div class="col-sm-12">
             <table class="table table-striped table-hover table-condensed table-default">
                 <thead>
@@ -22,15 +22,20 @@
                 <tbody>
                 <?php foreach ($model->variants as $variant) : ?>
                     <tr>
-                        <th><?= $variant->name ?></th>
-                        <td><?= $variant->price ?></td>
+                        <th>
+                            <?= $variant->name ?>
+                        </th>
+                        <td>
+                            <?= ($model->price_from) ? Yii::t('app', 'from') : "" ?>
+                            <?= $variant->price ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
         <div class="col-sm-12">
-    <?php } else { ?>
+    <?php else: ?>
         <div class="col-sm-6">
             <?php if ($model->variants[0]->code) : ?>
                 <div class="product-code">
@@ -51,10 +56,10 @@
             </div>
         </div>
         <div class="col-sm-6">
-    <?php } ?>
-<?php } else {?>
+    <?php endif; ?>
+<?php else: ?>
     <div class="col-sm-12">
-<?php } ?>
+<?php endif; ?>
         <div class="product-buy">
             <small class="text-muted"><?= Yii::t('app', 'You can order by phone') ?></small>
             <div class="phone"><?= Yii::$app->params['phone1'] ?></div>

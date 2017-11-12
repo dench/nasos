@@ -30,7 +30,9 @@ use yii\helpers\Url;
                         <?php } else { ?>
                             <th><?= $option->name ?></th>
                         <?php } ?>
-                        <td><?php
+                        <td>
+                            <?= ($option->price_from) ? Yii::t('app', 'from') : "" ?>
+                            <?php
                             $variants = $option->variants;
                             $variant = current($variants);
                             echo @$variant->price;
