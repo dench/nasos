@@ -478,6 +478,11 @@ div.required label.control-label:after {
   }
 }
 
+.showFeaturesAll,
+.hideFeaturesAll {
+  line-height: 2;
+}
+
 .hideFeaturesAll {
   display: none;
 }

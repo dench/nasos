@@ -119,15 +119,16 @@ class FeaturesTable extends Widget
             $js = <<<JS
 $('.showFeaturesAll').click(function(e){
     e.preventDefault();
-    $(this).hide();
+    $('.showFeaturesAll').hide();
     $('.hideFeaturesAll').show();
     $('.features-hidden').show('slow');
 });
 $('.hideFeaturesAll').click(function(e){
     e.preventDefault();
-    $(this).hide();
-    $('.showFeaturesAll').show();
-    $('.features-hidden').hide('slow');
+    $('.features-hidden').hide('slow', function(){
+        $('.hideFeaturesAll').hide();
+        $('.showFeaturesAll').show();
+    });
 });
 JS;
             Yii::$app->view->registerJs($js);
