@@ -39,14 +39,23 @@ AdminAsset::register($this);
             'class' => 'navbar-inverse navbar-static-top',
         ],
     ]);
+
+    if ($unread = \app\models\Questionnaire::unread()) {
+        $unread_question = ' <span class="badge badge-danger">' . $unread . '</span>';
+    } else {
+        $unread_question = '';
+    }
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
+        'encodeLabels' => false,
         'items' => [
             ['label' => Yii::t('app', 'Categories'), 'url' => ['/admin/category/index']],
             ['label' => Yii::t('app', 'Products'), 'url' => ['/admin/product2/index']],
             ['label' => Yii::t('app', 'Features'), 'url' => ['/admin/feature/index']],
             ['label' => Yii::t('app', 'Complectation'), 'url' => ['/admin/complect/index']],
             ['label' => Yii::t('app', 'Pages'), 'url' => ['/admin/page/default/index']],
+            ['label' => Yii::t('questionnaire', 'Questionnaire') . $unread_question, 'url' => ['/admin/questionnaire/index']],
             ['label' => Yii::t('app', 'Other'), 'url' => '#', 'items' => [
                 ['label' => Yii::t('app', 'Blocks'), 'url' => ['/admin/block/default/index']],
                 ['label' => Yii::t('app', 'Brands'), 'url' => ['/admin/brand/index']],

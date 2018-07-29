@@ -12,6 +12,11 @@ return [
     'language' => 'ru',
     'sourceLanguage' => 'en',
     'bootstrap' => ['log'],
+    'aliases' => [
+        '@admin' => '@app/admin',
+        '@bower' => '@vendor/bower-asset',
+        '@npm'   => '@vendor/npm-asset',
+    ],
     'modules' => [
         'admin' => [
             'class' => 'app\admin\Module',
@@ -65,6 +70,9 @@ return [
                     'class' => 'yii\i18n\PhpMessageSource',
                 ],
                 'page' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                ],
+                'questionnaire' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                 ],
             ],
