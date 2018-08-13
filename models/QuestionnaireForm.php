@@ -43,8 +43,11 @@ class QuestionnaireForm extends Questionnaire
             $supplyList = self::supplyList();
             $performanceList = self::performanceList();
 
-            $supply = ['dench'];
-            $performance = [2];
+            $supply = [];
+            $performance = [];
+
+            $this->performance = explode(', ', $this->attributes['performance']);
+            $this->supply = explode(', ', $this->attributes['supply']);
 
             foreach ($this->supply as $supply) {
                 $supply[] = $supplyList[$supply];
