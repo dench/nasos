@@ -43,8 +43,8 @@ class QuestionnaireForm extends Questionnaire
             $supplyList = self::supplyList();
             $performanceList = self::performanceList();
 
-            $supply = [];
-            $performance = [];
+            $supply = [1];
+            $performance = [2];
 
             foreach ($this->supply as $item) {
                 $supply[] = $supplyList[$item];
