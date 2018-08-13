@@ -10,6 +10,7 @@ namespace app\models;
 
 use himiklab\yii2\recaptcha\ReCaptchaValidator;
 use Yii;
+use yii\helpers\Html;
 
 class QuestionnaireForm extends Questionnaire
 {
@@ -38,6 +39,43 @@ class QuestionnaireForm extends Questionnaire
     public function send()
     {
         if ($this->save()) {
+
+            $supplyList = self::supplyList();
+            $performanceList = self::performanceList();
+            $levelList = self::levelList();
+
+            $supply = [];
+            $performance = [];
+
+            foreach ($supplyList as $item) {
+                $supply[] = $supplyList[$item];
+            }
+
+            foreach ($supplyList as $item) {
+                $performance[] = $performanceList[$item];
+            }
+
+            $html = Html::ul([
+                '<b>' . Yii::t('questionnaire', 'Name') . '</b>: ' . $this->name,
+                '<b>' . Yii::t('questionnaire', 'Phone') . '</b>: ' . $this->phone,
+                '<b>' . Yii::t('questionnaire', 'Type') . '</b>: ' . $this->type,
+                '<b>' . Yii::t('questionnaire', 'Section') . '</b>: ' . $this->section,
+                '<b>' . Yii::t('questionnaire', 'Fuel') . '</b>: ' . $this->fuel,
+                '<b>' . Yii::t('questionnaire', 'Performance') . '</b>: ' . Html::ul([
+                    $performance,
+                    ]),
+                '<b>' . Yii::t('questionnaire', 'Supply') . '</b>: ' . Html::ul([
+                    $supply,
+                ]),
+                '<b>' . Yii::t('questionnaire', 'Level') . '</b>: ' . $levelList[$this->level],
+            ]);
+
+            Yii::$app->mailer->compose()
+                ->setTo(Yii::$app->params['adminEmail2'])
+                ->setFrom([$this->email => $this->name])
+                ->setSubject(Yii::t('questionnaire', 'Questionnaire'))
+                ->setHtmlBody($html)
+                ->send();
             return true;
         } else {
             return false;
