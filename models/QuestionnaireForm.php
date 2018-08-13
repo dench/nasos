@@ -63,12 +63,12 @@ class QuestionnaireForm extends Questionnaire
                 '<b>' . Yii::t('questionnaire', 'Fuel') . '</b>: ' . $this->fuel,
                 '<b>' . Yii::t('questionnaire', 'Performance') . '</b>: ' . Html::ul([
                     $performance,
-                    ]),
+                    ], ['encode' => false]),
                 '<b>' . Yii::t('questionnaire', 'Supply') . '</b>: ' . Html::ul([
                     $supply,
-                ]),
+                    ], ['encode' => false]),
                 '<b>' . Yii::t('questionnaire', 'Level') . '</b>: ' . $levelList[$this->level],
-            ]);
+            ], ['encode' => false]);
 
             Yii::$app->mailer->compose()
                 ->setTo(Yii::$app->params['adminEmail2'])
