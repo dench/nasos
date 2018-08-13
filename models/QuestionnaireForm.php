@@ -46,11 +46,11 @@ class QuestionnaireForm extends Questionnaire
             $supply = [];
             $performance = [];
 
-            foreach ($supplyList as $item) {
+            foreach ($this->supply as $item) {
                 $supply[] = $supplyList[$item];
             }
 
-            foreach ($supplyList as $item) {
+            foreach ($this->performance as $item) {
                 $performance[] = $performanceList[$item];
             }
 
