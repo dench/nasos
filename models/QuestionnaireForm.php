@@ -49,13 +49,13 @@ class QuestionnaireForm extends Questionnaire
             $this->performance = explode(', ', $this->attributes['performance']);
             $this->supply = explode(', ', $this->attributes['supply']);
 
-            /*foreach ($this->supply as $supply) {
-                $supply[] = $supplyList[$supply];
+            foreach ($this->supply as $s) {
+                $supply[] = $supplyList[$s];
             }
 
-            foreach ($this->performance as $performance) {
-                $performance[] = $performanceList[$performance];
-            }*/
+            foreach ($this->performance as $p) {
+                $performance[] = $performanceList[$p];
+            }
 
             $html = Html::ul([
                 '<b>' . Yii::t('questionnaire', 'Name') . '</b>: ' . $this->name,
@@ -66,7 +66,7 @@ class QuestionnaireForm extends Questionnaire
                 '<b>' . Yii::t('questionnaire', 'Performance') . '</b>: ' . implode(', ', $performance),
                 '<b>' . Yii::t('questionnaire', 'Supply') . '</b>: ' . implode(', ', $supply),
                 '<b>' . Yii::t('questionnaire', 'Level') . '</b>: ' . self::levelList()[$this->level],
-            ], ['encode' => false]) . print_r($supplyList, 1) . print_r($performanceList, 1) . print_r($this->supply, 1) . ',' . print_r($this->performance, 1);
+            ], ['encode' => false]);
 
             Yii::$app->mailer->compose()
                 ->setTo(Yii::$app->params['adminEmail2'])
