@@ -46,11 +46,14 @@ class QuestionnaireForm extends Questionnaire
             $supply = ['dench'];
             $performance = [2];
 
-            foreach ($this->supply as $supply) {
+            $sup = explode(', ', $this->supply);
+            $per = explode(', ', $this->performance);
+
+            foreach ($sup as $supply) {
                 $supply[] = $supplyList[$supply];
             }
 
-            foreach ($this->performance as $performance) {
+            foreach ($per as $performance) {
                 $performance[] = $performanceList[$performance];
             }
 
@@ -63,7 +66,7 @@ class QuestionnaireForm extends Questionnaire
                 '<b>' . Yii::t('questionnaire', 'Performance') . '</b>: ' . implode(', ', $performance),
                 '<b>' . Yii::t('questionnaire', 'Supply') . '</b>: ' . implode(', ', $supply),
                 '<b>' . Yii::t('questionnaire', 'Level') . '</b>: ' . self::levelList()[$this->level],
-            ], ['encode' => false]) . print_r($supply, 1) . print_r($this->supply, 1);
+            ], ['encode' => false]) . print_r($supply, 1) . print_r($sup, 1);
 
             Yii::$app->mailer->compose()
                 ->setTo(Yii::$app->params['adminEmail2'])
