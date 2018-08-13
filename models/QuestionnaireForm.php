@@ -49,13 +49,13 @@ class QuestionnaireForm extends Questionnaire
             $this->performance = explode(', ', $this->attributes['performance']);
             $this->supply = explode(', ', $this->attributes['supply']);
 
-            foreach ($this->supply as $supply) {
+            /*foreach ($this->supply as $supply) {
                 $supply[] = $supplyList[$supply];
             }
 
             foreach ($this->performance as $performance) {
                 $performance[] = $performanceList[$performance];
-            }
+            }*/
 
             $html = Html::ul([
                 '<b>' . Yii::t('questionnaire', 'Name') . '</b>: ' . $this->name,
