@@ -42,7 +42,6 @@ class QuestionnaireForm extends Questionnaire
 
             $supplyList = self::supplyList();
             $performanceList = self::performanceList();
-            $levelList = self::levelList();
 
             $supply = [];
             $performance = [];
@@ -58,16 +57,12 @@ class QuestionnaireForm extends Questionnaire
             $html = Html::ul([
                 '<b>' . Yii::t('questionnaire', 'Name') . '</b>: ' . $this->name,
                 '<b>' . Yii::t('questionnaire', 'Phone') . '</b>: ' . $this->phone,
-                '<b>' . Yii::t('questionnaire', 'Type') . '</b>: ' . $this->type,
-                '<b>' . Yii::t('questionnaire', 'Section') . '</b>: ' . $this->section,
-                '<b>' . Yii::t('questionnaire', 'Fuel') . '</b>: ' . $this->fuel,
-                '<b>' . Yii::t('questionnaire', 'Performance') . '</b>: ' . Html::ul([
-                    $performance,
-                    ], ['encode' => false]),
-                '<b>' . Yii::t('questionnaire', 'Supply') . '</b>: ' . Html::ul([
-                    $supply,
-                    ], ['encode' => false]),
-                '<b>' . Yii::t('questionnaire', 'Level') . '</b>: ' . $levelList[$this->level],
+                '<b>' . Yii::t('questionnaire', 'Type') . '</b>: ' . self::typeList()[$this->type],
+                '<b>' . Yii::t('questionnaire', 'Section') . '</b>: ' . self::sectionList()[$this->section],
+                '<b>' . Yii::t('questionnaire', 'Fuel') . '</b>: ' . self::fuelList()[$this->fuel],
+                '<b>' . Yii::t('questionnaire', 'Performance') . '</b>: ' . Html::ul($performance, ['encode' => false]),
+                '<b>' . Yii::t('questionnaire', 'Supply') . '</b>: ' . Html::ul($supply, ['encode' => false]),
+                '<b>' . Yii::t('questionnaire', 'Level') . '</b>: ' . self::levelList()[$this->level],
             ], ['encode' => false]);
 
             Yii::$app->mailer->compose()
