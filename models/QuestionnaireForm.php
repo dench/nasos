@@ -72,7 +72,7 @@ class QuestionnaireForm extends Questionnaire
 
             Yii::$app->mailer->compose()
                 ->setTo(Yii::$app->params['adminEmail2'])
-                ->setFrom([$this->email => $this->name])
+                ->setFrom([Yii::$app->params['adminEmail']])
                 ->setSubject(Yii::t('questionnaire', 'Questionnaire'))
                 ->setHtmlBody($html)
                 ->send();
