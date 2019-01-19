@@ -4,7 +4,7 @@
 /* @var $content string */
 
 use app\assets\SiteAsset;
-use app\models\Category;
+use dench\products\models\Category;
 use app\widgets\NavBar;
 use dench\language\models\Language;
 use dench\language\widgets\Lang;
@@ -160,7 +160,7 @@ $this->registerJs($js);
             </div>
             <div class="col-sm-12 col-md-3">
                 <div class="copyright">
-                    <p>© <a href="/"><?= Yii::$app->params['sitename'] ?></a> 2017</p>
+                    <p>© <a href="/"><?= Yii::$app->params['sitename'] ?></a> 2017 - <?= date('Y') ?></p>
                 </div>
             </div>
         </div>

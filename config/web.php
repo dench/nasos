@@ -106,4 +106,6 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = 'yii\gii\Module';
 }
 
+Yii::$classMap['dench\products\models\Product'] = '@app/models/Product.php';
+
 return $config;

@@ -2,7 +2,7 @@
 
 /** @var $this yii\web\View */
 /** @var $page dench\page\models\Page */
-/** @var $categories app\models\Category[] */
+/** @var $categories dench\products\models\Category[] */
 
 $this->params['breadcrumbs'][] = $page->name;
 ?>

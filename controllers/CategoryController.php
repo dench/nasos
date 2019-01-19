@@ -2,8 +2,8 @@
 
 namespace app\controllers;
 
-use app\models\Category;
-use app\models\Feature;
+use dench\products\models\Category;
+use dench\products\models\Feature;
 use app\models\ProductSearch;
 use dench\page\models\Page;
 use Yii;

@@ -1,8 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Product */
-/* @var $similar app\models\Product[] */
+/* @var $model dench\products\models\Product */
+/* @var $similar dench\products\models\Product[] */
 /* @var $viewed boolean */
 
 

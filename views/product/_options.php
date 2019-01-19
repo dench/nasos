@@ -5,7 +5,7 @@
  * Date: 02.04.17
  * Time: 22:05
  *
- * @var $options app\models\Product[]
+ * @var $options dench\products\models\Product[]
  */
 
 use yii\helpers\Url;

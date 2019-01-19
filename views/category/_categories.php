@@ -1,5 +1,5 @@
 <?php
-/** @var $categories app\models\Category[] */
+/** @var $categories dench\products\models\Category[] */
 
 use dench\image\helpers\ImageHelper;
 use yii\helpers\Url;

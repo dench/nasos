@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use app\models\CallbackForm;
-use app\models\Category;
+use dench\products\models\Category;
 use dench\page\models\Page;
 use Yii;
 use yii\data\ActiveDataProvider;

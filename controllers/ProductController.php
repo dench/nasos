@@ -2,8 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\Product;
-use app\models\ProductSearch;
+use dench\products\models\Product;
 use dench\block\traits\BlockTrait;
 use Yii;
 use yii\web\Controller;

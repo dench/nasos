@@ -8,7 +8,7 @@
 
 namespace app\widgets;
 
-use app\models\Product;
+use dench\products\models\Product;
 use yii\base\Widget;
 use yii\helpers\Url;
 

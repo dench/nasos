@@ -8,7 +8,7 @@ use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
 /* @var $page dench\page\models\Page */
-/* @var $categories app\models\Category[] */
+/* @var $categories dench\products\models\Category[] */
 ?>
 <section class="section bg-grey">
     <div class="container">

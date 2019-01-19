@@ -1,15 +1,14 @@
 <?php
 
-use app\models\Feature;
-use app\models\Value;
+use dench\products\models\Value;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ProductSearch */
+/* @var $model dench\products\models\ProductSearch */
 /* @var $form yii\widgets\ActiveForm */
-/* @var $page app\models\Category */
-/* @var $features app\models\Feature[] */
+/* @var $page dench\products\models\Category */
+/* @var $features dench\products\models\Feature[] */
 
 ?>
 

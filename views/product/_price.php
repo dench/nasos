@@ -5,7 +5,7 @@
  * Date: 02.04.17
  * Time: 22:59
  *
- * @var $model app\models\Product
+ * @var $model dench\products\models\Product
  */
 ?>
 <div class="row">

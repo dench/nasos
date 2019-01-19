@@ -5,7 +5,7 @@
  * Date: 02.04.17
  * Time: 22:52
  *
- * @var $model app\models\Product
+ * @var $model dench\products\models\Product
  */
 
 use app\assets\PhotoSwipe;

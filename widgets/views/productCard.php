@@ -5,7 +5,7 @@
  * Date: 25.03.17
  * Time: 13:30
  *
- * @var $model \app\models\Product
+ * @var $model \dench\products\models\Product
  * @var $link string
  */
 use dench\image\helpers\ImageHelper;

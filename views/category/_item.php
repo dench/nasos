@@ -5,7 +5,7 @@
  * Date: 25.03.17
  * Time: 13:24
  *
- * @var \app\models\Product $model
+ * @var \dench\products\models\Product $model
  */
 
 use app\widgets\ProductCard;

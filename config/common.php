@@ -41,6 +41,9 @@ return [
                 'block' => [
                     'class' => 'dench\block\Module',
                 ],
+                'products' => [
+                    'class' => 'dench\products\Module',
+                ],
             ],
         ],
         'image' => [

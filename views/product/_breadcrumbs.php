@@ -6,7 +6,7 @@
  * Time: 23:11
  *
  * @var $this yii\web\View
- * @var $model app\models\Product
+ * @var $model dench\products\models\Product
  */
 
 $this->params['breadcrumbs'][] = [

@@ -5,7 +5,7 @@
  * Date: 02.04.17
  * Time: 23:09
  *
- * @var $model app\models\Product
+ * @var $model dench\products\models\Product
  */
 ?>
 <?php if (isset($model->variants[0]->values)) : ?>

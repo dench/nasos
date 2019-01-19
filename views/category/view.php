@@ -1,11 +1,11 @@
 <?php
 /* @var $this yii\web\View */
-/* @var $page \app\models\Category */
-/* @var $categories \app\models\Category[] */
-/* @var $products \app\models\Product[] */
-/* @var $searchModel app\models\ProductSearch */
+/* @var $page dench\products\models\Category */
+/* @var $categories dench\products\models\Category[] */
+/* @var $products dench\products\models\Product[] */
+/* @var $searchModel dench\products\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $features app\models\Feature[] */
+/* @var $features dench\products\models\Feature[] */
 
 use dench\image\helpers\ImageHelper;
 use yii\helpers\Url;

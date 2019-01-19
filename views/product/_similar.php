@@ -5,7 +5,7 @@
  * Date: 02.04.17
  * Time: 22:03
  *
- * @var $similar app\models\Product[]
+ * @var $similar dench\products\models\Product[]
  * @var $viewed boolean
  */
 

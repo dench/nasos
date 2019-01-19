@@ -1,7 +1,8 @@
 <?php
 
-namespace app\models;
+namespace dench\products\models;
 
+use dench\image\models\File;
 use dench\image\models\Image;
 use dench\language\behaviors\LanguageBehavior;
 use dench\sortable\behaviors\SortableBehavior;
@@ -46,9 +47,16 @@ use yii\web\NotFoundHttpException;
  * @property Status[] $statuses
  * @property Complect[] $complects
  * @property Image $image
+ * @property File[] $files
+ * @property File[] $filesAll
+ * @property array $fileEnabled
+ * @property array $fileName
  */
 class Product extends ActiveRecord
 {
+    private $_fileEnabled = null;
+    private $_fileName = null;
+
     /**
      * @inheritdoc
      */
@@ -78,6 +86,26 @@ class Product extends ActiveRecord
                     'option_ids' => ['options'],
                     'complect_ids' => ['complects'],
                     'status_ids' => ['statuses'],
+                    'file_ids' => [
+                        'files',
+                        'updater' => [
+                            'viaTableAttributesValue' => [
+                                'position' => function($updater, $relatedPk, $rowCondition) {
+                                    $primaryModel = $updater->getBehavior()->owner;
+                                    $file_ids = array_values($primaryModel->file_ids);
+                                    return array_search($relatedPk, $file_ids);
+                                },
+                                'enabled' => function($updater, $relatedPk, $rowCondition) {
+                                    $primaryModel = $updater->getBehavior()->owner;
+                                    return !empty($primaryModel->fileEnabled[$relatedPk]) ? 1 : 0;
+                                },
+                                'name' => function($updater, $relatedPk, $rowCondition) {
+                                    $primaryModel = $updater->getBehavior()->owner;
+                                    return $primaryModel->fileName[$relatedPk];
+                                },
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ];
@@ -89,14 +117,15 @@ class Product extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'h1', 'title', 'category_ids'], 'required'],
+            [['name', 'h1', 'title', 'category_ids', 'slug'], 'required'],
             [['brand_id', 'position'], 'integer'],
             [['slug', 'name', 'h1', 'title', 'keywords', 'view'], 'string', 'max' => 255],
             [['description', 'text'], 'string'],
             [['slug', 'name', 'h1', 'title', 'keywords', 'description', 'text'], 'trim'],
             [['enabled', 'price_from'], 'boolean'],
             [['enabled'], 'default', 'value' => true],
-            [['category_ids', 'option_ids', 'complect_ids', 'status_ids'], 'each', 'rule' => ['integer']],
+            [['category_ids', 'option_ids', 'complect_ids', 'status_ids', 'file_ids', 'fileEnabled'], 'each', 'rule' => ['integer']],
+            [['fileName'], 'each', 'rule' => ['string']],
             [['brand_id'], 'exist', 'skipOnError' => true, 'targetClass' => Brand::className(), 'targetAttribute' => ['brand_id' => 'id']],
         ];
     }
@@ -116,16 +145,17 @@ class Product extends ActiveRecord
             'enabled' => Yii::t('app', 'Enabled'),
             'name' => Yii::t('app', 'Name'),
             'h1' => Yii::t('app', 'H1'),
-            'title' => Yii::t('app', 'Title'),
-            'keywords' => Yii::t('app', 'Keywords'),
-            'description' => Yii::t('app', 'Description'),
-            'text' => Yii::t('app', 'Text'),
+            'title' => Yii::t('app', 'META Title'),
+            'keywords' => Yii::t('app', 'META Keywords'),
+            'description' => Yii::t('app', 'META Description'),
+            'text_short' => Yii::t('app', 'Short description'),
+            'text' => Yii::t('app', 'Description'),
             'price_from' => Yii::t('app', 'from'),
             'view' => Yii::t('app', 'View template'),
             'category_ids' => Yii::t('app', 'Categories'),
             'status_ids' => Yii::t('app', 'Statuses'),
             'complect_ids' => Yii::t('app', 'Complectation'),
-            'option_ids' => Yii::t('app', 'Additional options'),
+            'option_ids' => Yii::t('app', 'Related products'),
         ];
     }
 
@@ -232,5 +262,72 @@ class Product extends ActiveRecord
     public static function getList($enabled)
     {
         return ArrayHelper::map(self::find()->andFilterWhere(['enabled' => $enabled])->orderBy('position')->all(), 'id', 'name');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFiles()
+    {
+        $name = $this->tableName();
+        return $this->hasMany(File::className(), ['id' => 'file_id'])
+            ->viaTable($name . '_file', [$name . '_id' => 'id'])
+            ->leftJoin($name . '_file', 'id=file_id')
+            ->where([$name . '_file.' . $name . '_id' => $this->id])
+            ->andFilterWhere([$name . '_file.enabled' => true])
+            ->orderBy([$name . '_file.position' => SORT_ASC])
+            ->indexBy('id');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFilesAll()
+    {
+        $name = $this->tableName();
+        return $this->hasMany(File::className(), ['id' => 'file_id'])
+            ->viaTable($name . '_file', [$name . '_id' => 'id'])
+            ->leftJoin($name . '_file', 'id=file_id')
+            ->where([$name . '_file.' . $name . '_id' => $this->id])
+            ->orderBy([$name . '_file.position' => SORT_ASC])
+            ->indexBy('id');
+    }
+
+    public function getFileEnabled()
+    {
+        if ($this->_fileEnabled != null) {
+            return $this->_fileEnabled;
+        }
+        $name = $this->tableName();
+        return $this->_fileEnabled = (new \yii\db\Query())
+            ->select(['enabled'])
+            ->from($name . '_file')
+            ->where([$name . '_id' => $this->id])
+            ->indexBy('file_id')
+            ->column();
+    }
+
+    public function getFileName()
+    {
+        if ($this->_fileName != null) {
+            return $this->_fileName;
+        }
+        $name = $this->tableName();
+        return $this->_fileName = (new \yii\db\Query())
+            ->select(['name'])
+            ->from($name . '_file')
+            ->where([$name . '_id' => $this->id])
+            ->indexBy('file_id')
+            ->column();
+    }
+
+    public function setFileName($value)
+    {
+        $this->_fileName = $value;
+    }
+
+    public function setFileEnabled($value)
+    {
+        $this->_fileEnabled = $value;
     }
 }

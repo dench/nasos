@@ -5,7 +5,7 @@
  * Date: 02.04.17
  * Time: 22:08
  *
- * @var $complects app\models\Complect[]
+ * @var $complects dench\products\models\Complect[]
  */
 ?>
 <?php if ($complects) : ?>

@@ -28,7 +28,8 @@
         "kartik-v/bootstrap-fileinput": "4.3.8",
         "himiklab/yii2-recaptcha-widget" : "*",
         "wbraganca/yii2-dynamicform": "*",
-        "kartik-v/yii2-widget-select2": "@dev"
+        "kartik-v/yii2-widget-select2": "@dev",
+        "dench/yii2-products": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
