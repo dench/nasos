@@ -14,7 +14,7 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.6",
         "yiisoft/yii2": "~2.0.6",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
@@ -23,6 +23,8 @@
         "dench/yii2-image": "@dev",
         "dench/yii2-sortable": "@dev",
         "dench/yii2-block": "@dev",
+        "dench/yii2-modal": "@dev",
+        "dench/yii2-cart": "@dev",
         "bower-asset/twbs/bootstrap-sass": "*",
         "bower-asset/photoswipe": "*",
         "kartik-v/bootstrap-fileinput": "4.3.8",

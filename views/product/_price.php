@@ -7,6 +7,21 @@
  *
  * @var $model dench\products\models\Product
  */
+
+use yii\helpers\Url;
+
+$url_add = Url::to(['/cart/add']);
+
+$js = <<<JS
+$('.btn-buy').mousedown(function(){
+    var id = $(this).attr('rel');
+    $.get('{$url_add}', { id: id }, function(){
+        openModal('/cart/modal');
+    });
+});
+JS;
+
+$this->registerJs($js);
 ?>
 <div class="row">
 <?php if (@$model->variants[0]->price): ?>
@@ -17,6 +32,7 @@
                 <tr>
                     <th><?= Yii::t('app', 'Model') ?></th>
                     <th><?= Yii::t('app', 'Price, UAH') ?></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -28,6 +44,9 @@
                         <td>
                             <?= ($model->price_from) ? Yii::t('app', 'from') : "" ?>
                             <?= $variant->price ?>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-block btn-buy btn-sm" rel="<?= $variant->id ?>">Купить</button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -54,6 +73,7 @@
                     <?= $model->variants[0]->currency->after ?>
                 </div>
             </div>
+            <button class="btn btn-primary btn-block btn-buy btn-lg" rel="<?= $model->variants[0]->id ?>">Купить</button>
         </div>
         <div class="col-sm-6">
     <?php endif; ?>

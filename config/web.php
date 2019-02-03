@@ -27,6 +27,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
+                '<controller:cart>' => '<controller>/index',
                 '<action:(about|contacts)>' => 'site/<action>',
                 'image/<size:[0-9a-z\-]+>/<name>.<extension:[a-z]+>' => 'image/default/index',
                 'products' => 'category/index',

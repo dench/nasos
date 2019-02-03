@@ -56,6 +56,11 @@ div.required label.control-label:after {
       background-color: $secondary-color;
     }
   }
+  &-sm {
+    padding: 3px 8px;
+    font-size: 12px;
+    line-height: 1;
+  }
 }
 
 .bg-inverse {
@@ -564,6 +569,9 @@ div.required label.control-label:after {
       height: 120px;
     }
   }
+  &-delete {
+    color: red;
+  }
 }
 
 .pswp__bg {
@@ -580,6 +588,35 @@ div.required label.control-label:after {
 .table-responsive {
   td, th {
     white-space: normal !important;
+  }
+}
+
+.cart {
+  &-icon {
+    position: absolute;
+    font-size: 2rem;
+    color: #9B9CA4;
+    line-height: 50px;
+    right: 170px;
+    &:hover {
+      color: #DDDDDD;
+    }
+    i {
+      line-height: 53px;
+    }
+  }
+  &-count {
+    display: block;
+    position: absolute;
+    background: red;
+    color: white;
+    font-weight: bold;
+    right: -10px;
+    top: 8px;
+    line-height: 1;
+    font-size: 12px;
+    padding: 2px 5px 3px 5px;
+    border-radius: 50%;
   }
 }
 
@@ -610,6 +647,11 @@ div.required label.control-label:after {
 }
 
 @media (min-width: 768px) {
+  .cart {
+    &-icon {
+      right: 100px;
+    }
+  }
   p {
     line-height: 1.5;
   }
@@ -629,9 +671,6 @@ div.required label.control-label:after {
       }
     }
     &-collapse {
-      position: absolute;
-      right: 120px;
-      left: 130px;
       text-align: center;
       &.collapse {
         height: 50px !important;
@@ -706,6 +745,20 @@ div.required label.control-label:after {
 }
 
 @media (min-width: 992px) {
+  .cart {
+    &-icon {
+      font-size: 3rem;
+      line-height: 70px;
+      right: 130px;
+      i {
+        line-height: 75px;
+      }
+    }
+    &-count {
+      right: -8px;
+      top: 20px;
+    }
+  }
   .navbar {
     height: 70px;
     &-brand {
@@ -718,7 +771,6 @@ div.required label.control-label:after {
       }
     }
     &-collapse {
-      left: 160px;
       &.collapse {
         height: 70px !important;
       }
@@ -778,6 +830,11 @@ div.required label.control-label:after {
 }
 
 @media (min-width: 1200px) {
+  .cart {
+    &-icon {
+      right: 180px;
+    }
+  }
   .header {
     padding: 20px 0;
     &-slogan {

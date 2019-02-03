@@ -4,6 +4,8 @@
 /* @var $content string */
 
 use app\assets\SiteAsset;
+use dench\cart\widgets\CartIconWidget;
+use dench\modal\Modal;
 use dench\products\models\Category;
 use app\widgets\NavBar;
 use dench\language\models\Language;
@@ -47,13 +49,14 @@ $this->registerJs($js);
         'current' => Language::getCurrent(),
         'langs' => Language::nameList(),
     ]);
+    $cart = CartIconWidget::widget();
     NavBar::begin([
         'brandLabel' => '<img src="/img/benza.png" alt="Бенза">',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-static-top',
         ],
-        'headerHtml' => $lang,
+        'headerHtml' => $cart . $lang,
     ]);
     echo Nav::widget([
         'options' => [
@@ -166,6 +169,11 @@ $this->registerJs($js);
         </div>
     </div>
 </footer>
+<?= Modal::widget([
+    'titleTag' => 'h3',
+    'center' => true,
+    'size' => 'modal-lg',
+]); ?>
 <?= $this->render('_counters') ?>
 <?php $this->endBody() ?>
 </body>

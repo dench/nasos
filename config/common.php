@@ -44,6 +44,9 @@ return [
                 'products' => [
                     'class' => 'dench\products\Module',
                 ],
+                'cart' => [
+                    'class' => 'dench\cart\Module',
+                ],
             ],
         ],
         'image' => [
