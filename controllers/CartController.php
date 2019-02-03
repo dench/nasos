@@ -2,9 +2,10 @@
 
 namespace app\controllers;
 
-use app\widgets\CartIconWidget;
+
 use dench\cart\models\Cart;
 use dench\cart\models\OrderForm;
+use dench\cart\widgets\CartIconWidget;
 use dench\page\models\Page;
 use dench\products\models\Variant;
 use Yii;
