@@ -46,6 +46,13 @@ $this->params['breadcrumbs'][] = $page->name;
                             'mask' => '+38 (099) 999-99-99',
                         ]) ?>
 
+                        <?= $form->field($model, 'email')->textInput() ?>
+
+                        <?= $form->field($model, 'entity')->radioList([
+                            0 => 'Частное лицо ',
+                            1 => 'Организация',
+                        ], ['class' => 'pt-2']) ?>
+
                         <?php if (!YII_DEBUG): ?>
                             <div class="row">
                                 <div class="col-sm-3"></div>
@@ -59,25 +66,28 @@ $this->params['breadcrumbs'][] = $page->name;
             </div>
             <div class="col-lg-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Дополнительная информация о себе</div>
+                    <div class="panel-heading">Способ доставки</div>
                     <div class="panel-body">
-                        <div class="alert alert-warning">
-                            Если хотите, можете указать дополнительную информацию о себе.
-                            Это позволит нашим сотрудникам быстрее подготовить и отправить
-                            Вам счет на оплату заказанной продукции.
-                        </div>
+                        Выберите подходящий способ доставки
 
-                        <?= $form->field($model, 'delivery')->widget(MaskedInput::className(), [
-                            'mask' => 'город *{3,20}, отделение новой почты № 9{1,4}',
-                        ])->textInput(['placeholder' => 'Введите город и номер отделения Новой почты']) ?>
+                        Cамовывоз
+                        Новая почта
+                        Ночной экспресс
+                        Интайм
+                        Деливери
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Способ оплаты</div>
+                    <div class="panel-body">
+                        Выберите способ оплаты заказа.
 
-                        <?= $form->field($model, 'email')->textInput() ?>
-
-                        <?= $form->field($model, 'entity')->radioList([
-                            0 => 'Частное лицо ',
-                            1 => 'Организация',
-                        ], ['class' => 'pt-2']) ?>
-
+                        Наложеный платеж
+                        Оплата при доставке
+                        Банковский перевод (для юрлиц)
+                        Карта Visa и MasterCard (LiqPay)
+                        Мгновенная рассрочка (ПриватБанк)
+                        Оплата частями (ПриватБанк)
                     </div>
                 </div>
             </div>

@@ -77,9 +77,14 @@ return [
                 ],
                 'page' => [
                     'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@vendor/dench/yii2-page/messages',
                 ],
                 'questionnaire' => [
                     'class' => 'yii\i18n\PhpMessageSource',
+                ],
+                'cart' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@vendor/dench/yii2-cart/messages',
                 ],
             ],
         ],

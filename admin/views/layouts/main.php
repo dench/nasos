@@ -72,6 +72,8 @@ AdminAsset::register($this);
                 ['label' => Yii::t('app', 'Statuses'), 'url' => ['/admin/products/product-status/index']],
                 ['label' => Yii::t('app', 'Users'), 'url' => ['/admin/user/index']],
                 ['label' => Yii::t('app', 'Buyers'), 'url' => ['/admin/cart/buyer/index']],
+                ['label' => Yii::t('cart', 'Delivery methods'), 'url' => ['/admin/cart/delivery/index']],
+                ['label' => Yii::t('cart', 'Payment methods'), 'url' => ['/admin/cart/payment/index']],
                 ['label' => Yii::t('app', 'Settings'), 'url' => ['/admin/setting/index']],
             ]],
             ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
