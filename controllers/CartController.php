@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 
+use dench\cart\actions\DeliveryAction;
+use dench\cart\actions\PaymentAction;
 use dench\cart\models\Cart;
 use dench\cart\models\OrderForm;
 use dench\cart\widgets\CartIconWidget;
@@ -31,6 +33,14 @@ class CartController extends Controller
                 'class' => 'yii\filters\AjaxFilter',
                 'only' => ['modal', 'add', 'del'],
             ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'delivery' => DeliveryAction::class,
+            'payment' => PaymentAction::class,
         ];
     }
 

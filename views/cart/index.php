@@ -4,12 +4,35 @@
 /* @var $items dench\products\models\Variant[] */
 /* @var $cart array */
 
+use dench\cart\models\Delivery;
+use dench\cart\models\Payment;
 use himiklab\yii2\recaptcha\ReCaptcha;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\MaskedInput;
 
 $this->params['breadcrumbs'][] = $page->name;
+
+$delivery_url = Url::to('cart/delivery');
+$payment_url = Url::to('cart/payment');
+
+$js = <<<JS
+$('#delivery_id').change(function(){
+    var iD = $(this).find(':checked').val();
+    $.get('{$delivery_url}', { id: iD }, function(data){
+        $('#delivery-info').html(data.text);
+    }, 'json');
+});
+$('#payment_id').change(function(){
+    var iD = $(this).find(':checked').val();
+    $.get('{$payment_url}', { id: iD }, function(data){
+        $('#payment-info').html(data.text);
+    }, 'json');
+});
+JS;
+
+$this->registerJs($js);
 ?>
 <div class="container page">
 
@@ -68,26 +91,21 @@ $this->params['breadcrumbs'][] = $page->name;
                 <div class="panel panel-default">
                     <div class="panel-heading">Способ доставки</div>
                     <div class="panel-body">
-                        Выберите подходящий способ доставки
-
-                        Cамовывоз
-                        Новая почта
-                        Ночной экспресс
-                        Интайм
-                        Деливери
+                        <?= $form->field($model, 'delivery_id')->radioList(Delivery::getList(), [
+                            'class' => 'pt-2',
+                            'id' => 'delivery_id',
+                            'item' => function ($index, $label, $name, $checked, $value) {
+                                return '<div class="radio"><label>' . Html::radio($name, $checked, ['value' => $value]) . $label . '</label></div>';
+                            },
+                        ]) ?>
+                        <div id="delivery-info"></div>
                     </div>
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">Способ оплаты</div>
                     <div class="panel-body">
-                        Выберите способ оплаты заказа.
-
-                        Наложеный платеж
-                        Оплата при доставке
-                        Банковский перевод (для юрлиц)
-                        Карта Visa и MasterCard (LiqPay)
-                        Мгновенная рассрочка (ПриватБанк)
-                        Оплата частями (ПриватБанк)
+                        <?= $form->field($model, 'payment_id')->radioList(Payment::getList(), ['class' => 'pt-2', 'id' => 'payment_id']) ?>
+                        <div id="payment-info"></div>
                     </div>
                 </div>
             </div>
