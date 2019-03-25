@@ -41,7 +41,7 @@ $this->registerJs($js);
     <?php if (Yii::$app->session->hasFlash('orderSubmitted')): ?>
 
         <div class="alert alert-success">
-            Заказ успешно отправлен. Скоро с вами свяжется наш сотрудник для уточнения информации.
+            <?= Yii::t('app', 'Order is accepted. Soon our employee will contact you to clarify information.') ?>
         </div>
 
     <?php else: ?>
@@ -61,9 +61,9 @@ $this->registerJs($js);
         <div class="row">
             <div class="col-lg-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Необходимая информация для заказа</div>
+                    <div class="panel-heading"><?= Yii::t('app', 'Required information for ordering') ?></div>
                     <div class="panel-body">
-                        <?= $form->field($model, 'name')->textInput(['placeholder' => 'Фамилия Имя Отчество']) ?>
+                        <?= $form->field($model, 'name')->textInput(['placeholder' => Yii::t('app', 'Full name')]) ?>
 
                         <?= $form->field($model, 'phone')->widget(MaskedInput::class, [
                             'mask' => '+38 (099) 999-99-99',
@@ -72,8 +72,8 @@ $this->registerJs($js);
                         <?= $form->field($model, 'email')->textInput() ?>
 
                         <?= $form->field($model, 'entity')->radioList([
-                            0 => 'Частное лицо ',
-                            1 => 'Организация',
+                            0 => Yii::t('app', 'Private person'),
+                            1 => Yii::t('app', 'Organization'),
                         ], ['class' => 'pt-2']) ?>
 
                         <?php if (!YII_DEBUG): ?>
@@ -89,7 +89,7 @@ $this->registerJs($js);
             </div>
             <div class="col-lg-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Способ доставки</div>
+                    <div class="panel-heading"><?= Yii::t('app', 'Delivery method') ?></div>
                     <div class="panel-body">
                         <?= $form->field($model, 'delivery_id')->radioList(Delivery::getList(), [
                             'class' => 'pt-2',
@@ -102,7 +102,7 @@ $this->registerJs($js);
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">Способ оплаты</div>
+                    <div class="panel-heading"><?= Yii::t('app', 'Payment method') ?></div>
                     <div class="panel-body">
                         <?= $form->field($model, 'payment_id')->radioList(Payment::getList(), ['class' => 'pt-2', 'id' => 'payment_id']) ?>
                         <div id="payment-info"></div>
@@ -113,11 +113,11 @@ $this->registerJs($js);
 
 
             <div class="text-muted">
-                <b style="color: red;">*</b> - поля являются обязательными для заполнения
+                <b style="color: red;">*</b> <?= Yii::t('app', ' - fields are required') ?>
             </div>
 
             <div class="text-center mt-4">
-                <?= Html::submitButton('Заказать', ['class' => 'btn btn-primary btn-lg']) ?>
+                <?= Html::submitButton(Yii::t('app', 'To order'), ['class' => 'btn btn-primary btn-lg']) ?>
             </div>
 
             <?php ActiveForm::end() ?>
