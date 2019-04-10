@@ -26,9 +26,9 @@ class m190316_153448_add_delivery_id_payment_id_columns_to_order_table extends M
      */
     public function safeDown()
     {
-        $this->dropColumn('fk-order-delivery_id', 'order');
+        $this->dropForeignKey('fk-order-delivery_id', 'order');
 
-        $this->dropColumn('fk-order-payment_id', 'order');
+        $this->dropForeignKey('fk-order-payment_id', 'order');
 
         $this->dropColumn('order', 'delivery_id');
 

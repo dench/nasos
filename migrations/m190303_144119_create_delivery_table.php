@@ -33,6 +33,21 @@ class m190303_144119_create_delivery_table extends Migration
         $this->addForeignKey('fk-delivery_lang-delivery_id', 'delivery_lang', 'delivery_id', 'delivery', 'id', 'CASCADE');
 
         $this->addForeignKey('fk-delivery_lang-lang_id', 'delivery_lang', 'lang_id', 'language', 'id', 'CASCADE', 'CASCADE');
+
+        $this->batchInsert('delivery', ['type', 'position'], [
+            [2, 1],
+            [3, 2],
+            [4, 3],
+        ]);
+
+        $this->batchInsert('delivery_lang', ['delivery_id', 'lang_id', 'name'], [
+            [1, 'ru', 'Самовывоз'],
+            [1, 'uk', 'Самовивіз'],
+            [2, 'ru', 'Новая почта'],
+            [2, 'uk', 'Нова Пошта'],
+            [3, 'ru', 'Доставка курьером'],
+            [3, 'uk', 'Доставка кур\'єром'],
+        ]);
     }
 
     /**
@@ -40,7 +55,7 @@ class m190303_144119_create_delivery_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropPrimaryKey('pk-delivery_lang', 'delivery_lang');
+        //$this->dropPrimaryKey('pk-delivery_lang', 'delivery_lang');
 
         $this->dropForeignKey('fk-delivery_lang-delivery_id', 'delivery_lang');
 

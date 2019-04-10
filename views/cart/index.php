@@ -14,21 +14,17 @@ use yii\widgets\MaskedInput;
 
 $this->params['breadcrumbs'][] = $page->name;
 
-$delivery_url = Url::to('cart/delivery');
-$payment_url = Url::to('cart/payment');
+$delivery_url = Url::to(['cart/delivery']);
+$payment_url = Url::to(['cart/payment']);
 
 $js = <<<JS
 $('#delivery_id').change(function(){
     var iD = $(this).find(':checked').val();
-    $.get('{$delivery_url}', { id: iD }, function(data){
-        $('#delivery-info').html(data.text);
-    }, 'json');
+    $('#delivery-info').load('{$delivery_url}', { id: iD });
 });
 $('#payment_id').change(function(){
     var iD = $(this).find(':checked').val();
-    $.get('{$payment_url}', { id: iD }, function(data){
-        $('#payment-info').html(data.text);
-    }, 'json');
+    $('#payment-info').load('{$payment_url}', { id: iD });
 });
 JS;
 
@@ -47,7 +43,6 @@ $this->registerJs($js);
     <?php else: ?>
 
         <?= $page->short ?>
-        <?= $page->text ?>
 
         <?= $this->render('_table', [
             'items' => $items,
@@ -117,12 +112,14 @@ $this->registerJs($js);
             </div>
 
             <div class="text-center mt-4">
-                <?= Html::submitButton(Yii::t('app', 'To order'), ['class' => 'btn btn-primary btn-lg']) ?>
+                <?= Html::submitButton(Yii::t('app', 'To order'), ['id' => 'submitButton', 'class' => 'btn btn-primary btn-lg']) ?>
             </div>
 
             <?php ActiveForm::end() ?>
 
         <?php endif; ?>
+
+        <?= $page->text ?>
 
     <?php endif; ?>
 </div>

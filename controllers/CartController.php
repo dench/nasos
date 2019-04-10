@@ -6,6 +6,7 @@ namespace app\controllers;
 use dench\cart\actions\DeliveryAction;
 use dench\cart\actions\PaymentAction;
 use dench\cart\models\Cart;
+use dench\cart\models\Order;
 use dench\cart\models\OrderForm;
 use dench\cart\widgets\CartIconWidget;
 use dench\page\models\Page;
@@ -15,6 +16,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 
 /**
  * Class CartController
@@ -149,4 +151,5 @@ class CartController extends Controller
 
         return Cart::setCart($cart);
     }
+
 }
