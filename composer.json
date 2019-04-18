@@ -12,13 +12,14 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable" : true,
     "require": {
         "php": ">=5.6",
         "yiisoft/yii2": "~2.0.6",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
-        "dench/yii2-language": "@dev",
+        "dench/yii2-language": "~1.1.0",
         "dench/yii2-page": "@dev",
         "dench/yii2-image": "@dev",
         "dench/yii2-sortable": "@dev",
@@ -31,7 +32,9 @@
         "himiklab/yii2-recaptcha-widget" : "*",
         "wbraganca/yii2-dynamicform": "*",
         "kartik-v/yii2-widget-select2": "@dev",
-        "dench/yii2-products": "@dev"
+        "dench/yii2-products": "@dev",
+        "liqpay/liqpay": "~1.2.0",
+        "ext-json": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

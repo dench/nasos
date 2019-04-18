@@ -2,8 +2,8 @@
 
 namespace app\controllers;
 
-use dench\cart\models\Order;
 use dench\page\models\Page;
+use dench\cart\models\Order;
 use Yii;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
@@ -20,7 +20,9 @@ class OrderController extends Controller
     {
         $page = Page::viewPage('order');
 
-        $order = Order::findOne($id);
+        if (!$order = Order::findOne($id)) {
+            return false;
+        }
 
         if ($hash !== md5($id . Yii::$app->params['order_secret'])) {
             //throw new ForbiddenHttpException("403 Forbidden Error");

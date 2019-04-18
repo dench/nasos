@@ -7,7 +7,9 @@
  */
 
 use dench\cart\models\Order;
+use dench\cart\widgets\LiqPay;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 
 $this->title = Yii::t('app', 'Order #{order_id}', ['order_id' => $order->id]);
@@ -56,12 +58,32 @@ $this->params['breadcrumbs'][] = $this->title;
         </table>
     </div>
 
-    <div class="text-right" style="margin-bottom: 30px;">
+    <div class="text-right">
         <?= Yii::t('app', 'Total amount') ?>: <span class="total h4"><?= $order->amount ?></span> <?= $items[0]->variant->currency->before . $items[0]->variant->currency->after ?>
+    </div>
+
+    <div class="text-center">
+        <?php
+        if ($order->status === Order::STATUS_AWAITING) {
+            echo LiqPay::widget([
+                'amount' => $order->amount,
+                'currency' => $items[0]->variant->currency->code,
+                'order_id' => $order->id . '-' . time(),
+                'description' => 'Order #' . $order->id,
+                'result_url' => Url::to(['/order', 'id' => $order->id, 'hash' => md5($order->id . Yii::$app->params['order_secret'])], true),
+                'server_url' => Url::to(['/liqpay'], true),
+                'sandbox' => true,
+            ]);
+        }
+        ?>
     </div>
 
     <?= DetailView::widget([
         'model' => $order,
+        'options' => [
+            'class' => 'table table-condensed table-bordered detail-view',
+            'style' => 'margin-top: 30px;',
+        ],
         'attributes' => [
             [
                 'label' => Yii::t('app', 'Payment method'),

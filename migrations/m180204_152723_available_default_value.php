@@ -12,7 +12,7 @@ class m180204_152723_available_default_value extends Migration
      */
     public function safeUp()
     {
-        $this->alterColumn('variant', 'available', 'integer not null default 1');
+        $this->alterColumn('variant', 'available', 'integer default 1');
     }
 
     /**

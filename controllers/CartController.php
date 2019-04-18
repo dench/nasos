@@ -63,9 +63,9 @@ class CartController extends Controller
 
         $model->scenario = 'user';
 
-        if ($model->load(Yii::$app->request->post()) && $model->send()) {
+        if ($model->load(Yii::$app->request->post()) && $order_id = $model->send()) {
             Yii::$app->session->setFlash('orderSubmitted');
-            return $this->redirect(['']);
+            return $this->redirect(['/order', 'id' => $order_id, 'hash' => md5($order_id . Yii::$app->params['order_secret'])]);
         }
 
         return $this->render('index', [
