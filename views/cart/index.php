@@ -34,92 +34,82 @@ $this->registerJs($js);
 
     <h1 class="page-title"><?= $page->h1 ?></h1>
 
-    <?php if (Yii::$app->session->hasFlash('orderSubmitted')): ?>
+    <?= $page->short ?>
 
-        <div class="alert alert-success">
-            <?= Yii::t('app', 'Order is accepted. Soon our employee will contact you to clarify information.') ?>
-        </div>
+    <?= $this->render('_table', [
+        'items' => $items,
+        'cart' => $cart,
+    ]) ?>
 
-    <?php else: ?>
+    <?php if ($items) : ?>
 
-        <?= $page->short ?>
+        <?php $form = ActiveForm::begin() ?>
 
-        <?= $this->render('_table', [
-            'items' => $items,
-            'cart' => $cart,
-        ]) ?>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><?= Yii::t('app', 'Required information for ordering') ?></div>
+                <div class="panel-body">
+                    <?= $form->field($model, 'name')->textInput(['placeholder' => Yii::t('app', 'Full name')]) ?>
 
-        <?php if ($items) : ?>
+                    <?= $form->field($model, 'phone')->widget(MaskedInput::class, [
+                        'mask' => '+38 (099) 999-99-99',
+                    ]) ?>
 
-            <?php $form = ActiveForm::begin() ?>
+                    <?= $form->field($model, 'email')->textInput() ?>
 
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><?= Yii::t('app', 'Required information for ordering') ?></div>
-                    <div class="panel-body">
-                        <?= $form->field($model, 'name')->textInput(['placeholder' => Yii::t('app', 'Full name')]) ?>
+                    <?= $form->field($model, 'entity')->radioList([
+                        0 => Yii::t('app', 'Private person'),
+                        1 => Yii::t('app', 'Organization'),
+                    ], ['class' => 'pt-2']) ?>
 
-                        <?= $form->field($model, 'phone')->widget(MaskedInput::class, [
-                            'mask' => '+38 (099) 999-99-99',
-                        ]) ?>
-
-                        <?= $form->field($model, 'email')->textInput() ?>
-
-                        <?= $form->field($model, 'entity')->radioList([
-                            0 => Yii::t('app', 'Private person'),
-                            1 => Yii::t('app', 'Organization'),
-                        ], ['class' => 'pt-2']) ?>
-
-                        <?php if (!YII_DEBUG): ?>
-                            <div class="row">
-                                <div class="col-sm-3"></div>
-                                <div class="col-sm-9">
-                                    <?= $form->field($model, 'reCaptcha')->widget(ReCaptcha::class)->label(false) ?>
-                                </div>
+                    <?php if (!YII_DEBUG): ?>
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-9">
+                                <?= $form->field($model, 'reCaptcha')->widget(ReCaptcha::class)->label(false) ?>
                             </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><?= Yii::t('app', 'Delivery method') ?></div>
-                    <div class="panel-body">
-                        <?= $form->field($model, 'delivery_id')->radioList(Delivery::getList(), [
-                            'class' => 'pt-2',
-                            'id' => 'delivery_id',
-                            'item' => function ($index, $label, $name, $checked, $value) {
-                                return '<div class="radio"><label>' . Html::radio($name, $checked, ['value' => $value]) . $label . '</label></div>';
-                            },
-                        ]) ?>
-                        <div id="delivery-info"></div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading"><?= Yii::t('app', 'Payment method') ?></div>
-                    <div class="panel-body">
-                        <?= $form->field($model, 'payment_id')->radioList(Payment::getList(), ['class' => 'pt-2', 'id' => 'payment_id']) ?>
-                        <div id="payment-info"></div>
-                    </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
-
-
-            <div class="text-muted">
-                <b style="color: red;">*</b> <?= Yii::t('app', ' - fields are required') ?>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><?= Yii::t('app', 'Delivery method') ?></div>
+                <div class="panel-body">
+                    <?= $form->field($model, 'delivery_id')->radioList(Delivery::getList(), [
+                        'class' => 'pt-2',
+                        'id' => 'delivery_id',
+                        'item' => function ($index, $label, $name, $checked, $value) {
+                            return '<div class="radio"><label>' . Html::radio($name, $checked, ['value' => $value]) . $label . '</label></div>';
+                        },
+                    ]) ?>
+                    <div id="delivery-info"></div>
+                </div>
             </div>
-
-            <div class="text-center mt-4">
-                <?= Html::submitButton(Yii::t('app', 'To order'), ['id' => 'submitButton', 'class' => 'btn btn-primary btn-lg']) ?>
+            <div class="panel panel-default">
+                <div class="panel-heading"><?= Yii::t('app', 'Payment method') ?></div>
+                <div class="panel-body">
+                    <?= $form->field($model, 'payment_id')->radioList(Payment::getList(), ['class' => 'pt-2', 'id' => 'payment_id']) ?>
+                    <div id="payment-info"></div>
+                </div>
             </div>
+        </div>
+    </div>
 
-            <?php ActiveForm::end() ?>
 
-        <?php endif; ?>
+        <div class="text-muted">
+            <b style="color: red;">*</b> <?= Yii::t('app', ' - fields are required') ?>
+        </div>
 
-        <?= $page->text ?>
+        <div class="text-center mt-4">
+            <?= Html::submitButton(Yii::t('app', 'To order'), ['id' => 'submitButton', 'class' => 'btn btn-primary btn-lg']) ?>
+        </div>
+
+        <?php ActiveForm::end() ?>
 
     <?php endif; ?>
+
+    <?= $page->text ?>
 </div>

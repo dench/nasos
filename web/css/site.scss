@@ -591,18 +591,21 @@ div.required label.control-label:after {
   }
 }
 
-.cart {
+.cart,
+.order {
   &-icon {
     position: absolute;
     font-size: 2rem;
     color: #9B9CA4;
     line-height: 50px;
     right: 170px;
+    background-color: $bg-inverse;
+    padding-left: 1px;
+    padding-right: 1px;
     &:hover {
       color: #DDDDDD;
     }
     i {
-      line-height: 53px;
     }
   }
   &-count {
@@ -647,7 +650,8 @@ div.required label.control-label:after {
 }
 
 @media (min-width: 768px) {
-  .cart {
+  .cart,
+  .order {
     &-icon {
       right: 100px;
     }
@@ -745,13 +749,14 @@ div.required label.control-label:after {
 }
 
 @media (min-width: 992px) {
-  .cart {
+  .cart,
+  .order {
     &-icon {
       font-size: 3rem;
       line-height: 70px;
       right: 130px;
       i {
-        line-height: 75px;
+        top: 8px;
       }
     }
     &-count {
@@ -830,7 +835,8 @@ div.required label.control-label:after {
 }
 
 @media (min-width: 1200px) {
-  .cart {
+  .cart,
+  .order {
     &-icon {
       right: 180px;
     }

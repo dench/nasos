@@ -5873,17 +5873,21 @@ div.required label.control-label:after {
 .table-responsive td, .table-responsive th {
   white-space: normal !important; }
 
-.cart-icon {
+.cart-icon,
+.order-icon {
   position: absolute;
   font-size: 2rem;
   color: #9B9CA4;
   line-height: 50px;
-  right: 170px; }
-  .cart-icon:hover {
+  right: 170px;
+  background-color: #363948;
+  padding-left: 1px;
+  padding-right: 1px; }
+  .cart-icon:hover,
+  .order-icon:hover {
     color: #DDDDDD; }
-  .cart-icon i {
-    line-height: 53px; }
-.cart-count {
+.cart-count,
+.order-count {
   display: block;
   position: absolute;
   background: red;
@@ -5913,7 +5917,8 @@ div.required label.control-label:after {
     .news-item-img {
       padding-left: 0; } }
 @media (min-width: 768px) {
-  .cart-icon {
+  .cart-icon,
+  .order-icon {
     right: 100px; }
 
   p {
@@ -5979,13 +5984,16 @@ div.required label.control-label:after {
     .footer .copyright {
       text-align: center; } }
 @media (min-width: 992px) {
-  .cart-icon {
+  .cart-icon,
+  .order-icon {
     font-size: 3rem;
     line-height: 70px;
     right: 130px; }
-    .cart-icon i {
-      line-height: 75px; }
-  .cart-count {
+    .cart-icon i,
+    .order-icon i {
+      top: 8px; }
+  .cart-count,
+  .order-count {
     right: -8px;
     top: 20px; }
 
@@ -6032,10 +6040,9 @@ div.required label.control-label:after {
       .footer .copyright .slogan {
         display: block; } }
 @media (min-width: 1200px) {
-  .cart-icon {
+  .cart-icon,
+  .order-icon {
     right: 180px; }
-    .cart-icon i {
-      line-height: 75px; }
 
   .header {
     padding: 20px 0; }

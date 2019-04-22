@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use app\assets\SiteAsset;
+use dench\cart\widgets\OrderIconWidget;
 use dench\cart\widgets\CartIconWidget;
 use dench\modal\Modal;
 use dench\products\models\Category;
@@ -50,13 +51,14 @@ $this->registerJs($js);
         'langs' => Language::nameList(),
     ]);
     $cart = CartIconWidget::widget();
+    $order = OrderIconWidget::widget();
     NavBar::begin([
         'brandLabel' => '<img src="/img/benza.png" alt="Бенза">',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-static-top',
         ],
-        'headerHtml' => $cart . $lang,
+        'headerHtml' => $order . $cart . $lang,
     ]);
     echo Nav::widget([
         'options' => [

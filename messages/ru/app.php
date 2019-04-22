@@ -149,4 +149,5 @@ return [
     'city *{3,32}, number of Nova Poshta № 9{1,4}' => 'город *{3,32}, отделение новой почты № 9{1,4}',
     'Order number' => 'Номер заказа',
     'Current order status' => 'Текущий статус заказа',
+    'Continue' => 'Продолжить',
 ];

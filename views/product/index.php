@@ -10,7 +10,7 @@ echo $this->render('_breadcrumbs', [
     'model' => $model,
 ]);
 
-$this->registerJsFile('//ppcalc.privatbank.ua/pp_calculator/resources/js/calculator.js');
+/*$this->registerJsFile('//ppcalc.privatbank.ua/pp_calculator/resources/js/calculator.js');
 
 $js = <<<JS
 var resCalc = PP_CALCULATOR.calculatePhys(1, 500);
@@ -18,7 +18,7 @@ resCalc = {payCount: 2, ipValue: "264.50", ipaValue: "254.95", ppValue: "250.00"
 console.log(resCalc.payCount);
 JS;
 
-$this->registerJs($js);
+$this->registerJs($js);*/
 ?>
 <div class="container page product">
     <h1 class="page-title"><?= $model->h1 ?></h1>

@@ -22,7 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
     $statusList = Order::statusList();
-    echo '<div class="alert alert-info">' . Yii::t('app', 'Current order status') . ': <b>' . $statusList[$order->status] . '</b></div>';
+    $awaiting = Yii::$app->params['liqpay']['status_awaiting'];
+    $call =  '<p>' . Yii::t('app', 'Order is accepted. Soon our employee will contact you to clarify information.') . '</p>';
+    echo '<div class="alert alert-info">' . $call . Yii::t('app', 'Current order status') . ': <b>' . $statusList[$order->status] . '</b></div>';
     ?>
 
     <?= $page->short ?>

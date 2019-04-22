@@ -3,7 +3,7 @@
  * @var $this \yii\web\View
  */
 
-$text = Yii::t('app', 'To pay');
+$text = Yii::t('app', 'Continue');
 
 $js = <<<JS
 $('#submitButton').text('{$text}');

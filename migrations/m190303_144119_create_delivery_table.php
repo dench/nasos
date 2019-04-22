@@ -36,8 +36,8 @@ class m190303_144119_create_delivery_table extends Migration
 
         $this->batchInsert('delivery', ['type', 'position'], [
             [2, 1],
-            [3, 2],
-            [4, 3],
+            [4, 2],
+            [3, 3],
         ]);
 
         $this->batchInsert('delivery_lang', ['delivery_id', 'lang_id', 'name'], [

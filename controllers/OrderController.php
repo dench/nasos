@@ -15,6 +15,7 @@ class OrderController extends Controller
      * @param $hash
      * @return string
      * @throws ForbiddenHttpException
+     * @throws \yii\web\NotFoundHttpException
      */
     public function actionIndex($id, $hash)
     {
@@ -25,7 +26,7 @@ class OrderController extends Controller
         }
 
         if ($hash !== md5($id . Yii::$app->params['order_secret'])) {
-            //throw new ForbiddenHttpException("403 Forbidden Error");
+            throw new ForbiddenHttpException("403 Forbidden Error");
         }
 
         return $this->render('index', [
