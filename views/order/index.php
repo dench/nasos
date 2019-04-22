@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'description' => 'Order #' . $order->id,
                 'result_url' => Url::to(['/order', 'id' => $order->id, 'hash' => md5($order->id . Yii::$app->params['order_secret'])], true),
                 'server_url' => Url::to(['/liqpay'], true),
-                'sandbox' => true,
+                'sandbox' => Yii::$app->params['liqpay']['sandbox'],
             ]);
         }
         ?>
