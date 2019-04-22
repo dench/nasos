@@ -410,12 +410,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dench/yii2-cart.git",
-                "reference": "04c2147ed18019eaf1b635ab4580c5e809559d72"
+                "reference": "e394862778c10717df4f1b867d1d39b52f61f7ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dench/yii2-cart/zipball/04c2147ed18019eaf1b635ab4580c5e809559d72",
-                "reference": "04c2147ed18019eaf1b635ab4580c5e809559d72",
+                "url": "https://api.github.com/repos/dench/yii2-cart/zipball/e394862778c10717df4f1b867d1d39b52f61f7ca",
+                "reference": "e394862778c10717df4f1b867d1d39b52f61f7ca",
                 "shasum": ""
             },
             "require": {
@@ -445,7 +445,7 @@
                 "extension",
                 "yii2"
             ],
-            "time": "2019-04-22 09:09:29"
+            "time": "2019-04-22 09:37:22"
         },
         {
             "name": "dench/yii2-image",
