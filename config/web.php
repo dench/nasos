@@ -18,11 +18,11 @@ $config = [
             'traceLevel' => YII_DEBUG ? 3 : 0,
         ],
         'request' => [
-            'class' => 'dench\language\LangRequest'
+            'class' => 'app\components\SiteRequest'
         ],
         'urlManager' => [
-            'class' => 'dench\language\LangUrlManager',
-            'defaultLanguage' => 'ru',
+            'class' => 'app\components\SiteUrlManager',
+            //'defaultLanguage' => 'ru',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [

@@ -13,7 +13,10 @@ use dench\language\models\Language;
 use dench\language\widgets\Lang;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
+
+$this->registerLinkTag(['rel' => 'canonical', 'href' => Url::to((Yii::$app->language === 'uk' ? '/ua' : null) . explode('?', Yii::$app->request->url)[0], true)]);
 
 SiteAsset::register($this);
 

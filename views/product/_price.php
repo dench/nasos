@@ -11,12 +11,13 @@
 use yii\helpers\Url;
 
 $url_add = Url::to(['/cart/add']);
+$url_modal = Url::to(['/cart/modal']);
 
 $js = <<<JS
 $('.btn-buy').mousedown(function(){
     var id = $(this).attr('rel');
     $.get('{$url_add}', { id: id }, function(){
-        openModal('/cart/modal');
+        openModal('{$url_modal}');
     });
 });
 JS;
@@ -46,7 +47,7 @@ $this->registerJs($js);
                             <?= $variant->price ?>
                         </td>
                         <td>
-                            <button class="btn btn-primary btn-block btn-buy btn-sm" rel="<?= $variant->id ?>">Купить</button>
+                            <button class="btn btn-primary btn-block btn-buy btn-sm" rel="<?= $variant->id ?>"><?= Yii::t('app', 'Buy') ?></button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -73,7 +74,7 @@ $this->registerJs($js);
                     <?= $model->variants[0]->currency->after ?>
                 </div>
             </div>
-            <button class="btn btn-primary btn-block btn-buy btn-lg" rel="<?= $model->variants[0]->id ?>">Купить</button>
+            <button class="btn btn-primary btn-block btn-buy btn-lg" rel="<?= $model->variants[0]->id ?>"><?= Yii::t('app', 'Buy') ?></button>
         </div>
         <div class="col-sm-6">
     <?php endif; ?>

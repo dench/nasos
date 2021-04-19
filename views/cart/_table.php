@@ -7,9 +7,9 @@ use dench\image\helpers\ImageHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$url_del = Url::to('/cart/del');
-$url_set = Url::to('/cart/set');
-$url_cart = Url::to('/cart/block');
+$url_del = Url::to(['/cart/del']);
+$url_set = Url::to(['/cart/set']);
+$url_cart = Url::to(['/cart/block']);
 
 $js = <<<JS
 $('.product-delete').click(function(e){
