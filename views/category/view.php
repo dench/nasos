@@ -40,9 +40,9 @@ $this->params['breadcrumbs'][] = $page->name;
                             <img src="<?= ImageHelper::thumb($category->image->id, 'category') ?>" class="img-responsive" alt="<?= $category->image->alt ? $category->image->alt : $category->name ?>" title="<?= $category->title ?>">
                         </div>
                         <div class="card-block">
-                            <h5 class="card-title">
+                            <div class="card-title h5">
                                 <a href="<?= Url::to(['category/view', 'slug' => $category->slug]) ?>" class="text-nowrap"><?= $category->name ?></a>
-                            </h5>
+                            </div>
                         </div>
                     </div>
                 </div>

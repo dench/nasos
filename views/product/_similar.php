@@ -54,9 +54,9 @@ use yii\helpers\Url;
                             <?php } ?>
                         </div>
                         <div class="card-block">
-                            <h5 class="card-title">
+                            <div class="card-title h5">
                                 <a href="<?= Url::to(['product/index', 'slug' => $product->slug]) ?>"><?= $product->name ?></a>
-                            </h5>
+                            </div>
                         </div>
                     </div>
                 </div>
