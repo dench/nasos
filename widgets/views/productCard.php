@@ -26,9 +26,9 @@ $variant = @$model->variants[0];
             <?php } ?>
         </div>
         <div class="card-block">
-            <h5 class="card-title">
+            <div class="card-title h5">
                 <a href="<?= $link ?>"><?= $model->name ?></a>
-            </h5>
+            </div>
             <?php if (@$variant->price) : ?>
             <div class="card-price">
                 <?php if ($model->price_from) : ?>
