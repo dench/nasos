@@ -67,13 +67,13 @@ $this->registerJs($js);*/
     "@type": "product",
     "name": "<?= $model->name ?>",
     "brand": "БЕНЗА",
-    "image": "<?= $model->image ? ImageHelper::thumb($model->image->id, 'big') : null ?>",
+    "image": "<?= $model->image ? Url::to(ImageHelper::thumb($model->image->id, 'big'), 'https') : null ?>",
     "description": "<?= $model->description ?>",
     "offers": {
         "@type": "Offer",
         "availability": "http://schema.org/InStock",
         "price": "<?= !empty($model->variants[0]) ? $model->variants[0]->price : null ?>",
-        "url": "<?= Url::to(['product/index', 'slug' => $model->slug]) ?>",
+        "url": "<?= Url::to(['product/index', 'slug' => $model->slug], 'https') ?>",
         "priceCurrency": "UAH"
     }
 }
