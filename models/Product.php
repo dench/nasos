@@ -166,23 +166,35 @@ class Product extends ActiveRecord
         } else {
             $page = self::findOne(['slug' => $id]);
         }
+
         if ($page === null) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        $page->title = str_replace('{0}', $page->title, Yii::$app->params['templateTitle_' . Yii::$app->language]);
+
+        if (empty($model->description)) {
+            $page->description = str_replace('{0}', $page->name, Yii::$app->params['templateDescription_' . Yii::$app->language]);
+        }
+
         Yii::$app->view->params['page'] = $page;
+
         Yii::$app->view->title = $page->title;
+
         if ($page->description) {
             Yii::$app->view->registerMetaTag([
                 'name' => 'description',
                 'content' => $page->description
             ]);
         }
+
         if ($page->keywords) {
             Yii::$app->view->registerMetaTag([
                 'name' => 'keywords',
                 'content' => $page->keywords
             ]);
         }
+
         return $page;
     }
 
