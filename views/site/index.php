@@ -44,7 +44,7 @@ use yii\widgets\ListView;
             <div class="col-md-6">
                 <h1 class="section-company-title"><?= $page->h1 ?></h1>
                 <div class="section-company-text">
-                    <?= $page->text ?>
+                    <?= $page->short ?>
                 </div>
                 <div class="section-company-link">
                     <a href="<?= Url::to(['site/about']) ?>" class="btn btn-secondary btn-lg"><?= Yii::t('app', 'Read more') ?></a>
@@ -68,6 +68,15 @@ use yii\widgets\ListView;
         ?>
     </div>
 </section>
+
+<?php if ($page->text): ?>
+<section class="section section-text bg-white">
+    <div class="container">
+        <?= $page->text ?>
+    </div>
+</section>
+<?php endif; ?>
+
 <?php
 
 $script = <<< JS

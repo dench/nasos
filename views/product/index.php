@@ -6,6 +6,9 @@
 /* @var $viewed boolean */
 
 
+use dench\image\helpers\ImageHelper;
+use yii\helpers\Url;
+
 echo $this->render('_breadcrumbs', [
     'model' => $model,
 ]);
@@ -57,3 +60,21 @@ $this->registerJs($js);*/
     'viewed' => $viewed,
     'similar' => $similar,
 ]) ?>
+
+<script type="application/ld+json">
+{
+    "@context": "http://www.schema.org",
+    "@type": "product",
+    "name": "<?= $model->name ?>",
+    "brand": "БЕНЗА",
+    "image": "<?= $model->image_id ? ImageHelper::thumb($model->image->id, 'big') : null ?>",
+    "description": "<?= $model->description ?>",
+    "offers": {
+        "@type": "Offer",
+        "availability": "http://schema.org/InStock",
+        "price": "<?= !empty($model->variants[0]) ? $model->variants[0]->price : null ?>",
+        "url": "<?= Url::to(['product/index', 'slug' => $model->slug]) ?>",
+        "priceCurrency": "UAH"
+    }
+}
+</script>

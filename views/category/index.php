@@ -10,9 +10,9 @@ $this->params['breadcrumbs'][] = $page->name;
 
     <h1 class="page-title"><?= $page->h1 ?></h1>
 
-    <?php if ($page->text) : ?>
+    <?php if ($page->short) : ?>
     <div class="page-text">
-        <?= $page->text ?>
+        <?= $page->short ?>
     </div>
     <?php endif; ?>
 
@@ -22,4 +22,10 @@ $this->params['breadcrumbs'][] = $page->name;
             ]);
         });
     ?>
+
+    <?php if ($page->text) : ?>
+        <div class="page-seo">
+            <?= $page->text ?>
+        </div>
+    <?php endif; ?>
 </div>
