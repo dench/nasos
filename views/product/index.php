@@ -67,7 +67,7 @@ $this->registerJs($js);*/
     "@type": "product",
     "name": "<?= $model->name ?>",
     "brand": "БЕНЗА",
-    "image": "<?= $model->image_id ? ImageHelper::thumb($model->image->id, 'big') : null ?>",
+    "image": "<?= $model->image ? ImageHelper::thumb($model->image->id, 'big') : null ?>",
     "description": "<?= $model->description ?>",
     "offers": {
         "@type": "Offer",
