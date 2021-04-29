@@ -36,6 +36,8 @@ $config = [
                 'info' => 'info/index',
                 'info/<slug:[0-9a-z\-]+>' => 'info/view',
                 'sitemap.xml' => 'sitemap/index',
+                'sitemap_ua.xml' => 'sitemap/ua',
+                'sitemap_ru.xml' => 'sitemap/ru',
                 'configurator' => 'configurator/index',
             ],
         ],

@@ -150,4 +150,7 @@ return [
     'Order number' => 'Номер заказа',
     'Current order status' => 'Текущий статус заказа',
     'Continue' => 'Продолжить',
+    'Vozduhoflotskiy' => 'Воздухофлотский',
+    'Kiev' => 'Киев',
+    'Kiev region' => 'Киевская область',
 ];

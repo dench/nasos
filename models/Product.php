@@ -173,7 +173,7 @@ class Product extends ActiveRecord
 
         $page->title = str_replace('{0}', $page->title, Yii::$app->params['templateTitle_' . Yii::$app->language]);
 
-        if (empty($model->description)) {
+        if (empty($page->description)) {
             $page->description = str_replace('{0}', $page->name, Yii::$app->params['templateDescription_' . Yii::$app->language]);
         }
 

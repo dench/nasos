@@ -18,6 +18,9 @@ use app\widgets\Breadcrumbs;
 
 $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::to((Yii::$app->language === 'uk' ? '/ua' : null) . explode('?', Yii::$app->request->url)[0], true)]);
 
+$this->registerLinkTag(['rel' => 'alternate', 'hreflang' => 'ru-UA', 'href' => Url::current(['lang' => 'ru'], 'https')]);
+$this->registerLinkTag(['rel' => 'alternate', 'hreflang' => 'uk-UA', 'href' => Url::current(['lang' => 'uk'], 'https')]);
+
 SiteAsset::register($this);
 
 $js = <<<JS
