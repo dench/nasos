@@ -67,7 +67,7 @@ class SitemapController extends Controller
         $info = Page::find()
             ->select(['slug', 'updated_at'])
             ->leftJoin('page_parent','page.id = page_parent.page_id')
-            ->andWhere(['parent_id' => 6])
+            ->andWhere(['parent_id' => 5])
             ->andWhere(['enabled' => Page::ENABLED])
             ->all();
 
