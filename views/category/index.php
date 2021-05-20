@@ -1,8 +1,10 @@
 <?php
+/* @var $this yii\web\View */
+/* @var $page dench\page\models\Page */
+/* @var $categories dench\products\models\Category[] */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-/** @var $this yii\web\View */
-/** @var $page dench\page\models\Page */
-/** @var $categories dench\products\models\Category[] */
+use yii\widgets\ListView;
 
 $this->params['breadcrumbs'][] = $page->name;
 ?>
@@ -21,6 +23,19 @@ $this->params['breadcrumbs'][] = $page->name;
                 'categories' => $categories,
             ]);
         });
+    ?>
+
+    <h2 class="page-title" style="margin-top: 30px"><?= Yii::t('app', 'Our production') ?></h2>
+
+    <?php
+    echo ListView::widget([
+        'dataProvider' => $dataProvider,
+        'itemView' => '_item',
+        'layout' => "<div class=\"row\">{items}</div>\n<div class=\"clear-pager\">{pager}</div>",
+        'emptyTextOptions' => [
+            'class' => 'alert alert-danger',
+        ],
+    ]);
     ?>
 
     <?php if ($page->text) : ?>

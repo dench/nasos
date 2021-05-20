@@ -148,12 +148,6 @@ $this->registerJs($js);
                         if (isset(Yii::$app->params['phone2'])) {
                             echo '<p><i class="glyphicon glyphicon-earphone">&ensp;</i>' . Yii::$app->params['phone2'] . '</p>';
                         }
-                    ?>
-                </div>
-            </div>
-            <div class="col-sm-3 col-md-2">
-                <div class="contacts phones">
-                    <?php
                         if (isset(Yii::$app->params['phone3'])) {
                             echo '<p><i class="glyphicon glyphicon-earphone">&ensp;</i>' . Yii::$app->params['phone3'] . '</p>';
                         }
@@ -169,7 +163,24 @@ $this->registerJs($js);
                     <p><i class="glyphicon glyphicon-time">&ensp;</i><?= Yii::t('app', 'Calls from 9:00 to 20:00 Mon-Fri') ?></p>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-3">
+            <div class="col-sm-3 col-md-3">
+                <?php
+                $category_ids = isset($this->params['category_ids']) ? $this->params['category_ids'] : [];
+                $items = [];
+                foreach (Category::getPodmenu() as $category) {
+                    $items[] = [
+                        'label' => $category['name'],
+                        'url' => ['/category/view', 'slug' => $category['slug']],
+                        'active' => (in_array($category['id'], $category_ids))
+                    ];
+                }
+                unset($items[count($items) - 1]);
+                foreach ($items as $item) {
+                    echo Html::tag('div', Html::a($item['label'], $item['url']));
+                }
+                ?>
+            </div>
+            <div class="col-sm-12 col-md-2">
                 <div class="copyright">
                     <p>© <a href="/"><?= Yii::$app->params['sitename'] ?></a> 2017 - <?= date('Y') ?></p>
                 </div>

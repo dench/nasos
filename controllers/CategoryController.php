@@ -6,7 +6,9 @@ use dench\products\models\Category;
 use dench\products\models\Feature;
 use app\models\ProductSearch;
 use dench\page\models\Page;
+use dench\products\models\Product;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 
 class CategoryController extends Controller
@@ -17,9 +19,19 @@ class CategoryController extends Controller
 
         $categories = !Yii::$app->cache->exists('_categories-' . Yii::$app->language) ? Category::getMain() : [];
 
+        $dataProvider = new ActiveDataProvider([
+            'query' => Product::find()->where(['enabled' => true])->limit(8),
+            'sort'=> [
+                'defaultOrder' => [
+                    'position' => SORT_ASC,
+                ],
+            ],
+        ]);
+
         return $this->render('index', [
             'page' => $page,
             'categories' => $categories,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

@@ -5,10 +5,10 @@ namespace app\controllers;
 use app\models\CallbackForm;
 use dench\products\models\Category;
 use dench\page\models\Page;
+use dench\products\models\Product;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
-use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use app\models\ContactForm;
 
@@ -49,10 +49,21 @@ class SiteController extends Controller
             'pagination' => false,
         ]);
 
+        $query = Product::find();
+        $query->joinWith(['categories']);
+        $query->andWhere(['product.enabled' => true]);
+        $query->andWhere(['category.enabled' => true]);
+        $query->orderBy(['position' => SORT_DESC]);
+
+        $productsHits = (clone $query)->joinWith('statuses')->andWhere(['status_id' => 3])->all();
+        $productsSales = (clone $query)->joinWith('statuses')->andWhere(['status_id' => 2])->all();
+
         return $this->render('index', [
             'page' => $page,
             'categories' => $categories,
             'dataProvider' => $dataProvider,
+            'productsHits' => $productsHits,
+            'productsSales' => $productsSales,
         ]);
     }
 

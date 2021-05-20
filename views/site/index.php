@@ -1,14 +1,17 @@
 <?php
+/* @var $this yii\web\View */
+/* @var $page dench\page\models\Page */
+/* @var $categories dench\products\models\Category[] */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $productsHits dench\products\models\Product[] */
+/* @var $productsSales dench\products\models\Product[] */
 
+use app\widgets\ProductCard;
 use dench\image\helpers\ImageHelper;
 use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ListView;
-
-/* @var $this yii\web\View */
-/* @var $page dench\page\models\Page */
-/* @var $categories dench\products\models\Category[] */
 ?>
 <section class="section bg-grey">
     <div class="container">
@@ -68,6 +71,38 @@ use yii\widgets\ListView;
         ?>
     </div>
 </section>
+
+<?php if ($productsHits): ?>
+<section class="section section-hit bg-white">
+    <div class="container">
+        <h2 class="section-title"><?= Yii::t('app', 'Хиты') ?></h2>
+        <?php foreach ($productsHits as $item): ?>
+            <?= Yii::$app->cache->getOrSet('_product_card-' . $item->id . '-' . Yii::$app->language, function () use ($item) {
+                return ProductCard::widget([
+                    'model' => $item,
+                    'link' => ['product/index', 'slug' => $item->slug],
+                ]);
+            }) ?>
+        <?php endforeach; ?>
+    </div>
+</section>
+<?php endif; ?>
+
+<?php if ($productsHits): ?>
+<section class="section section-hit bg-white">
+    <div class="container">
+        <h2 class="section-title"><?= Yii::t('app', 'Акции') ?></h2>
+        <?php foreach ($productsHits as $item): ?>
+            <?= Yii::$app->cache->getOrSet('_product_card-' . $item->id . '-' . Yii::$app->language, function () use ($item) {
+                return ProductCard::widget([
+                    'model' => $item,
+                    'link' => ['product/index', 'slug' => $item->slug],
+                ]);
+            }) ?>
+        <?php endforeach; ?>
+    </div>
+</section>
+<?php endif; ?>
 
 <?php if ($page->text): ?>
 <section class="section section-text bg-white">
