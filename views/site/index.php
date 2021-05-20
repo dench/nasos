@@ -88,11 +88,11 @@ use yii\widgets\ListView;
 </section>
 <?php endif; ?>
 
-<?php if ($productsHits): ?>
+<?php if ($productsSales): ?>
 <section class="section section-hit bg-white">
     <div class="container">
         <h2 class="section-title"><?= Yii::t('app', 'Акции') ?></h2>
-        <?php foreach ($productsHits as $item): ?>
+        <?php foreach ($productsSales as $item): ?>
             <?= Yii::$app->cache->getOrSet('_product_card-' . $item->id . '-' . Yii::$app->language, function () use ($item) {
                 return ProductCard::widget([
                     'model' => $item,
