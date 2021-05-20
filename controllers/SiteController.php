@@ -56,7 +56,7 @@ class SiteController extends Controller
         $query->orderBy(['position' => SORT_DESC]);
 
         $productsHits = (clone $query)->joinWith('statuses')->andWhere(['status_id' => 3])->all();
-        $productsSales = (clone $query)->joinWith('statuses')->andWhere(['status_id' => 4])->all();
+        $productsSales = (clone $query)->joinWith('statuses')->andWhere(['status_id' => 1])->all();
 
         return $this->render('index', [
             'page' => $page,

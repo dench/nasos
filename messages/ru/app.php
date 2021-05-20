@@ -153,4 +153,6 @@ return [
     'Vozduhoflotskiy' => 'Воздухофлотский',
     'Kiev' => 'Киев',
     'Kiev region' => 'Киевская область',
+    'Hits' => 'Хиты',
+    'New items' => 'Новинки',
 ];
