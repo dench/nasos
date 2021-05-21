@@ -368,6 +368,17 @@ div.required label.control-label:after {
     font-size: 16px;
     font-weight: bold;
   }
+  &-features {
+    font-size: 14px;
+    padding: 8px 10px 8px 20px;
+    margin: 10px -15px 15px -15px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+  }
+  .btn-buy {
+    margin-top: 15px;
+  }
   .status {
     &-2 {
       width: 80px;

@@ -59,7 +59,7 @@ $this->registerJs($js);
     $cart = CartIconWidget::widget();
     $order = OrderIconWidget::widget();
     NavBar::begin([
-        'brandLabel' => '<img src="/img/benza.png" alt="Бенза">',
+        'brandLabel' => '<img src="/img/benza.png" alt="Оборудование для АЗС">',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-static-top',

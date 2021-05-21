@@ -30,6 +30,7 @@ $config = [
                 '<controller:cart>' => '<controller>/index',
                 '<action:(about|contacts)>' => 'site/<action>',
                 'image/<size:[0-9a-z\-]+>/<name>.<extension:[a-z]+>' => 'image/default/index',
+                'products/page-<page:[0-9]+>' => 'category/index',
                 'products' => 'category/index',
                 'products/<slug:[0-9a-z\-]+>' => 'category/view',
                 'product/<slug:[0-9a-z\-]+>' => 'product/index',

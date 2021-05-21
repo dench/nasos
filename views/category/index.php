@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $page->name;
     echo ListView::widget([
         'dataProvider' => $dataProvider,
         'itemView' => '_item',
-        'layout' => "<div class=\"row\">{items}</div>\n<div class=\"clear-pager\">{pager}</div>",
+        'layout' => "<div class=\"row\">{items}</div>\n<div class=\"clear-pager text-center\">{pager}</div>",
         'emptyTextOptions' => [
             'class' => 'alert alert-danger',
         ],

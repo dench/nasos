@@ -12,7 +12,7 @@ use yii\helpers\Url;
             <div class="card block-link">
                 <div class="card-img">
                     <?php if ($category->image) { ?>
-                        <img src="<?= ImageHelper::thumb($category->image->id, 'category') ?>" class="img-responsive" alt="<?= $category->image->alt ? $category->image->alt : $category->name ?>" title="<?= $category->title ?>">
+                        <img src="<?= ImageHelper::thumb($category->image->id, 'category') ?>" class="img-responsive" alt="<?= $category->name ?>" title="<?= $category->name ?>">
                     <?php } else { ?>
                         <img src="<?= Yii::$app->params['image']['none'] ?>" class="img-responsive" alt="">
                     <?php } ?>

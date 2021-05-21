@@ -20,6 +20,8 @@ class FeaturesTable extends Widget
 
     public $options = ['class' => 'table table-striped'];
 
+    public $limit;
+
     function run()
     {
         $variants = [];
@@ -34,7 +36,9 @@ class FeaturesTable extends Widget
             return '';
         }
 
-        $cols[] = Html::tag('th', $this->theadText);
+        if ($this->theadText) {
+            $cols[] = Html::tag('th', $this->theadText);
+        }
 
         $values = [];
         $labels = [];
@@ -107,6 +111,18 @@ class FeaturesTable extends Widget
 
         foreach ($sortable as $key => $sort) {
             $rows_sortable[$key] = $rows[$key];
+        }
+
+        if ($this->limit) {
+            if (!$rows) {
+                return null;
+            }
+            $rows = array_slice($rows_sortable, 0, $this->limit);
+            foreach ($rows as $key => $row) {
+                $row = str_replace(['<tr>', '</tr>', '<th>', '</th>', '<td>', '</td>'], ['<div>', '</div>', '<b>', ':</b> ', '<span>', '</span>'], $row);
+                $rows[$key] = $row;
+            }
+            return Html::tag('div', implode('', $rows), $this->options);
         }
 
         $hide = 18;
