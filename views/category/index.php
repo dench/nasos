@@ -35,6 +35,9 @@ $this->params['breadcrumbs'][] = $page->name;
         'emptyTextOptions' => [
             'class' => 'alert alert-danger',
         ],
+        'itemOptions' => [
+            'tag' => null,
+        ],
     ]);
     ?>
 
