@@ -8,6 +8,8 @@
  * @var $model dench\products\models\Product
  */
 
+use yii\bootstrap\Modal;
+use yii\bootstrap\Html;
 use yii\helpers\Url;
 
 $url_add = Url::to(['/cart/add']);
@@ -79,7 +81,27 @@ $this->registerJs($js);
         <div class="col-sm-6">
     <?php endif; ?>
 <?php else: ?>
-    <div class="col-sm-12">
+    <div class="col-sm-6">
+        <button class="btn btn-primary btn-block btn-lg modal-callback-open" data-target="<?= Url::to(['/site/callback']) ?>"><?= Yii::t('app', 'To order') ?></button>
+        <?php
+
+        $script = <<< JS
+$('.modal-callback-open').mousedown(function(){
+    $('#modal-callback').modal('show').find('#modal-callback-content').load($(this).attr('data-target'));
+});
+JS;
+        $this->registerJs($script);
+
+        Modal::begin([
+            'id' => 'modal-callback',
+            'header' => '<h3>' . Yii::t('app', 'Callback') . '</h3>',
+        ]);
+        echo Html::tag('div', '', ['id' => 'modal-callback-content']);
+        Modal::end();
+
+        ?>
+    </div>
+    <div class="col-sm-6">
 <?php endif; ?>
         <div class="product-buy">
             <small class="text-muted"><?= Yii::t('app', 'You can order by phone') ?></small>

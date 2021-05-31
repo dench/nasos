@@ -8,6 +8,8 @@
 /* @var $features dench\products\models\Feature[] */
 
 use dench\image\helpers\ImageHelper;
+use yii\bootstrap\Html;
+use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
@@ -69,3 +71,21 @@ $this->params['breadcrumbs'][] = $page->name;
         <?= $page->seo ?>
     </div>
 </div>
+
+<?php
+
+$script = <<< JS
+$('.modal-callback-open').mousedown(function(){
+    $('#modal-callback').modal('show').find('#modal-callback-content').load($(this).attr('data-target'));
+});
+JS;
+$this->registerJs($script);
+
+Modal::begin([
+    'id' => 'modal-callback',
+    'header' => '<h3>' . Yii::t('app', 'Callback') . '</h3>',
+]);
+echo Html::tag('div', '', ['id' => 'modal-callback-content']);
+Modal::end();
+
+?>

@@ -4,6 +4,8 @@
 /* @var $categories dench\products\models\Category[] */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+use yii\bootstrap\Html;
+use yii\bootstrap\Modal;
 use yii\widgets\ListView;
 
 $this->params['breadcrumbs'][] = $page->name;
@@ -47,3 +49,21 @@ $this->params['breadcrumbs'][] = $page->name;
         </div>
     <?php endif; ?>
 </div>
+
+<?php
+
+$script = <<< JS
+$('.modal-callback-open').mousedown(function(){
+    $('#modal-callback').modal('show').find('#modal-callback-content').load($(this).attr('data-target'));
+});
+JS;
+$this->registerJs($script);
+
+Modal::begin([
+    'id' => 'modal-callback',
+    'header' => '<h3>' . Yii::t('app', 'Callback') . '</h3>',
+]);
+echo Html::tag('div', '', ['id' => 'modal-callback-content']);
+Modal::end();
+
+?>

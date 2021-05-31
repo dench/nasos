@@ -66,6 +66,8 @@ $this->registerJs($js, View::POS_READY, 'btn-buy');
                 ],
             ]); ?>
             <button class="btn btn-primary btn-block btn-buy btn-lg" rel="<?= $model->variants[0]->id ?>"><?= Yii::t('app', 'Buy') ?></button>
+            <?php else: ?>
+                <button class="btn btn-primary btn-block btn-lg modal-callback-open" data-target="<?= Url::to(['/site/callback']) ?>"><?= Yii::t('app', 'To order') ?></button>
             <?php endif; ?>
         </div>
     </div>
