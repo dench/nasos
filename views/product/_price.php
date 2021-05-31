@@ -24,6 +24,20 @@ $('.btn-buy').mousedown(function(){
 });
 JS;
 
+if (empty($model->variants[0]->price)) {
+    $js .= <<< JS
+$('.modal-callback-open').mousedown(function(){
+    $('#modal-callback').modal('show').find('#modal-callback-content').load($(this).attr('data-target'));
+});
+JS;
+    Modal::begin([
+        'id' => 'modal-callback',
+        'header' => '<h3>' . Yii::t('app', 'Callback') . '</h3>',
+    ]);
+    echo Html::tag('div', '', ['id' => 'modal-callback-content']);
+    Modal::end();
+}
+
 $this->registerJs($js);
 ?>
 <div class="row">
@@ -83,23 +97,6 @@ $this->registerJs($js);
 <?php else: ?>
     <div class="col-sm-6">
         <button class="btn btn-primary btn-block btn-lg modal-callback-open" data-target="<?= Url::to(['/site/callback']) ?>"><?= Yii::t('app', 'To order') ?></button>
-        <?php
-
-        $script = <<< JS
-$('.modal-callback-open').mousedown(function(){
-    $('#modal-callback').modal('show').find('#modal-callback-content').load($(this).attr('data-target'));
-});
-JS;
-        $this->registerJs($script);
-
-        Modal::begin([
-            'id' => 'modal-callback',
-            'header' => '<h3>' . Yii::t('app', 'Callback') . '</h3>',
-        ]);
-        echo Html::tag('div', '', ['id' => 'modal-callback-content']);
-        Modal::end();
-
-        ?>
     </div>
     <div class="col-sm-6">
 <?php endif; ?>

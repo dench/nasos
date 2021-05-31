@@ -5,6 +5,8 @@
 /* @var $similar dench\products\models\Product[] */
 /* @var $viewed boolean */
 
+use yii\helpers\Url;
+
 echo $this->render('_breadcrumbs', [
     'model' => $model,
 ]);
@@ -19,6 +21,8 @@ echo $this->render('_breadcrumbs', [
             ]) ?>
         </div>
         <div class="col-md-7">
+            <button class="btn btn-primary btn-block btn-lg modal-callback-open" data-target="<?= Url::to(['/site/callback']) ?>"><?= Yii::t('app', 'To order') ?></button>
+            <br>
             <?= $this->render('_feature_simple', [
                 'model' => $model,
             ]) ?>
