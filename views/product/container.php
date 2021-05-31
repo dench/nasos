@@ -36,7 +36,9 @@ $this->registerJs($js);
             ]) ?>
         </div>
         <div class="col-md-7">
-            <button class="btn btn-primary btn-lg modal-callback-open" data-target="<?= Url::to(['/site/callback']) ?>"><?= Yii::t('app', 'To order') ?></button>
+            <div>
+                <button class="btn btn-primary btn-lg modal-callback-open" data-target="<?= Url::to(['/site/callback']) ?>"><?= Yii::t('app', 'To order') ?></button>
+            </div>
             <br>
             <?= $this->render('_feature_simple', [
                 'model' => $model,
