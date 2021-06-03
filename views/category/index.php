@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $page->name;
 
     <h1 class="page-title"><?= $page->h1 ?></h1>
 
-    <?php if ($page->short) : ?>
+    <?php if (!$dataProvider->pagination->page && $page->short) : ?>
     <div class="page-text">
         <?= $page->short ?>
     </div>
@@ -43,12 +43,10 @@ $this->params['breadcrumbs'][] = $page->name;
     ]);
     ?>
 
-    <?php if (!$dataProvider->pagination->page): ?>
-        <?php if ($page->text) : ?>
-            <div class="page-seo">
-                <?= $page->text ?>
-            </div>
-        <?php endif; ?>
+    <?php if (!$dataProvider->pagination->page && $page->text) : ?>
+        <div class="page-seo">
+            <?= $page->text ?>
+        </div>
     <?php endif; ?>
 </div>
 
