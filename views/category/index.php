@@ -9,12 +9,14 @@ use yii\bootstrap\Modal;
 use yii\widgets\ListView;
 
 $this->params['breadcrumbs'][] = $page->name;
+
+$pageN = Yii::$app->request->get('page');
 ?>
 <div class="container page">
 
     <h1 class="page-title"><?= $page->h1 ?></h1>
 
-    <?php if (!$dataProvider->pagination->page && $page->short) : ?>
+    <?php if (!$pageN && $page->short) : ?>
     <div class="page-text">
         <?= $page->short ?>
     </div>
@@ -43,7 +45,7 @@ $this->params['breadcrumbs'][] = $page->name;
     ]);
     ?>
 
-    <?php if (!$dataProvider->pagination->page && $page->text) : ?>
+    <?php if (!$pageN && $page->text) : ?>
         <div class="page-seo">
             <?= $page->text ?>
         </div>
