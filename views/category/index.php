@@ -43,10 +43,12 @@ $this->params['breadcrumbs'][] = $page->name;
     ]);
     ?>
 
-    <?php if ($page->text) : ?>
-        <div class="page-seo">
-            <?= $page->text ?>
-        </div>
+    <?php if (!$dataProvider->pagination->page): ?>
+        <?php if ($page->text) : ?>
+            <div class="page-seo">
+                <?= $page->text ?>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
 </div>
 

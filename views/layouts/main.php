@@ -166,7 +166,10 @@ $this->registerJs($js);
             <div class="col-sm-3 col-md-3">
                 <?php
                 $category_ids = isset($this->params['category_ids']) ? $this->params['category_ids'] : [];
-                $items = [];
+                $items[] = [
+                    'label' => Yii::t('app', 'Products'),
+                    'url' => ['/category/index'],
+                ];
                 foreach (Category::getPodmenu() as $category) {
                     $items[] = [
                         'label' => $category['name'],
